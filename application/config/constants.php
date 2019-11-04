@@ -90,5 +90,9 @@ define('DB_PASS','');
 define('DB_NAME','db_gis');
 
 define('TB_DETAIL','wgm_detail');
+define('TB_GROUP_KEGIATAN','wgm_group_kegiatan');
+define('TB_REQUEST_SUPPORT','wgm_request_support');
+define('TB_TIMELINE_KEGIATAN','wgm_timeline_kegiatan');
+define('TB_TIPE_BENCANA','wgm_tipe_bencana');
 
 define('APP_NAME','WGMaps');

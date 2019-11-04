@@ -14,13 +14,13 @@
     <body class="bg-white">
         <aside class="nav-menu border-right position-fixed nav-slider">
             <aside class="card border-0 m-3 text-secondary">
-                <span id="nav-menu-starter" onclick="starter_click()">
+                <span>
                     <a href="<?php echo base_url() ?>">
                         <i class="fa fa-signature fa-fw mr-2"></i>
                         Dashboard
                     </a>
                 </span>
-                <span id="nav-menu-support" onclick="support_click()">
+                <span>
                     <a href="<?php echo base_url('maps') ?>">
                         <i class="far fa-map fa-fw mr-2"></i>
                         Maps

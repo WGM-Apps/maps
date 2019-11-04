@@ -16,11 +16,11 @@
                 <aside class="row">
                     <aside class="col-md-6">
                         <label><small>Latitude</small></label>
-                        <input type="text" name="lat" id="text_lat" class="form-control">
+                        <input type="text" name="lat" id="text_lat" class="form-control" readonly>
                     </aside>
                     <aside class="col-md-6">
                         <label><small>Longitude</small></label>
-                        <input type="text" name="lng" id="text_lng" class="form-control">
+                        <input type="text" name="lng" id="text_lng" class="form-control" readonly>
                     </aside>
                 </aside>
                 
@@ -34,9 +34,9 @@
                     <label><small>Bencana</small></label>
                     <select name="bencana" id="" class="form-control">
                         <option value="">-- Pilih Bencana --</option>
-                        <option value="1">Gempa Bumi</option>
-                        <option value="2">Gunung Meletus</option>
-                        <option value="3">Tsunami</option>
+                        <?php foreach($result as $r): ?>
+                        <option value="<?php echo $r->id ?>"><?php echo $r->nama ?></option>
+                        <?php endforeach ?>
                     </select>
                 </aside>
 
@@ -87,7 +87,7 @@
     <hr>
     
     <aside class="row pt-3">
-        <div class="table-responsive">
+        <div class="scrollmenu">
             <table class="table table-hovered" id="tbDetail">
                 <thead>
                     <tr>

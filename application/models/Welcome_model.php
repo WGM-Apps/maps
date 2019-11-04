@@ -7,7 +7,6 @@ class Welcome_model extends ci_model{
 
     private function _get_datatables_query()
     {
-         
         $this->db->from($this->table);
  
         $i = 0;

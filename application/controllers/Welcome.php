@@ -15,6 +15,7 @@ class Welcome extends CI_Controller {
 	}
 
 	function maps() {
+		$data['result'] = $this->db->get(TB_TIPE_BENCANA)->result();
 		$data['myJS'] = 'maps/myJS';
 		$this->template->load('template', 'maps/home', $data);
 	}
