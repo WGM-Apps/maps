@@ -20,12 +20,21 @@
                         Dashboard
                     </a>
                 </span>
-                <span>
-                    <a href="<?php echo base_url('maps') ?>">
-                        <i class="far fa-map fa-fw mr-2"></i>
-                        Maps
-                    </a>
-                </span>
+                <?php if($menu == 1): ?>
+                    <span>
+                        <a href="<?php echo base_url('maps') ?>">
+                            <i class="far fa-map fa-fw mr-2"></i>
+                            Maps
+                        </a>
+                    </span>
+                <?php else: ?>
+                    <!-- <span>
+                        <a href="<?php echo base_url('maps') ?>">
+                            <i class="far fa-map fa-fw mr-2"></i>
+                            Maps
+                        </a>
+                    </span> -->
+                <?php endif ?>
                 <!-- <span id="nav-menu-setting" onclick="setting_click()">
                     <i class="fa fa-cog fa-fw mr-2"></i>
                     Setting
@@ -43,16 +52,66 @@
             </aside>
             <aside class="float-right mr-3 p-3">
                 <span>
+                <?php if($menu == 1): ?>
                     <aside class="dropdown">
                         <a href="javascript:void(0)" class="text-secondary dropdown-toggle" data-toggle="dropdown">
                             <b>Reynaldi</b>
                         </a>
                         <aside class="dropdown-menu">
-                            <a class="dropdown-item" href="javascript:void(0)">
-                                <i class="fa fa-sign-out-alt fa-fw"></i> Sign out
+                            <a class="dropdown-item" href="<?php echo base_url('logout') ?>">
+                                <i class="fa fa-sign-out-alt fa-fw"></i> Keluar
                             </a>
                         </aside>
                     </aside>
+                <?php else: ?>
+                    <a href="javascript:void(0)" class="text-secondary" data-toggle="modal" data-target="#masuk">
+                        Daftar / Masuk
+                    </a>
+                    <div class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="masukTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="masukTitle">Masuk</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="form_login">
+                                        <aside class="row">
+                                            <aside class="col-md-5">
+                                                <input type="text" name="username" placeholder="Nama pengguna" class="form-control form-control-sm">
+                                            </aside>
+                                            <aside class="col-md-5">
+                                                <input type="password" name="password" placeholder="Kata Kunci" class="form-control form-control-sm">
+                                            </aside>
+                                            <aside class="col-md-2">
+                                                <a href="javascript:void(0)" onclick="proses_login()" id="btn_login" class="btn btn-primary btn-sm btn-block"><i class="fa fa-sign-in-alt"></i></a>
+                                            </aside>
+                                        </aside>
+                                    </form>
+
+                                    <hr>
+                                    <aside id="pesan" class="text-danger"></aside>
+                                    <!-- <h5>Daftar</h5>
+                                    <form>
+                                        <aside class="row">
+                                            <aside class="col-md-5">
+                                                <input type="text" name="" placeholder="Email" class="form-control form-control-sm">
+                                            </aside>
+                                            <aside class="col-md-5">
+                                                <input type="password" name="" placeholder="Kata Kunci" class="form-control form-control-sm">
+                                            </aside>
+                                            <aside class="col-md-2">
+                                                <a href="javascript:void(0)" class="btn btn-success btn-sm btn-block"><i class="fa fa-user-plus"></i></a>
+                                            </aside>
+                                        </aside>
+                                    </form> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ?>
                 </span>
             </aside>
         </aside>

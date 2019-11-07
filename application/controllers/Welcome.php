@@ -2,6 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
+	function __construct() {
+        parent::__construct();
+        $this->load->model('welcome_model');
+    }
+
 	public function index()
 	{
 		// $bencana = $this->input->post('bencana');
@@ -11,12 +16,51 @@ class Welcome extends CI_Controller {
 		}
 		$data['result'] = $this->db->get(TB_DETAIL)->result();
 		$data['myJS'] = 'dashboard/myJS';
+		if(!$this->welcome_model->logged_id()) {
+            $data['menu'] = 0;
+        }else{
+			$data['menu'] = 1;
+		}
 		$this->template->load('template', 'dashboard/home', $data);
+	}
+
+	function login() {
+		$username = $this->input->post('username');
+        $password = md5($this->input->post('password'));
+
+        $check = $this->welcome_model->check_login(array('user' => $username), array('password' => $password));
+
+        if($check != FALSE) {
+            $r = $check;
+            $session_data = array(
+                'USER_ID' => $r->id,
+                'USER_NAME' => $r->user,
+                'USER_FULLNAME' => $r->nama,
+                'USER_ACTIVE' => $r->flg_active,
+            );
+            $this->session->set_userdata($session_data);
+            $data = array('isValid'=>0);
+            echo json_encode($data);
+        }else {
+            $data = array('isValid'=>1, 'isPesan'=>'Nama pengguna atau kata kunci salah');
+            echo json_encode($data);
+        }
+	}
+
+	function logout()
+	{
+		$this->session->sess_destroy();
+		redirect();
 	}
 
 	function maps() {
 		$data['result'] = $this->db->get(TB_TIPE_BENCANA)->result();
 		$data['myJS'] = 'maps/myJS';
+		if(!$this->welcome_model->logged_id()) {
+            redirect();
+        }else{
+			$data['menu'] = 1;
+		}
 		$this->template->load('template', 'maps/home', $data);
 	}
 

@@ -67,4 +67,30 @@
     $('#filter_bencana').on('change', function() {
         window.location = "<?php echo base_url('welcome/index/') ?>"+this.value;
     });
+
+    function proses_login() {
+        var data = $('#form_login').serialize();
+        $.ajax({
+            url : '<?php echo base_url("welcome/login") ?>',
+            type : 'post',
+            cahce : false,
+            data : data,
+            dataType : 'json',
+            beforeSend : function(){
+                $('#btn_login').html("<i class='fa fa-spinner fa-spin'></i>");
+            },
+            success : function(result){
+                localStorage.clear();
+                var isValid = result.isValid;
+                var isPesan = result.isPesan;
+                if(isValid == 1){
+                    $('#btn_login').html("<i class='fa fa-sign-in-alt'></i>");
+                    $('#btn_login').show();
+                    $('#pesan').html(isPesan);
+                }else{
+                    window.location.href = './';
+                }
+            }
+        });
+    }
 </script>
