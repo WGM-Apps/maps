@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css') ?>">
     </head>
 
-    <body class="bg-white">
+    <body class="bg-light">
         <aside class="nav-menu border-right position-fixed nav-slider">
             <aside class="card border-0 m-3 text-secondary">
                 <span>
@@ -28,21 +28,21 @@
                         </a>
                     </span>
                 <?php else: ?>
-                    <!-- <span>
-                        <a href="<?php echo base_url('maps') ?>">
-                            <i class="far fa-map fa-fw mr-2"></i>
-                            Maps
-                        </a>
-                    </span> -->
+                    <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fa fa-chart-line fa-fw mr-2"></i>
+                        Bencana
+                    </span>
+                    <aside class="collapse" id="collapseExample">
+                        <ul class="list-group list-group-flush">
+                        <?php
+                            $res_bencana = $this->db->get(TB_TIPE_BENCANA)->result();
+                            foreach($res_bencana as $r):
+                        ?>
+                            <li class="list-group-item border-0" onclick="filter_bencana(<?php echo $r->id?>)">&raquo; <?php echo ucwords(strtolower($r->nama)) ?></li>
+                        <?php endforeach ?>
+                        </ul>
+                    </aside>
                 <?php endif ?>
-                <!-- <span id="nav-menu-setting" onclick="setting_click()">
-                    <i class="fa fa-cog fa-fw mr-2"></i>
-                    Setting
-                </span>
-                <span id="nav-menu-manage" onclick="manage_click()">
-                    <i class="fa fa-users fa-fw mr-2"></i>
-                    Manage
-                </span> -->
             </aside>
         </aside>
 
@@ -67,16 +67,16 @@
                     <a href="javascript:void(0)" class="text-secondary" data-toggle="modal" data-target="#masuk">
                         Daftar / Masuk
                     </a>
-                    <div class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="masukTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                    <aside class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="masukTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                        <aside class="modal-dialog modal-dialog-centered" role="document">
+                            <aside class="modal-content">
+                                <aside class="modal-header">
                                     <h5 class="modal-title" id="masukTitle">Masuk</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
-                                </div>
-                                <div class="modal-body">
+                                </aside>
+                                <aside class="modal-body">
                                     <form id="form_login">
                                         <aside class="row">
                                             <aside class="col-md-5">
@@ -107,10 +107,10 @@
                                             </aside>
                                         </aside>
                                     </form> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </aside>
+                            </aside>
+                        </aside>
+                    </aside>
                 <?php endif ?>
                 </span>
             </aside>

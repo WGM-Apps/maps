@@ -9,12 +9,17 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
+		$tb_detail = TB_DETAIL;
+		$tb_bencana = TB_TIPE_BENCANA;
 		// $bencana = $this->input->post('bencana');
 		$bencana = $this->uri->segment(3);
+		$where_bencana = null;
 		if(!empty($bencana)){
-			$this->db->where('bencana', $bencana);
+			// $this->db->where('bencana', $bencana);
+			$where_bencana = "WHERE wd.bencana='$bencana'";
 		}
-		$data['result'] = $this->db->get(TB_DETAIL)->result();
+		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` $where_bencana";
+		$data['result'] = $this->db->query($query)->result();
 		$data['myJS'] = 'dashboard/myJS';
 		if(!$this->welcome_model->logged_id()) {
             $data['menu'] = 0;
@@ -68,12 +73,14 @@ class Welcome extends CI_Controller {
 		$lat = $this->input->post('lat');
 		$lng = $this->input->post('lng');
 		$bencana = $this->input->post('bencana');
+		$tgl_kejadian = $this->input->post('tgl_kejadian');
 		$nama_lokasi = $this->input->post('nama_lokasi');
 		$kelurahan = $this->input->post('kelurahan');
 		$kecamatan = $this->input->post('kecamatan');
 		$kota = $this->input->post('kota');
 		$provinsi = $this->input->post('provinsi');
-		$deskripsi = $this->input->post('deskripsi');
+		$dampak = $this->input->post('dampak');
+		$kebutuhan = $this->input->post('kebutuhan');
 		$date_now = date('Y-m-d');
 		
 		if(empty($lat) || empty($lng)) {
@@ -87,12 +94,14 @@ class Welcome extends CI_Controller {
 				'lat' => strtoupper($lat),
 				'lng' => strtoupper($lng),
 				'bencana' => strtoupper($bencana),
+				'tgl_kejadian' => strtoupper($tgl_kejadian),
 				'nama_lokasi' => strtoupper($nama_lokasi),
 				'kelurahan' => strtoupper($kelurahan),
 				'kecamatan' => strtoupper($kecamatan),
 				'kota' => strtoupper($kota),
 				'provinsi' => strtoupper($provinsi),
-				'deskripsi' => strtoupper($deskripsi),
+				'dampak' => strtoupper($dampak),
+				'kebutuhan' => strtoupper($kebutuhan),
 				'create_date' => $date_now,
 				'flg_active' => 'Y',
 			);
@@ -133,16 +142,15 @@ class Welcome extends CI_Controller {
 
             $row = array();
             $row[] = $no;
-            $row[] = $field->lat;
-            $row[] = $field->lng;
-            $row[] = $bencana;
-            $row[] = $field->nama_lokasi.", ".$field->kelurahan.", ".$field->kecamatan.", ".$field->kota.", ".$field->provinsi;
-            $row[] = $field->deskripsi;
             $row[] = "
                 <a class='btn btn-primary text-light btn-sm' href='javascript:void(0)' data-toggle='modal' data-target='#viewKepatuhanMatriks' data-id='$field->id' title='Lihat Matriks'><i class='fa fa-table'></i></a>
 
                 <a class='btn btn-warning text-light btn-sm' href='".base_url($field->id)."' title='Edit'><i class='fa fa-edit'></i></a>
+
+                <a class='btn btn-success text-light btn-sm' href='https://www.google.com/maps?q=loc:$field->lat,$field->lng' target='_blank' title='Buka Google Maps'><i class='fa fa-map'></i></a>
             ";
+            $row[] = $bencana;
+            $row[] = $field->nama_lokasi.", ".$field->kelurahan.", ".$field->kecamatan.", ".$field->kota.", ".$field->provinsi;
             $data[] = $row;
         }
  
@@ -156,4 +164,18 @@ class Welcome extends CI_Controller {
         echo json_encode($output);
 	}
 	
+	function get_detail_koordinat() {
+		$tb_detail = TB_DETAIL;
+		$tb_bencana = TB_TIPE_BENCANA;
+		$tb_timeline_kegiatan = TB_TIMELINE_KEGIATAN;
+		$id = $this->input->post('id');
+		
+		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id`=wd.`bencana` WHERE wd.`id`='$id'";
+		$data['row'] = $this->db->query($query)->row();
+
+		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id`=wd.`bencana` WHERE wd.`id`='$id'";
+		$data['row'] = $this->db->query($query)->row();
+
+		$this->load->view('dashboard/detail_koordinat', $data);
+	}
 }

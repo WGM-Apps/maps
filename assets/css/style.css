@@ -12,6 +12,7 @@ a:hover{
     overflow-x: auto;
     white-space: nowrap;
     z-index: 0;
+    width: 100%;
 }
 
 .scrollmenu a {
@@ -60,7 +61,7 @@ a:hover{
         font-size: 10.5pt;
         z-index: 9999;
         background-color: #fff;
-        box-shadow: 6px 0px 18px rgba(0,0,0,.1);
+        box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.151);
     }
         .mobile-menu-view{
             display: none;
@@ -69,15 +70,6 @@ a:hover{
     .content{
         margin-left:215px;
         margin-top:50px;
-    }
-    
-    .iframe{
-        left:215px;
-        right:0;
-        bottom:0;
-        top:130px;
-        position: absolute;
-        overflow: hidden;
     }
 
 }
@@ -110,7 +102,7 @@ a:hover{
         font-size: 10.5pt;
         z-index: 9999;
         background-color: #fff;
-        box-shadow: 1px 2px 18px rgba(0,0,0,.1);
+        box-shadow: 1px 2px 18px rgba(0,0,0,.151);
     }
     
 
@@ -133,15 +125,6 @@ a:hover{
                 background: transparent;
                 cursor: pointer;
             }
-
-    .iframe{
-        left:0;
-        right:0;
-        bottom:0;
-        top:130px;
-        position: absolute;
-        overflow: hidden;
-    }
 }
 
 #map_canvas{
@@ -156,4 +139,8 @@ a:hover{
 div[style*="background-color: white; font-weight: 500; font-family: Roboto, sans-serif; padding: 15px 25px; box-sizing: border-box; top: 5px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 5px; left: 50%; max-width: 375px; position: absolute; transform: translateX(-50%); width: calc(100% - 10px); z-index: 1;"],
 .gmnoprint{
     display: none;
+}
+
+#deskripsi_page .card{
+    box-shadow: 1px 2px 18px rgba(0, 0, 0, 0.151);
 }

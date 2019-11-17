@@ -1,12 +1,16 @@
-<aside class="row m-5 pt-4">
-    <div class="col-md-12">
-        <select name="bencana" id="filter_bencana" class="form-control">
-            <option value="">-- Pilih Bencana --</option>
-            <option value="1">Gempa Bumi</option>
-            <option value="2">Gunung Meletus</option>
-            <option value="3">Tsunami</option>
-        </select>
-    </div>
-</aside>
+<aside class="m-3 p-3">
+    <aside class="row">
+        <aside class="col-md-9">
+            <aside id="map_canvas" class="mx-auto"></aside>
+        </aside>
+        <aside class="col-md-3">
+            <b><a href="javascript:void(0)">Assesment</a></b><br>
+            kajs askdjhkasj <a href="javascript:void(0)">[...]</a><br>
+            <small>20-11-2019 08:30 | <i>Oleh: Reynaldi</i></small>
+            <hr>
+        </aside>
+    </aside>
 
-<aside id="map-canvas" class="iframe"></aside>
+    <aside id="deskripsi_page"></aside>
+
+</aside>

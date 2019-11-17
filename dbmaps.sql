@@ -25,11 +25,14 @@ CREATE TABLE `user` (
   `user` varchar(20) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
   `nama` varchar(30) DEFAULT NULL,
-  `flg_active` enum('Y','N') NOT NULL DEFAULT 'Y',
+  `akses` enum('0','1','2') NOT NULL DEFAULT '0' COMMENT '0=tidak ada akses, 1=akses respon, 2=semua akses',
+  `flg_active` enum('Y','N') NOT NULL DEFAULT 'Y' COMMENT 'Y=aktif, N=tidak aktif',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
+
+insert  into `user`(`id`,`user`,`password`,`nama`,`akses`,`flg_active`) values (1,'reynaldi','4a52576581484410901682859fcf4dbc','REYNALDI','2','Y');
 
 /*Table structure for table `wgm_detail` */
 
@@ -40,25 +43,24 @@ CREATE TABLE `wgm_detail` (
   `lat` varchar(20) DEFAULT NULL,
   `lng` varchar(20) DEFAULT NULL,
   `bencana` int(11) DEFAULT NULL,
+  `tgl_kejadian` varchar(30) NOT NULL,
   `nama_lokasi` text,
   `kelurahan` varchar(30) DEFAULT NULL,
   `kecamatan` varchar(30) DEFAULT NULL,
   `kota` varchar(30) DEFAULT NULL,
   `provinsi` varchar(30) DEFAULT NULL,
-  `deskripsi` text,
-  `group_kegiatan` int(11) DEFAULT NULL,
+  `dampak` text,
+  `kebutuhan` text,
   `create_date` date NOT NULL,
   `flg_active` enum('Y','N') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `bencana` (`bencana`),
-  KEY `group_kegiatan` (`group_kegiatan`),
-  CONSTRAINT `wgm_detail_ibfk_1` FOREIGN KEY (`bencana`) REFERENCES `wgm_tipe_bencana` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `wgm_detail_ibfk_2` FOREIGN KEY (`group_kegiatan`) REFERENCES `wgm_group_kegiatan` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  CONSTRAINT `wgm_detail_ibfk_1` FOREIGN KEY (`bencana`) REFERENCES `wgm_tipe_bencana` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_detail` */
 
-insert  into `wgm_detail`(`id`,`lat`,`lng`,`bencana`,`nama_lokasi`,`kelurahan`,`kecamatan`,`kota`,`provinsi`,`deskripsi`,`group_kegiatan`,`create_date`,`flg_active`) values (1,'-4.8524316','105.2190786',1,'JL. LINTAS SUMATRA','TERBANGGI BESAR','TERBANGGI BESAR','LAMPUNG','KABUPATEN LAMPUNG','TERJADI GEMPA BUMI PADA PUKUL 00.12 ',NULL,'2019-11-03','Y'),(3,'-5.939360342871429','107.0608294057563',3,'PANTAI BAKTI','MUARA GEMBONG','MUARA GEMBONG','BEKASI','JAWA BARAT','TELAH TERJADI TSUNAMI DENGAN KETINGGIAN 10M',NULL,'2019-11-03','Y'),(4,'-6.159427023609115','105.44050971471904',2,'PULAU KRAKATAU, PULAU ANAK KRAKATAU','LAMPUNG SELATAN','LAMPUNG SELATAN','LAMPUNG SELATAN','LAMPUNG','TERJADI LETUSAN PADA ANAK KRAKATAU',NULL,'2019-11-03','Y'),(5,'-4.4213064620510645','137.3946969820497',1,'HOYA','JILA','JILA','KABUPATEN MIMIKA','PAPUA','TERJADI GEMPA BUMI DENGAN GETARAN 5SL',NULL,'2019-11-03','Y'),(6,'-6.299281490182','106.670573076983',1,'BSD','JAKARYA','FSAF','FF','FD','FDFD',NULL,'2019-11-04','Y');
+insert  into `wgm_detail`(`id`,`lat`,`lng`,`bencana`,`tgl_kejadian`,`nama_lokasi`,`kelurahan`,`kecamatan`,`kota`,`provinsi`,`dampak`,`kebutuhan`,`create_date`,`flg_active`) values (1,'-4.8524316','105.2190786',1,'0000-00-00 00:00:00','JL. LINTAS SUMATRA','TERBANGGI BESAR','TERBANGGI BESAR','LAMPUNG','KABUPATEN LAMPUNG','TERJADI GEMPA BUMI PADA PUKUL 00.12 ','TERJADI GEMPA BUMI PADA PUKUL 00.12 ','2019-11-03','Y'),(3,'-5.939360342871429','107.0608294057563',3,'0000-00-00 00:00:00','PANTAI BAKTI','MUARA GEMBONG','MUARA GEMBONG','BEKASI','JAWA BARAT','TELAH TERJADI TSUNAMI DENGAN KETINGGIAN 10M','TELAH TERJADI TSUNAMI DENGAN KETINGGIAN 10M','2019-11-03','Y'),(4,'-6.159427023609115','105.44050971471904',2,'0000-00-00 00:00:00','PULAU KRAKATAU, PULAU ANAK KRAKATAU','LAMPUNG SELATAN','LAMPUNG SELATAN','LAMPUNG SELATAN','LAMPUNG','TERJADI LETUSAN PADA ANAK KRAKATAU','TERJADI LETUSAN PADA ANAK KRAKATAU','2019-11-03','Y'),(5,'-4.4213064620510645','137.3946969820497',1,'0000-00-00 00:00:00','HOYA','JILA','JILA','KABUPATEN MIMIKA','PAPUA','TERJADI GEMPA BUMI DENGAN GETARAN 5SL','TERJADI GEMPA BUMI DENGAN GETARAN 5SL','2019-11-03','Y'),(6,'-6.299281490182','106.670573076983',1,'0000-00-00 00:00:00','BSD','JAKARYA','FSAF','FF','FD','FDFD','FDFD','2019-11-04','Y'),(7,'-6.305626338536418','106.68641516648529',4,'10-10-2019','RW. MEKAR JAYA, 15310','RW. MEKAR JAYA','KEC. SERPONG','KOTA TANGERANG SELATAN','BANTEN ','- AJSDASJ OASDKL\r\n- JASHDKL KASDJ KJASD\r\n- JKADSHFL','-IOOUI UWERYU WEJLRKH\r\n-KJJSDNF SDJFB JDBF JDF','2019-11-17','Y');
 
 /*Table structure for table `wgm_group_kegiatan` */
 
@@ -73,7 +75,7 @@ CREATE TABLE `wgm_group_kegiatan` (
 
 /*Data for the table `wgm_group_kegiatan` */
 
-insert  into `wgm_group_kegiatan`(`id`,`nama`,`deskripsi`) values (1,'a','vcv'),(2,'b','vvvvvvvvvvvvv');
+insert  into `wgm_group_kegiatan`(`id`,`nama`,`deskripsi`) values (1,'ASSESMEN','vcv'),(2,'DAPUR DARURAT','vvvvvvvvvvvvv');
 
 /*Table structure for table `wgm_request_support` */
 
@@ -106,15 +108,18 @@ DROP TABLE IF EXISTS `wgm_timeline_kegiatan`;
 CREATE TABLE `wgm_timeline_kegiatan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
+  `detail_id` int(11) DEFAULT NULL,
   `group_kegiatan_id` int(11) DEFAULT NULL,
-  `detail` text,
+  `deskripsi` text,
   `gambar` varchar(30) DEFAULT NULL,
   `waktu` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `group_kegiatan_id` (`group_kegiatan_id`),
+  KEY `detail_id` (`detail_id`),
   CONSTRAINT `wgm_timeline_kegiatan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `wgm_timeline_kegiatan_ibfk_2` FOREIGN KEY (`group_kegiatan_id`) REFERENCES `wgm_group_kegiatan` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `wgm_timeline_kegiatan_ibfk_2` FOREIGN KEY (`group_kegiatan_id`) REFERENCES `wgm_group_kegiatan` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `wgm_timeline_kegiatan_ibfk_3` FOREIGN KEY (`detail_id`) REFERENCES `wgm_detail` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_timeline_kegiatan` */

@@ -43,24 +43,15 @@
         map.setCenter(pos);
         map.setZoom(14);
 
-        // var infowindow = new google.maps.InfoWindow({
-        //     content: "<a target='_blank' href='https://www.google.com/maps?q=loc:"+lat_maps+","+lng_maps+"'>Tampilkan di Google Maps</a>",
-        // });
-
         marker = new google.maps.Marker({
             position: pos,
             map: map
         });
-
-        // google.maps.event.addListener(marker, 'click', function() {
-        //     infowindow.open(map,marker);
-        // });
     }
     
     function taruhMarker(map, posisiTitik) {
         var lat_maps = posisiTitik.lat();
         var lng_maps = posisiTitik.lng();
-        // var infowindow = new google.maps.InfoWindow();
 
         if(marker){
             marker.setPosition(posisiTitik);
@@ -119,9 +110,6 @@
             { "data": "1" },
             { "data": "2" },
             { "data": "3" },
-            { "data": "4" },
-            { "data": "5" },
-            { "data": "6" },
         ],
         "order": []
 
