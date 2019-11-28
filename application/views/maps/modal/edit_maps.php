@@ -9,7 +9,7 @@
                 $lat  = $b['lat'];
                 $lng = $b['lng'];
                 $bencana = $b['bencana'];
-                $tgl_kejadian = date('m/d/Y',strtotime($b['tgl_kejadian']));
+                $tgl_kejadian = date('Y-m-d',strtotime($b['tgl_kejadian']));
                 $nama_lokasi = $b['nama_lokasi'];
                 $kelurahan = $b['kelurahan'];
                 $kecamatan = $b['kecamatan'];
@@ -18,7 +18,6 @@
                 $dampak = $b['dampak'];
                 $kebutuhan = $b['kebutuhan'];
                 $nama_bencana = $b['nama_bencana'];
-
             ?>
         </div>
         <div class="modal-body">
