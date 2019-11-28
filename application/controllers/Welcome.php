@@ -82,7 +82,7 @@ class Welcome extends CI_Controller {
 		$dampak = $this->input->post('dampak');
 		$kebutuhan = $this->input->post('kebutuhan');
 		$date_now = date('Y-m-d');
-		
+
 		if(empty($lat) || empty($lng)) {
 			$isValid = 0;
 			$isPesan = "Latitude dan Longtitude tidak boleh kosong";
@@ -170,10 +170,11 @@ class Welcome extends CI_Controller {
 		$tb_timeline_kegiatan = TB_TIMELINE_KEGIATAN;
 		$id = $this->input->post('id');
 		
-		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id`=wd.`bencana` WHERE wd.`id`='$id'";
-		$data['row'] = $this->db->query($query)->row();
+		// $query = "SELECT wd.*, wtb.`nama` AS `nama_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id`=wd.`bencana` WHERE wd.`id`='$id'";
+		// $data['row'] = $this->db->query($query)->row();
 
 		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id`=wd.`bencana` WHERE wd.`id`='$id'";
+
 		$data['row'] = $this->db->query($query)->row();
 
 		$this->load->view('dashboard/detail_koordinat', $data);

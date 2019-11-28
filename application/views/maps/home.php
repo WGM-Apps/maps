@@ -48,45 +48,45 @@
                                 </aside>
                                 <aside class="col-md-6">
                                     <label><small>Tgl. Kejadian</small></label>
-                                    <input type="text" name="tgl_kejadian" id="" class="form-control">
+                                    <input type="date" name="tgl_kejadian" id="" class="form-control">
                                 </aside>
                             </aside>
 
                             <aside class="form-group">
                                 <label><small>Nama Lokasi</small></label>
-                                <input type="text" name="nama_lokasi" id="" class="form-control">
+                                <input type="text" name="nama_lokasi" id="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()">
                             </aside>
                             
                             <aside class="row">
                                 <aside class="col-md-6">
                                     <label><small>Kelurahan</small></label>
-                                    <input type="text" name="kelurahan" id="" class="form-control">
+                                    <input type="text" name="kelurahan" id="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()">
                                 </aside>
                                 <aside class="col-md-6">
                                     <label><small>Kecamatan</small></label>
-                                    <input type="text" name="kecamatan" id="" class="form-control">
+                                    <input type="text" name="kecamatan" id="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()">
                                 </aside>
                             </aside>
                             
                             <aside class="row">
                                 <aside class="col-md-6">
                                     <label><small>Kota</small></label>
-                                    <input type="text" name="kota" id="" class="form-control">
+                                    <input type="text" name="kota" id="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()">
                                 </aside>
                                 <aside class="col-md-6">
                                     <label><small>Provinsi</small></label>
-                                    <input type="text" name="provinsi" id="" class="form-control">
+                                    <input type="text" name="provinsi" id="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()">
                                 </aside>
                             </aside>
 
                             <aside class="form-group">
                                 <label><small>Dampak</small></label>
-                                <textarea name="dampak" class="form-control"></textarea>
+                                <textarea name="dampak" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea>
                             </aside>
 
                             <aside class="form-group">
                                 <label><small>Kebutuhan Darurat</small></label>
-                                <textarea name="kebutuhan" class="form-control"></textarea>
+                                <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea>
                             </aside>
                             
                             <aside class="row">
@@ -108,6 +108,7 @@
         <aside class="card-header">
             Koordinat Bencana
         </aside>
+        <?php echo $this->session->flashdata('msg');?>
         <aside class="card-body">
             <aside class="scrollmenu">
                 <table class="table table-hover table-bordered table-sm" id="tbDetail">
@@ -124,3 +125,6 @@
         </aside>
     </aside>
 </aside>
+<div id="ModalEdit" class="modal"></div>
+<div id="ModalDelete" class="modal"></div>
+

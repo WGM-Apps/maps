@@ -13,7 +13,7 @@
             </aside>
             <aside class="card-body bg-white text-secondary">
                 Nama: <?php echo $row->nama_bencana ?><br>
-                Tgl. Kejadian: .....<br>
+                Tgl. Kejadian: <?php echo date('d-m-Y',strtotime($row->tgl_kejadian)) ?><br>
                 Lokasi Kejadian: <?php echo $row->nama_lokasi.", ".$row->kelurahan." ".$row->kecamatan." ".$row->kota." ".$row->provinsi ?><br>
             </aside>
         </aside>

@@ -7,7 +7,7 @@
         <meta name="application-name" content="">
         <meta name="create-by" content="Reynaldi">
         <meta name="create-date" content="01/10/2019">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/dataTables.bootstrap4.min.css') ?>"><link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css') ?>">
     </head>
 
@@ -27,6 +27,20 @@
                             Maps
                         </a>
                     </span>
+                    <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fa fa-chart-line fa-fw mr-2"></i>
+                        Bencana
+                    </span>
+                    <aside class="collapse" id="collapseExample">
+                        <ul class="list-group list-group-flush">
+                        <?php
+                            $res_bencana = $this->db->get(TB_TIPE_BENCANA)->result();
+                            foreach($res_bencana as $r):
+                        ?>
+                            <li class="list-group-item border-0" onclick="filter_bencana(<?php echo $r->id?>)">&raquo; <?php echo ucwords(strtolower($r->nama)) ?></li>
+                        <?php endforeach ?>
+                        </ul>
+                    </aside>
                 <?php else: ?>
                     <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <i class="fa fa-chart-line fa-fw mr-2"></i>
@@ -121,12 +135,12 @@
         </aside>
     </body>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://kit.fontawesome.com/ba0b170900.js" crossorigin="anonymous"></script>
+	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/popper.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dataTables.bootstrap4.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/ba0b170900.js') ?>" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/js/geo.js') ?>" charset="utf-8"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/js/script.js') ?>" charset="utf-8"></script>
     <?php

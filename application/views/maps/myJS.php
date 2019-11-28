@@ -72,7 +72,7 @@
         var btn = document.getElementById('simpan_maps');
         $.ajax({
             type: "post",
-            url: "<?php echo base_url('welcome/simpan_maps')?>",
+            url: "<?php echo base_url('maps/simpan_maps')?>",
             data: data,
             dataType: "json",
             beforeSend: function(){
@@ -101,7 +101,7 @@
         "serverSide": true,
          
         "ajax": {
-            "url": "welcome/get_data_tip",
+            "url": "maps/get_data_tip",
             "type": "post"
         },
 
@@ -114,4 +114,54 @@
         "order": []
 
     });
+
+    function delete_maps(id){
+        var data = {id:id}
+
+        $.ajax({
+            url: "<?php echo base_url('maps/hapus_data')?>",
+            type: "POST",
+            cache: false,
+            data : data,
+            beforeSend : function(){
+                $('#ModalDelete').modal({backdrop: 'static', keyboard: false});
+            },
+            success: function(html){
+                $("#ModalDelete").modal('show');
+                $("#ModalDelete").html(html);
+            }
+        });
+    }
+
+    function edit_maps(id){
+        var data = {id:id}
+
+        $.ajax({
+            url: "<?php echo base_url('maps/edit_maps')?>",
+            type: "POST",
+            cache: false,
+            data : data,
+            beforeSend : function(){
+                $('#ModalEdit').modal({backdrop: 'static', keyboard: false});
+            },
+            success: function(html){
+                $("#ModalEdit").modal('show');
+                $("#ModalEdit").html(html);
+            }
+        });
+    }
+
+    // $('#form_add_akses').on('show.bs.modal', function (e) {
+    //     var idx = $(e.relatedTarget).data('id');
+    //     $.ajax({
+    //         type : 'post',
+    //         url : 'um_controller/get_akses',
+    //         data :  'idx='+ idx,
+    //         cache: false,
+    //         success : function(data){
+    //             $('.hasil-data').html(data);
+    //         }
+    //     });
+    // });
+
 </script>
