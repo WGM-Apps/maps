@@ -1,14 +1,15 @@
 <?php
-class Bencana_model extends ci_model{
-
-	var $table = TB_TIPE_BENCANA;
+class Bencana_model extends ci_nmodel{
+	
+	var $table = TB_DETAIL;
     var $column_order = array(null, 'id');
-    var $column_search = array('nama');
+    var $column_search = array('nama_lokasi', 'kelurahan', 'kecamatan', 'kota', 'provinsi');
     var $order = array('id' => 'desc');
 
     private function _get_datatables_query()
     {
         $this->db->from($this->table);
+        $this->db->where('flg_active', 'Y');
  
         $i = 0;
      

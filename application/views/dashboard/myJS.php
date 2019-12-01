@@ -1,6 +1,12 @@
 <script src="https://maps.google.com/maps/api/js"></script>
 <script>
-    // $('#deskripsi_page').html('');
+    $(document).ready(function () {
+        $('.readmore').expander({
+            slicePoint: 5,
+            expandText: ' >>',
+            userCollapseText: ' <<'
+        });
+    });
 
     var marker;
     function initialize() {  
@@ -100,8 +106,31 @@
             data: "id="+id,
             success: function (response) {
                 $('#deskripsi_page').html(response);
+                var hash = "#deskripsi_page";
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function(){
+            
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
             }
         });
     };
+
+    function sesuaikan_respon(id){
+        $('#sesuaikan_respon').modal('show');
+        $.ajax({
+            type: "post",
+            url: "welcome/modal_respon",
+            data: "data="+id,
+            beforeSend: function () {
+                $(".detail_respon").html("<center>Memuat...</center>");
+            },
+            success: function (response) {
+                $(".detail_respon").html(response);
+            }
+        });
+    }
 
 </script>

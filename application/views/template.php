@@ -92,7 +92,7 @@
                         Daftar / Masuk
                     </a>
                     <aside class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="masukTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                        <aside class="modal-dialog modal-dialog-centered" role="document">
+                        <aside class="modal-dialog" role="document">
                             <aside class="modal-content">
                                 <aside class="modal-header">
                                     <h5 class="modal-title" id="masukTitle">Masuk</h5>
@@ -145,7 +145,8 @@
         </aside>
     </body>
 
-	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-expander/1.7.0/jquery.expander.js"></script>
     <script src="<?php echo base_url('assets/js/popper.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>"></script>

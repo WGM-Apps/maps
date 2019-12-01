@@ -16,7 +16,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Aksi</th>
+                            <th>Bencana</th>
+                            <th>Lokasi</th>
                         </tr>
                     </thead>
                 </table>

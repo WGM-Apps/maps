@@ -95,5 +95,6 @@ define('TB_GROUP_KEGIATAN','wgm_group_kegiatan');
 define('TB_REQUEST_SUPPORT','wgm_request_support');
 define('TB_TIMELINE_KEGIATAN','wgm_timeline_kegiatan');
 define('TB_TIPE_BENCANA','wgm_tipe_bencana');
+define('TB_LAST_UPDATE_TIMELINE_KEGIATAN','wgm_last_update_timeline_kegiatan');
 
 define('APP_NAME','WGMaps');
