@@ -4,8 +4,7 @@
         <div class="modal-header">
             <?php
                 $b=$row->row_array();
-
-                $id  = $b['id'];
+                $id_wgm  = $b['id'];
                 $lat  = $b['lat'];
                 $lng = $b['lng'];
                 $bencana = $b['bencana'];
@@ -22,23 +21,8 @@
         </div>
         <div class="modal-body">
             <aside class="row p-2">
-                <aside class="col-md-6">
-                    <aside id="map_canvas" class="mx-auto"></aside>
-                </aside>
-                <aside class="col-md-6">
+                <aside class="col-md-12">
                     <form class="form-horizontal" role="form" method="post" action="<?php echo base_url().'maps/update_maps'?>" enctype="multipart/form-data">
-                        <aside class="row">
-                            <aside class="col-md-6">
-                                <label><small>Latitude</small></label>
-                                <input type="hidden" name="id" value="<?php echo $id ?>">
-                                <input type="text" name="lat" id="text_lat" value="<?php echo $lat ?>" class="form-control" readonly>
-                            </aside>
-                            <aside class="col-md-6">
-                                <label><small>Longitude</small></label>
-                                <input type="text" name="lng" id="text_lng" value="<?php echo $lng ?>" class="form-control" readonly>
-                            </aside>
-                        </aside>
-                        
                         <aside class="row">
                             <aside class="col-md-6">
                                 <label><small>Bencana</small></label>
@@ -63,6 +47,7 @@
                             </aside>
                             <aside class="col-md-6">
                                 <label><small>Tgl. Kejadian</small></label>
+                                <input type="hidden" name="id" value="<?php echo $id_wgm ?>">
                                 <input type="date" name="tgl_kejadian" id="" value="<?php echo $tgl_kejadian ?>" class="form-control">
                             </aside>
                         </aside>
