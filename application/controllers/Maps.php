@@ -4,7 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Maps extends CI_Controller {
 	function __construct() {
         parent::__construct();
+        $this->load->model('welcome_model');
         $this->load->model('maps_model');
+    }
+
+    function index(){
+    	$data['myJS'] = 'maps/myJS';
+    	if(!$this->welcome_model->logged_id()){
+    		redirect();
+    	}else{
+    		$data['menu'] = 1;
+    	}
+    	$this->load->template('maps/home',$data);
     }
 
 	function simpan_maps() {

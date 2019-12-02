@@ -2,12 +2,12 @@
     <aside class="row mb-3">
         <aside class="col-md-12 text-secondary">
                 <a href="<?php echo base_url() ?>">Dashboard</a> >
-                Master bencana
+                Master kegiatan
         </aside>
     </aside>
     <aside class="card mt-3">
         <aside class="card-header">
-            Master Bencana
+            Master kegiatan
         </aside>
         <?php echo $this->session->flashdata('msg');?>
         <aside class="card-body">
@@ -34,3 +34,4 @@
     </aside>
 </aside>
 <div id="ModalForm" class="modal"></div>
+

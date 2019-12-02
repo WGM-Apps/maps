@@ -1,7 +1,7 @@
 <?php
-class Bencana_model extends ci_model{
+class Kegiatan_model extends ci_model{
 	
-	var $table = TB_TIPE_BENCANA;
+	var $table = TB_GROUP_KEGIATAN;
     var $column_order = array(null, 'id');
     var $column_search = array('nama');
     var $order = array('id' => 'desc');
@@ -76,7 +76,7 @@ class Bencana_model extends ci_model{
         return $hsl;
     }
 
-    function get_bencana_id($id,$table){
+    function get_kegiatan_id($id,$table){
         $hsl=$this->db->query("SELECT * from $table WHERE id ='$id' ");
         return $hsl; 
     }

@@ -1,13 +1,14 @@
 
 <script>
 
+
 $('#tbDetail').DataTable({ 
     "bSort" : false,
     "processing": true, 
     "serverSide": true,
      
     "ajax": {
-        "url": "bencana/get_data_tip",
+        "url": "kegiatan/get_data_tip",
         "type": "post"
     },
 
@@ -23,7 +24,7 @@ $('#tbDetail').DataTable({
 function tambahData(){
 
     $.ajax({
-        url: "<?php echo base_url('bencana/tambah')?>",
+        url: "<?php echo base_url('kegiatan/tambah')?>",
         type: "POST",
         cache: false,
         beforeSend : function(){
@@ -40,7 +41,7 @@ function deleteData(id){
     var data = {id:id}
 
     $.ajax({
-        url: "<?php echo base_url('bencana/delete_bencana')?>",
+        url: "<?php echo base_url('kegiatan/delete_kegiatan')?>",
         type: "POST",
         cache: false,
         data : data,
@@ -58,7 +59,7 @@ function editData(id){
     var data = {id:id}
 
     $.ajax({
-        url: "<?php echo base_url('bencana/edit_bencana')?>",
+        url: "<?php echo base_url('kegiatan/edit_kegiatan')?>",
         type: "POST",
         cache: false,
         data : data,
@@ -71,7 +72,5 @@ function editData(id){
         }
     });
 }
-
-
 
 </script>
