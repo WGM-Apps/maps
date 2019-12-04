@@ -104,4 +104,24 @@ class Welcome extends CI_Controller {
 
 		$this->load->view('dashboard/modal_respon', $data);
 	}
+
+	function simpan_respon()
+	{
+		$gambar1 = $this->input->post('gambar1');
+		$gambar2 = $this->input->post('gambar2');
+		$gambar3 = $this->input->post('gambar3');
+		$gambar4 = $this->input->post('gambar4');
+		$gambar5 = $this->input->post('gambar5');
+		$gambar6 = $this->input->post('gambar6');
+		$gambar7 = $this->input->post('gambar7');
+		$gambar8 = $this->input->post('gambar8');
+		$group1 = $this->input->post('group1');
+		$group2 = $this->input->post('group2');
+		$group3 = $this->input->post('group3');
+		$group4 = $this->input->post('group4');
+		$group5 = $this->input->post('group5');
+		$group6 = $this->input->post('group6');
+		$group7 = $this->input->post('group7');
+		$group8 = $this->input->post('group8');
+	}
 }
