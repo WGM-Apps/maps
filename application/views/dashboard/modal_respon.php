@@ -14,7 +14,10 @@
                 </div>
                 
                 <aside class="form-group" id="files<?php echo $res->id ?>"></aside>
-                
+
+                <input type="hidden" name="id_detail<?php echo $res->id ?>" value="<?php echo $idx ?>">
+                <input type="hidden" name="id_group_kegiatan<?php echo $res->id ?>" value="<?php echo $res->id ?>">
+
                 <aside class="form-group">
                     <a href="javascript:void(0)" class="btn btn-warning btn-sm text-white" onclick="addFile<?php echo $res->id ?>();"><i class="far fa-clipboard"></i> Tambah Keterangan</a> 
                 </aside>
@@ -51,7 +54,7 @@
                     var data = new FormData(form);
                     $.ajax({
                         type: "post",
-                        url: "rfm_controller/post_request",
+                        url: "welcome/simpan_respon",
                         data: data,
                         processData: false,
                         contentType: false,
