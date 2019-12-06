@@ -25,6 +25,8 @@ class Kegiatan extends CI_Controller {
         $list = $this->kegiatan_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
+
+        // <a class='btn btn-danger btn-sm' onclick ='deleteData($field->id)'><i class='fa fa-trash'></i></a>
         
         foreach ($list as $field) {
 			$no++;
@@ -32,8 +34,8 @@ class Kegiatan extends CI_Controller {
             $row = array();
             $row[] = $no;
             $row[] = "
-            	<a class='btn btn-danger btn-sm' onclick ='deleteData($field->id)'><i class='fa fa-trash'></i></a>
-                <a class='btn btn-primary btn-sm' onclick ='editData($field->id)'><i class='fa fa-edit'></i></a>
+            	
+                <a class='btn btn-warning btn-sm' onclick ='editData($field->id)'><i class='fa fa-edit'></i></a>
             ";
             $row[] = $field->nama;
             $data[] = $row;

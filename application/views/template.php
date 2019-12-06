@@ -39,32 +39,40 @@
                     </span>
                     <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <i class="fa fa-chart-line fa-fw mr-2"></i>
-                        Bencana
+                        Kategori bencana
                     </span>
                     <aside class="collapse" id="collapseExample">
-                        <ul class="list-group list-group-flush">
                         <?php
                             $res_bencana = $this->db->get(TB_TIPE_BENCANA)->result();
                             foreach($res_bencana as $r):
-                        ?>
-                            <li class="list-group-item border-0" onclick="filter_bencana(<?php echo $r->id?>)">&raquo; <?php echo ucwords(strtolower($r->nama)) ?></li>
+                        ?>  
+                            <form class="form-control" method="post" action="<?php echo base_url().'kategori'?>" enctype="multipart/form-data">
+                                <div class="row">
+                                    <input type="hidden" name="id_bencana" value="<?php echo $r->id ?>">
+                                    <button type="submit" class="form-control" style="background-color: white;color: black;border: 2px solid #4CAF50;font-size: 12px;" ><?php echo ucwords(strtolower($r->nama)) ?>
+                                </div>
+                            </form>
+                            
                         <?php endforeach ?>
-                        </ul>
                     </aside>
                 <?php else: ?>
                     <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <i class="fa fa-chart-line fa-fw mr-2"></i>
-                        Bencana
+                        Kategori bencana
                     </span>
                     <aside class="collapse" id="collapseExample">
-                        <ul class="list-group list-group-flush">
                         <?php
                             $res_bencana = $this->db->get(TB_TIPE_BENCANA)->result();
                             foreach($res_bencana as $r):
-                        ?>
-                            <li class="list-group-item border-0" onclick="filter_bencana(<?php echo $r->id?>)">&raquo; <?php echo ucwords(strtolower($r->nama)) ?></li>
+                        ?>  
+                            <form class="form-control" method="post" action="<?php echo base_url().'kategori'?>" enctype="multipart/form-data">
+                                <div class="row">
+                                    <input type="hidden" name="id_bencana" value="<?php echo $r->id ?>">
+                                    <button type="submit" class="form-control" style="background-color: white;color: black;border: 2px solid #4CAF50;font-size: 12px;" ><?php echo ucwords(strtolower($r->nama)) ?>
+                                </div>
+                            </form>
+                            
                         <?php endforeach ?>
-                        </ul>
                     </aside>
                 <?php endif ?>
             </aside>
