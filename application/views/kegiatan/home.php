@@ -11,14 +11,14 @@
         </aside>
         <?php echo $this->session->flashdata('msg');?>
         <aside class="card-body">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-sm" onclick="tambahData()">
                         <span class="fa fa-plus"></span> &nbsp;Tambah
                     </button>
                 </div>
             </div>
-            <hr width="100%">
+            <hr width="100%"> -->
             <aside class="scrollmenu">
                 <table class="table table-hover table-bordered table-sm" id="tbDetail">
                     <thead>
