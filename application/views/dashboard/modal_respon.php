@@ -12,7 +12,22 @@
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                     </div>
                 </div>
-                
+                <?php
+                    $tb_timeline_kegiatan = TB_TIMELINE_KEGIATAN;
+                    $tb_last_update_timeline_kegiatan = TB_LAST_UPDATE_TIMELINE_KEGIATAN;
+                    $cek_kegiatan = $this->db->query("SELECT *, COUNT(*) AS total FROM $tb_timeline_kegiatan WHERE detail_id = $idx AND group_kegiatan_id = $res->id");
+                    $cek_total = $cek_kegiatan->row();
+                    if($cek_total->total > 0){
+                        $exs = explode('|', $cek_total->deskripsi);
+                        foreach($exs as $eExs){
+                            echo "
+                                <aside class='form-group'>
+                                    <input type='text' name='deskripsi$res->id[]' value='$eExs' class='form-control form-control-sm'>
+                                </aside>
+                            ";
+                        }
+                    }
+                ?>
                 <aside class="form-group" id="files<?php echo $res->id ?>"></aside>
 
                 <input type="hidden" name="id_detail<?php echo $res->id ?>" value="<?php echo $idx ?>">
@@ -64,17 +79,20 @@
                             // $('.btn_post_request').html('<a href="javascript:void(0)" class="btn btn-secondary"><i class="fas fa-spinner fa-pulse"></i> Proses</a>');
                         },
                         success: function (res) {
-                            // var isValid = res.isValid,
-                            //     isPesan = res.isPesan;
-                            // if(isValid == 0) {
-                            //     $('.btn_post_request').html('<a href="javascript:void(0)" onclick="post_request()" class="btn btn-success"><i class="fa fa-check"></i> Kirim</a>');
-                            //     $('.pesan').html(isPesan);
-                            // }else {
-                            //     $('.pesan').html(isPesan);
-                            //     $('#modal-create-rfm').modal('hide');
-                            //     $('#modal-create-rfp').modal('hide');
-                            //     reload_table();
-                            // }
+                            var isValid = res.isValid,
+                                isPesan = res.isPesan;
+                            if(isValid == 0) {
+                                // $('.btn_post_request').html('<a href="javascript:void(0)" onclick="post_request()" class="btn btn-success"><i class="fa fa-check"></i> Kirim</a>');
+                                // $('.pesan').html(isPesan);
+                                console.log(isPesan);
+                            }else {
+                                // $('.pesan').html(isPesan);
+                                // $('#modal-create-rfm').modal('hide');
+                                // $('#modal-create-rfp').modal('hide');
+                                // reload_table();
+                                console.log(isPesan);
+                                window.location.href = "./";
+                            }
                         }
                     });
                 }

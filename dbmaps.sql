@@ -16,16 +16,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_gis` /*!40100 DEFAULT CHARACTER SET 
 
 USE `db_gis`;
 
-/*Table structure for table `test` */
-
-DROP TABLE IF EXISTS `test`;
-
-CREATE TABLE `test` (
-  `test` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `test` */
-
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
@@ -80,11 +70,11 @@ CREATE TABLE `wgm_group_kegiatan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_group_kegiatan` */
 
-insert  into `wgm_group_kegiatan`(`id`,`nama`) values (1,'ASSESMENT'),(2,'KESEHATAN'),(3,'EVAKUASI'),(4,'AIR & SANITASI'),(5,'PERMAKANAN'),(6,'DUKUNGAN PSIKOSOSIAL'),(7,'LOGISTIK'),(8,'RECOVERY AWAL');
+insert  into `wgm_group_kegiatan`(`id`,`nama`) values (1,'DAPUR UMUM'),(2,'POS HANGAT'),(3,'KESEHATAN'),(4,'KEBERSIHAN'),(5,'LOGISTIC FOOD'),(6,'LOGISTIC NON FOOD'),(7,'DUKUNGAN PSIKOSOSIAL'),(8,'SANITASI'),(9,'AIR'),(10,'RECOVERY AWAL'),(11,'PEMULIHAN');
 
 /*Table structure for table `wgm_last_update_timeline_kegiatan` */
 
@@ -95,17 +85,17 @@ CREATE TABLE `wgm_last_update_timeline_kegiatan` (
   `timeline_kegiatan_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `timeline_kegiatan_deskripsi` text,
-  `tgl_insert` datetime DEFAULT NULL,
+  `tgl_insert` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `wgm_last_update_timeline_kegiatan_ibfk_1` (`timeline_kegiatan_id`),
   CONSTRAINT `wgm_last_update_timeline_kegiatan_ibfk_1` FOREIGN KEY (`timeline_kegiatan_id`) REFERENCES `wgm_timeline_kegiatan` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `wgm_last_update_timeline_kegiatan_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_last_update_timeline_kegiatan` */
 
-insert  into `wgm_last_update_timeline_kegiatan`(`id`,`timeline_kegiatan_id`,`user_id`,`timeline_kegiatan_deskripsi`,`tgl_insert`) values (1,1,1,'KFNJ DSJNF DJNF','2019-11-29 14:48:13'),(2,1,1,'KJFIEF ENFIE IEI','2019-11-29 14:48:57'),(3,2,1,'AWRV SDSDFSVRV NYJMUK','2019-11-29 14:49:10'),(4,2,1,'SDFWV4TGH HRRHTHRTHR G','2019-11-29 14:55:27'),(5,3,1,'KDFVFNJ DSJDVDFVNF SFGBG','2019-11-29 14:55:29'),(6,3,1,'DFGF DGRTHGRGBT NTYHNGF R DF','2019-11-29 14:55:32');
+insert  into `wgm_last_update_timeline_kegiatan`(`id`,`timeline_kegiatan_id`,`user_id`,`timeline_kegiatan_deskripsi`,`tgl_insert`) values (61,58,1,'df','2019-12-06 09:58:28'),(62,58,1,'bg','2019-12-06 09:58:28'),(63,58,1,'vb','2019-12-06 09:59:47'),(64,58,1,'rt','2019-12-06 09:58:47'),(65,58,1,'vb','2019-12-06 15:31:37'),(66,58,1,'rt','2019-12-06 15:31:37'),(67,58,1,'vb','2019-12-06 15:32:03'),(68,58,1,'rt','2019-12-06 15:32:03'),(69,58,1,'vb','2019-12-06 15:33:25'),(70,58,1,'rt','2019-12-06 15:33:25');
 
 /*Table structure for table `wgm_request_support` */
 
@@ -140,18 +130,18 @@ CREATE TABLE `wgm_timeline_kegiatan` (
   `detail_id` int(11) DEFAULT NULL,
   `group_kegiatan_id` int(11) DEFAULT NULL,
   `deskripsi` text,
-  `gambar` varchar(30) DEFAULT NULL,
+  `gambar` varchar(100) DEFAULT NULL,
   `waktu` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `group_kegiatan_id` (`group_kegiatan_id`),
   KEY `detail_id` (`detail_id`),
   CONSTRAINT `wgm_timeline_kegiatan_ibfk_2` FOREIGN KEY (`group_kegiatan_id`) REFERENCES `wgm_group_kegiatan` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `wgm_timeline_kegiatan_ibfk_3` FOREIGN KEY (`detail_id`) REFERENCES `wgm_detail` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_timeline_kegiatan` */
 
-insert  into `wgm_timeline_kegiatan`(`id`,`detail_id`,`group_kegiatan_id`,`deskripsi`,`gambar`,`waktu`) values (1,5,1,'KFNJ DSJNF DJNF|KJFIEF ENFIE IEI','file/gambar.jpg','2019-11-25 18:59:55'),(2,5,2,'AWRV SDSDFSVRV NYJMUK|SDFWV4TGH HRRHTHRTHR G','file/gambar.jpg','2019-11-26 19:38:17'),(3,5,3,'KDFVFNJ DSJDVDFVNF SFGBG|DFGF DGRTHGRGBT|NTYHNGF R DF','file/gambar.jpg','2019-11-26 19:38:17');
+insert  into `wgm_timeline_kegiatan`(`id`,`detail_id`,`group_kegiatan_id`,`deskripsi`,`gambar`,`waktu`) values (58,7,1,'vb|rt','454f58f6bc0528e7b1ad5b2cbdc63c3e-1575621205.jpg',NULL);
 
 /*Table structure for table `wgm_tipe_bencana` */
 

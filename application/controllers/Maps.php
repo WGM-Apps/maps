@@ -191,6 +191,6 @@ class Maps extends CI_Controller {
 	function list_bencana(){
 		$id = $this->input->get('id');
 
-		$this->load->view('maps/modal/delete_maps', $data);
+		$this->load->view('maps/modal/delete_maps');
 	}
 }
