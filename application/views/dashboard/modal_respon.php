@@ -6,17 +6,28 @@
                 <?php echo $res->nama ?>
             </aside>
             <aside id="group<?php echo $res->id ?>" class="collapse p-2" aria-labelledby="group<?php echo $res->id ?>" data-parent="#accordion">
-                <div class="input-group mb-3">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="gambar<?php echo $res->id ?>">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2 text-center">
+                            <?php
+                                $tb_timeline_kegiatan = TB_TIMELINE_KEGIATAN;
+                                $tb_last_update_timeline_kegiatan = TB_LAST_UPDATE_TIMELINE_KEGIATAN;
+                                $cek_kegiatan = $this->db->query("SELECT *, COUNT(*) AS total FROM $tb_timeline_kegiatan WHERE detail_id = $idx AND group_kegiatan_id = $res->id");
+                                $cek_total = $cek_kegiatan->row();
+                                if($cek_total->gambar){
+                                    $url_gambar = base_url("upload/$cek_total->gambar");
+                                    echo "<a href='$url_gambar' target='_blank'><i class='fa fa-image fa-2x'></i></a>";
+                                }else{
+                                    echo "<small style='font-size:7pt'>GAMBAR KOSONG</small>";
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="file" class="form-control form-control-file" name="gambar<?php echo $res->id ?>">
+                        </div>
                     </div>
                 </div>
                 <?php
-                    $tb_timeline_kegiatan = TB_TIMELINE_KEGIATAN;
-                    $tb_last_update_timeline_kegiatan = TB_LAST_UPDATE_TIMELINE_KEGIATAN;
-                    $cek_kegiatan = $this->db->query("SELECT *, COUNT(*) AS total FROM $tb_timeline_kegiatan WHERE detail_id = $idx AND group_kegiatan_id = $res->id");
-                    $cek_total = $cek_kegiatan->row();
                     if($cek_total->total > 0){
                         $exs = explode('|', $cek_total->deskripsi);
                         foreach($exs as $eExs){

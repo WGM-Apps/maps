@@ -128,149 +128,6 @@ class Welcome extends CI_Controller {
 		$gambar11 = $_FILES['gambar11'];
 		$path = "upload/";
 
-		if(empty($gambar1['name'])){
-			$new_name1 = null;
-		}else{
-			$name = $gambar1['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name1 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar1['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name1);
-		}
-
-		if(empty($gambar2['name'])){
-			$new_name2 = null;
-		}else{
-			$name = $gambar2['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name2 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar2['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name2);
-		}
-
-		if(empty($gambar3['name'])){
-			$new_name3 = null;
-		}else{
-			$name = $gambar3['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name3 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar3['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name3);
-		}
-
-		if(empty($gambar4['name'])){
-			$new_name4 = null;
-		}else{
-			$name = $gambar4['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name4 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar4['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name4);
-		}
-
-		if(empty($gambar5['name'])){
-			$new_name5 = null;
-		}else{
-			$name = $gambar5['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name5 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar5['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name5);
-		}
-
-		if(empty($gambar6['name'])){
-			$new_name6 = null;
-		}else{
-			$name = $gambar6['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name6 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar6['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name6);
-		}
-
-		if(empty($gambar7['name'])){
-			$new_name7 = null;
-		}else{
-			$name = $gambar7['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name7 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar7['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name7);
-		}
-
-		if(empty($gambar8['name'])){
-			$new_name8 = null;
-		}else{
-			$name = $gambar8['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name8 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar8['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name8);
-		}
-
-		if(empty($gambar9['name'])){
-			$new_name9 = null;
-		}else{
-			$name = $gambar9['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name9 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar9['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name9);
-		}
-
-		if(empty($gambar10['name'])){
-			$new_name10 = null;
-		}else{
-			$name = $gambar10['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name10 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar10['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name10);
-		}
-
-		if(empty($gambar11['name'])){
-			$new_name11 = null;
-		}else{
-			$name = $gambar11['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name11 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar11['tmp_name'];
-			move_uploaded_file($tmp, $path.''.$new_name11);
-		}
-
 		$deskripsi1 = $this->input->post('deskripsi1');
 		$deskripsi2 = $this->input->post('deskripsi2');
 		$deskripsi3 = $this->input->post('deskripsi3');
@@ -307,27 +164,203 @@ class Welcome extends CI_Controller {
 		$id_group_kegiatan10 = $this->input->post('id_group_kegiatan10');
 		$id_group_kegiatan11 = $this->input->post('id_group_kegiatan11');
 
-		$cek_kegiatan1 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail1 AND group_kegiatan_id = $id_group_kegiatan1")->row();
+		$cek_kegiatan1 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail1 AND group_kegiatan_id = $id_group_kegiatan1")->row();
 
-		$cek_kegiatan2 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail2 AND group_kegiatan_id = $id_group_kegiatan2")->row();
+		$cek_kegiatan2 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail2 AND group_kegiatan_id = $id_group_kegiatan2")->row();
 		
-		$cek_kegiatan3 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail3 AND group_kegiatan_id = $id_group_kegiatan3")->row();
+		$cek_kegiatan3 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail3 AND group_kegiatan_id = $id_group_kegiatan3")->row();
 		
-		$cek_kegiatan4 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail4 AND group_kegiatan_id = $id_group_kegiatan4")->row();
+		$cek_kegiatan4 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail4 AND group_kegiatan_id = $id_group_kegiatan4")->row();
 		
-		$cek_kegiatan5 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail5 AND group_kegiatan_id = $id_group_kegiatan5")->row();
+		$cek_kegiatan5 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail5 AND group_kegiatan_id = $id_group_kegiatan5")->row();
 		
-		$cek_kegiatan6 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail6 AND group_kegiatan_id = $id_group_kegiatan6")->row();
+		$cek_kegiatan6 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail6 AND group_kegiatan_id = $id_group_kegiatan6")->row();
 		
-		$cek_kegiatan7 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail7 AND group_kegiatan_id = $id_group_kegiatan7")->row();
+		$cek_kegiatan7 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail7 AND group_kegiatan_id = $id_group_kegiatan7")->row();
 		
-		$cek_kegiatan8 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail8 AND group_kegiatan_id = $id_group_kegiatan8")->row();
+		$cek_kegiatan8 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail8 AND group_kegiatan_id = $id_group_kegiatan8")->row();
 		
-		$cek_kegiatan9 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail9 AND group_kegiatan_id = $id_group_kegiatan9")->row();
+		$cek_kegiatan9 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail9 AND group_kegiatan_id = $id_group_kegiatan9")->row();
 		
-		$cek_kegiatan10 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail10 AND group_kegiatan_id = $id_group_kegiatan10")->row();
+		$cek_kegiatan10 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail10 AND group_kegiatan_id = $id_group_kegiatan10")->row();
 		
-		$cek_kegiatan11 = $this->db->query("SELECT COUNT(*) as total, id FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail11 AND group_kegiatan_id = $id_group_kegiatan11")->row();
+		$cek_kegiatan11 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail11 AND group_kegiatan_id = $id_group_kegiatan11")->row();
+
+		if(empty($gambar1['name'])){
+			$new_name1 = null;
+		}else{
+			$name = $gambar1['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name1 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar1['tmp_name'];
+			if($cek_kegiatan1->gambar){
+				unlink($path.$cek_kegiatan1->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name1);
+		}
+
+		if(empty($gambar2['name'])){
+			$new_name2 = null;
+		}else{
+			$name = $gambar2['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name2 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar2['tmp_name'];
+			if($cek_kegiatan2->gambar){
+				unlink($path.$cek_kegiatan2->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name2);
+		}
+
+		if(empty($gambar3['name'])){
+			$new_name3 = null;
+		}else{
+			$name = $gambar3['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name3 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar3['tmp_name'];
+			if($cek_kegiatan3->gambar){
+				unlink($path.$cek_kegiatan3->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name3);
+		}
+
+		if(empty($gambar4['name'])){
+			$new_name4 = null;
+		}else{
+			$name = $gambar4['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name4 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar4['tmp_name'];
+			if($cek_kegiatan4->gambar){
+				unlink($path.$cek_kegiatan4->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name4);
+		}
+
+		if(empty($gambar5['name'])){
+			$new_name5 = null;
+		}else{
+			$name = $gambar5['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name5 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar5['tmp_name'];
+			if($cek_kegiatan5->gambar){
+				unlink($path.$cek_kegiatan5->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name5);
+		}
+
+		if(empty($gambar6['name'])){
+			$new_name6 = null;
+		}else{
+			$name = $gambar6['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name6 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar6['tmp_name'];
+			if($cek_kegiatan6->gambar){
+				unlink($path.$cek_kegiatan6->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name6);
+		}
+
+		if(empty($gambar7['name'])){
+			$new_name7 = null;
+		}else{
+			$name = $gambar7['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name7 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar7['tmp_name'];
+			if($cek_kegiatan7->gambar){
+				unlink($path.$cek_kegiatan7->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name7);
+		}
+
+		if(empty($gambar8['name'])){
+			$new_name8 = null;
+		}else{
+			$name = $gambar8['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name8 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar8['tmp_name'];
+			if($cek_kegiatan8->gambar){
+				unlink($path.$cek_kegiatan8->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name8);
+		}
+
+		if(empty($gambar9['name'])){
+			$new_name9 = null;
+		}else{
+			$name = $gambar9['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name9 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar9['tmp_name'];
+			if($cek_kegiatan9->gambar){
+				unlink($path.$cek_kegiatan9->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name9);
+		}
+
+		if(empty($gambar10['name'])){
+			$new_name10 = null;
+		}else{
+			$name = $gambar10['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name10 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar10['tmp_name'];
+			if($cek_kegiatan10->gambar){
+				unlink($path.$cek_kegiatan10->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name10);
+		}
+
+		if(empty($gambar11['name'])){
+			$new_name11 = null;
+		}else{
+			$name = $gambar11['name'];
+			$ext = explode(".", $name);
+			$extensi = end($ext);
+			$explode_name = explode(".", $name);
+			$random_name = round(microtime(true)).'.'.end($explode_name);
+			$new_name11 = md5(date('YmdHis'))."-".$random_name;
+			$tmp = $gambar11['tmp_name'];
+			if($cek_kegiatan11->gambar){
+				unlink($path.$cek_kegiatan11->gambar);
+			}
+			move_uploaded_file($tmp, $path.''.$new_name11);
+		}
 
 		if(empty($deskripsi1)){
 			$implode_deskripsi1 = null;
