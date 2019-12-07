@@ -91,11 +91,11 @@ CREATE TABLE `wgm_last_update_timeline_kegiatan` (
   KEY `wgm_last_update_timeline_kegiatan_ibfk_1` (`timeline_kegiatan_id`),
   CONSTRAINT `wgm_last_update_timeline_kegiatan_ibfk_1` FOREIGN KEY (`timeline_kegiatan_id`) REFERENCES `wgm_timeline_kegiatan` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `wgm_last_update_timeline_kegiatan_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_last_update_timeline_kegiatan` */
 
-insert  into `wgm_last_update_timeline_kegiatan`(`id`,`timeline_kegiatan_id`,`user_id`,`timeline_kegiatan_deskripsi`,`tgl_insert`) values (61,58,1,'df','2019-12-06 09:58:28'),(62,58,1,'bg','2019-12-06 09:58:28'),(63,58,1,'vb','2019-12-06 09:59:47'),(64,58,1,'rt','2019-12-06 09:58:47'),(65,58,1,'vb','2019-12-06 15:31:37'),(66,58,1,'rt','2019-12-06 15:31:37'),(67,58,1,'vb','2019-12-06 15:32:03'),(68,58,1,'rt','2019-12-06 15:32:03'),(69,58,1,'vb','2019-12-06 15:33:25'),(70,58,1,'rt','2019-12-06 15:33:25');
+insert  into `wgm_last_update_timeline_kegiatan`(`id`,`timeline_kegiatan_id`,`user_id`,`timeline_kegiatan_deskripsi`,`tgl_insert`) values (61,58,1,'df','2019-12-06 09:58:28'),(62,58,1,'bg','2019-12-06 09:58:28'),(63,58,1,'vb','2019-12-06 09:59:47'),(64,58,1,'rt','2019-12-06 09:58:47'),(65,58,1,'vb','2019-12-06 15:31:37'),(66,58,1,'rt','2019-12-06 15:31:37'),(67,58,1,'vb','2019-12-06 15:32:03'),(68,58,1,'rt','2019-12-06 15:32:03'),(69,58,1,'vb','2019-12-06 15:33:25'),(70,58,1,'rt','2019-12-06 15:33:25'),(71,58,1,'vb','2019-12-06 16:01:43'),(72,58,1,'rt','2019-12-06 16:01:43'),(73,58,1,'vb','2019-12-06 16:26:58'),(74,58,1,'rt','2019-12-06 16:26:58'),(75,58,1,'dfg','2019-12-06 16:26:58'),(76,58,1,'qwe','2019-12-06 16:28:17'),(77,58,1,'asd','2019-12-06 16:28:17'),(78,58,1,'mke','2019-12-06 16:28:17'),(79,58,1,'qwe','2019-12-07 11:39:45'),(80,58,1,'asd','2019-12-07 11:39:45'),(81,58,1,'mke','2019-12-07 11:39:45');
 
 /*Table structure for table `wgm_request_support` */
 
@@ -141,7 +141,7 @@ CREATE TABLE `wgm_timeline_kegiatan` (
 
 /*Data for the table `wgm_timeline_kegiatan` */
 
-insert  into `wgm_timeline_kegiatan`(`id`,`detail_id`,`group_kegiatan_id`,`deskripsi`,`gambar`,`waktu`) values (58,7,1,'vb|rt','454f58f6bc0528e7b1ad5b2cbdc63c3e-1575621205.jpg',NULL);
+insert  into `wgm_timeline_kegiatan`(`id`,`detail_id`,`group_kegiatan_id`,`deskripsi`,`gambar`,`waktu`) values (58,7,1,'qwe|asd|mke','f8fb696633ee8a334a2d3ca72dcc53f0-1575693586.jpg',NULL);
 
 /*Table structure for table `wgm_tipe_bencana` */
 
@@ -150,12 +150,13 @@ DROP TABLE IF EXISTS `wgm_tipe_bencana`;
 CREATE TABLE `wgm_tipe_bencana` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(30) DEFAULT NULL,
+  `icon` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_tipe_bencana` */
 
-insert  into `wgm_tipe_bencana`(`id`,`nama`) values (1,'GEMPA BUMI'),(2,'GUNUNG MELETUS'),(3,'TSUNAMI'),(4,'BANJIR');
+insert  into `wgm_tipe_bencana`(`id`,`nama`,`icon`) values (1,'GEMPA BUMI','gempa.png'),(2,'GUNUNG MELETUS','erupsi.png'),(3,'TSUNAMI','tsunami.png'),(4,'BANJIR','banjir.png'),(5,'LONGSOR','longsor.png'),(6,'KEBAKARAN HUTAN','karhutla.png'),(7,'KEBAKARAN PEMUKIMAN','kebakaran.png'),(8,'KEKERINGAN','kekeringan.png'),(9,'LAINNYA','lainnya.png');
 
 /*!50106 set global event_scheduler = 1*/;
 
