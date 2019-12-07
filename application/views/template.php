@@ -77,73 +77,64 @@
         </aside>
 
         <aside class="nav-top position-fixed">
-            <aside class="float-left mr-3 p-3 mobile-menu-view">
-                <i class="fa fa-ellipsis-h tombol"></i>
-            </aside>
-            <aside class="float-right mr-3 p-3">
-                <span>
-                <?php if($menu == 1): ?>
-                    <aside class="dropdown">
-                        <a href="javascript:void(0)" class="text-secondary dropdown-toggle" data-toggle="dropdown">
-                            <b>Reynaldi</b>
-                        </a>
-                        <aside class="dropdown-menu">
-                            <a class="dropdown-item" href="<?php echo base_url('logout') ?>">
-                                <i class="fa fa-sign-out-alt fa-fw"></i> Keluar
-                            </a>
-                        </aside>
-                    </aside>
-                <?php else: ?>
-                    <a href="javascript:void(0)" class="text-secondary" data-toggle="modal" data-target="#masuk">
-                        Daftar / Masuk
-                    </a>
-                    <aside class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="masukTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                        <aside class="modal-dialog" role="document">
-                            <aside class="modal-content">
-                                <aside class="modal-header">
-                                    <h5 class="modal-title" id="masukTitle">Masuk</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </aside>
-                                <aside class="modal-body">
-                                    <form id="form_login">
-                                        <aside class="row">
-                                            <aside class="col-md-5">
-                                                <input type="text" name="username" placeholder="Nama pengguna" class="form-control form-control-sm">
-                                            </aside>
-                                            <aside class="col-md-5">
-                                                <input type="password" name="password" placeholder="Kata Kunci" class="form-control form-control-sm">
-                                            </aside>
-                                            <aside class="col-md-2">
-                                                <a href="javascript:void(0)" onclick="proses_login()" id="btn_login" class="btn btn-primary btn-sm btn-block"><i class="fa fa-sign-in-alt"></i></a>
-                                            </aside>
-                                        </aside>
-                                    </form>
-
-                                    <hr>
-                                    <aside id="pesan" class="text-danger"></aside>
-                                    <!-- <h5>Daftar</h5>
-                                    <form>
-                                        <aside class="row">
-                                            <aside class="col-md-5">
-                                                <input type="text" name="" placeholder="Email" class="form-control form-control-sm">
-                                            </aside>
-                                            <aside class="col-md-5">
-                                                <input type="password" name="" placeholder="Kata Kunci" class="form-control form-control-sm">
-                                            </aside>
-                                            <aside class="col-md-2">
-                                                <a href="javascript:void(0)" class="btn btn-success btn-sm btn-block"><i class="fa fa-user-plus"></i></a>
-                                            </aside>
-                                        </aside>
-                                    </form> -->
+            <aside class="row">
+                <aside class="col mr-3 ml-3 p-3 tombol">
+                    <img src="<?php echo base_url('assets/icon_marker/logo.png') ?>">
+                </aside>
+                <aside class="col">
+                    <aside class="float-right mr-3 p-3">
+                        <span>
+                        <?php if($menu == 1): ?>
+                            <aside class="dropdown">
+                                <a href="javascript:void(0)" class="text-secondary dropdown-toggle" data-toggle="dropdown">
+                                    <b><?php echo $this->session->userdata('USER_FULLNAME') ?></b>
+                                </a>
+                                <aside class="dropdown-menu">
+                                    <a class="dropdown-item" href="<?php echo base_url('logout') ?>">
+                                        <i class="fa fa-sign-out-alt fa-fw"></i> Keluar
+                                    </a>
                                 </aside>
                             </aside>
-                        </aside>
+                        <?php else: ?>
+                            <a href="javascript:void(0)" class="text-secondary" data-toggle="modal" data-target="#masuk">
+                                Masuk
+                            </a>
+                            <aside class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="masukTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                <aside class="modal-dialog" role="document">
+                                    <aside class="modal-content">
+                                        <aside class="modal-header">
+                                            <h5 class="modal-title" id="masukTitle">Masuk</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </aside>
+                                        <aside class="modal-body">
+                                            <form id="form_login">
+                                                <aside class="row">
+                                                    <aside class="col-md-5">
+                                                        <input type="text" name="username" placeholder="Nama pengguna" class="form-control form-control-sm">
+                                                    </aside>
+                                                    <aside class="col-md-5">
+                                                        <input type="password" name="password" placeholder="Kata Kunci" class="form-control form-control-sm">
+                                                    </aside>
+                                                    <aside class="col-md-2">
+                                                        <a href="javascript:void(0)" onclick="proses_login()" id="btn_login" class="btn btn-primary btn-sm btn-block"><i class="fa fa-sign-in-alt"></i></a>
+                                                    </aside>
+                                                </aside>
+                                            </form>
+
+                                            <hr>
+                                            <aside id="pesan" class="text-danger"></aside>
+                                        </aside>
+                                    </aside>
+                                </aside>
+                            </aside>
+                        <?php endif ?>
+                        </span>
                     </aside>
-                <?php endif ?>
-                </span>
+                </aside>
             </aside>
+        </aside>
         </aside>
 
         <aside class="content">

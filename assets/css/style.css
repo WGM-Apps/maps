@@ -148,3 +148,7 @@ div[style*="background-color: white; font-weight: 500; font-family: Roboto, sans
 .modal{
     padding-top:5em;
 }
+
+.tombol img{
+    width: 65px;
+}
