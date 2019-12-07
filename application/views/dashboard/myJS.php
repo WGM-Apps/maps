@@ -136,4 +136,8 @@
         });
     }
 
+    function report_respon(id){
+        let url = "report_respon/pdf/"
+        window.open(url+id);
+    }
 </script>

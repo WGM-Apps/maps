@@ -4,6 +4,7 @@
             <?php if($this->session->userdata('USER_ID')): ?>
                 <sup>(<a href="javascript:void(0)" onclick="sesuaikan_respon(<?php echo $row_detail->id ?>)">Sesuaikan Respon <i class="far fa-edit"></i></a>)</sup>
             <?php endif ?>
+            <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right" onclick="report_respon('<?php echo $row_detail->id ?>')"><i class="fa fa-print"></i> LAPORAN</a>
     </aside>
 </aside>
 
