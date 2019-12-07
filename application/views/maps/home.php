@@ -110,6 +110,10 @@
         </aside>
         <?php echo $this->session->flashdata('msg');?>
         <aside class="card-body">
+            <div class="row">
+                <a href="<?php echo base_url().'maps/export_excel' ?>" class="btn btn-success btn-sm float-right" ><i class="fa fa-excel"></i> Export to Excel</a>
+            </div>
+            <hr width="100%">
             <aside class="scrollmenu">
                 <table class="table table-hover table-bordered table-sm" id="tbDetail">
                     <thead>

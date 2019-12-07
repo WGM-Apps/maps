@@ -63,11 +63,9 @@
                             $res_bencana = $this->db->get(TB_TIPE_BENCANA)->result();
                             foreach($res_bencana as $r):
                         ?>  
-                            <form class="form-control" method="post" action="<?php echo base_url().'kategori'?>" enctype="multipart/form-data">
-                                <div class="row">
+                             <form method="post" action="<?php echo base_url() ?>" enctype="multipart/form-data">
                                     <input type="hidden" name="id_bencana" value="<?php echo $r->id ?>">
-                                    <button type="submit" class="form-control" style="background-color: white;color: black;border: 2px solid #4CAF50;font-size: 12px;" ><?php echo ucwords(strtolower($r->nama)) ?>
-                                </div>
+                                    <button type="submit" class="btn btn-block btn-sm pl-3 pt-2 bg-white text-secondary text-left" style="cursor:pointer">&raquo; <?php echo ucwords(strtolower($r->nama)) ?></button>
                             </form>
                             
                         <?php endforeach ?>

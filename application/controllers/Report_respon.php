@@ -17,6 +17,7 @@ Class Report_respon extends CI_Controller{
         $bg = base_url('assets/icon_marker/logo.png');
         $bg1 = base_url('assets/icon_marker/s.jpg');
         $row = $this->db->query("SELECT wd.*, wtb.`nama` AS `nama_bencana`, wtb.`icon` AS `icon_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` WHERE wd.`id`='$id'")->row();
+
         $result = $this->db->query("SELECT wtk.*, wgk.`id` AS wgk_id, wgk.`nama` AS wgk_nama FROM $tb_timeline_kegiatan wtk LEFT JOIN $tb_group_kegiatan wgk ON wgk.`id` = wtk.`group_kegiatan_id` WHERE wtk.`detail_id` = '$row->id'")->result();
         
         // echo "<title>$row->nama_bencana</title>";
@@ -99,7 +100,16 @@ Class Report_respon extends CI_Controller{
                 $pdf->SetFont('Arial','B',12);
                 $pdf->Cell(190,5,$no++.". ".$ex->wgk_nama,0,1,'L');
             }
+
+            $explode_timeline = explode("|", $ex->deskripsi);
+            foreach($explode_timeline AS $res):
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetX(15);
+                $pdf->Cell(190,5,"-   ".$res,0,1,'L');
+            endforeach;
         endforeach;
+
+
         
         $pdf->Output();
     }

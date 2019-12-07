@@ -193,4 +193,79 @@ class Maps extends CI_Controller {
 
 		$this->load->view('maps/modal/delete_maps');
 	}
+
+	function export_excel(){
+		$tb_detail = TB_DETAIL;
+		$tb_bencana = TB_TIPE_BENCANA;
+		header('Pragma: public');
+	    header('Cache-control: private');
+	    header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+	    header("Content-type: application/x-msexcel; charset=utf-8");
+	    header("Content-Disposition: attachment; filename=Report Data Maps.xlsx");
+	    header("Pragma: no-cache");
+	    header("Expires: 0");
+	    
+	    
+	    $query = "SELECT * 
+	              FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` ";
+	              
+	    $execQuery = $this->db->query($query);
+	    if($execQuery){
+	        echo "<style>
+	                table{
+	                    border-collapse: collapse;
+	                }
+	                th{
+	                    background-color:blue;
+	                    color:white;
+	                }
+	                th, td {
+	                    border-color: rgba(121, 117, 117, 0.6);
+	                    border-style: solid !important;
+	                    border-width : 0.3pt;
+	                }
+	                .str{
+	                    mso-number-format:\@;
+	                }
+	               </style>
+	                <h1>REPORT DATA MAPS ALL</h1>
+	                <table>
+	                <tr>
+	                    <TH>Nama Bencana</TH>
+	                    <TH>Tgl kejadian</TH>
+	                    <TH>Lokasi</TH>
+	                    <TH>Kelurahan</TH>
+	                    <TH>Kecamatan</TH>
+	                    <TH>Kota</TH>
+	                    <TH>Provinsi</TH>
+	                    <TH>Dampak</TH>
+	                    <TH>Kebutuhan</TH>
+	                    
+	                </tr>";
+
+	        $rows = $execQuery->result_array();
+	        foreach ($rows as $data) {
+
+	        	
+	        	echo "<tr>
+	                    <td class ='str'>".$data['nama']."</td>
+	                    <td class ='str'>".date('d-m-Y',strtotime($data['tgl_kejadian']))."</td>
+	                    <td class ='str'>".$data['nama_lokasi']."</td>
+	                    <td class ='str'>".$data['kelurahan']."</td>
+	                    <td class ='str'>".$data['kecamatan']."</td>
+	                    <td class ='str'>".$data['kota']."</td>
+	                    <td class ='str'>".$data['provinsi']."</td>
+	                    <td class ='str'>".$data['dampak']."</td>
+	                    <td class ='str'>".$data['kebutuhan']."</td>
+	                </tr>";
+	        }
+
+	        echo '</table>';
+	    }else{
+	        echo "
+	            <table border=1 style='border: 1px solid black'>
+	                <tr><h4>INVALID</h4></tr>
+	            </table>";
+	    }
+	}
 }
