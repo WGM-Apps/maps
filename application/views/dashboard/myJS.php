@@ -42,15 +42,18 @@
                 $content .= "<center><a href=javascript:void(0) onclick=viewDetailKordinat($id)>Lihat Detail</a></center>";
                 $content .= "<hr>";
                 $content .= "<center><a target=&quot;_blank&quot; href=https://www.google.com/maps?q=loc:$lat,$lng><small>Tampilkan Google Maps</small></a></center>";
-                echo ("addMarker($lat, $lng, '$content');");                        
+                echo ("addMarker($lat, $lng, '$content', '$data->icon_bencana');");                        
             }    
         ?> 
-        function addMarker(lat, lng, info) {
+        function addMarker(lat, lng, info, iconb) {
             var lokasi = new google.maps.LatLng(lat, lng);
+            var icon_bencana = '<?php echo base_url("assets/icon_marker/") ?>'+iconb;
             bounds.extend(lokasi);
             var marker = new google.maps.Marker({
                 map: map,
-                position: lokasi
+                position: lokasi,
+                // animation:google.maps.Animation.BOUNCE,
+                icon: icon_bencana,
             });       
             map.fitBounds(bounds);
             bindInfoWindow(marker, map, infoWindow, info);

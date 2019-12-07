@@ -15,12 +15,12 @@ class Welcome extends CI_Controller {
 		$tb_timeline_kegiatan = TB_TIMELINE_KEGIATAN;
 		$tb_group_kegiatan = TB_GROUP_KEGIATAN;
 		$tb_last_update_timeline_kegiatan = TB_LAST_UPDATE_TIMELINE_KEGIATAN;
-		$bencana = $this->uri->segment(3);
+		$bencana = $this->input->post('id_bencana');
 		$where_bencana = null;
 		if(!empty($bencana)){
 			$where_bencana = "WHERE wd.bencana='$bencana'";
 		}
-		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` $where_bencana";
+		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana`, wtb.`icon` AS `icon_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` $where_bencana";
 		$data['result'] = $this->db->query($query)->result();
 		$data['myJS'] = 'dashboard/myJS';
 		if(!$this->welcome_model->logged_id()) {
