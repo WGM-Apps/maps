@@ -81,12 +81,22 @@
 
                             <aside class="form-group">
                                 <label><small>Dampak</small></label>
-                                <textarea name="dampak" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea>
+                                <!-- <textarea name="dampak" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea> -->
+                                <aside id="dampak"></aside>
+                            </aside>
+
+                            <aside class="form-group">
+                                <a href="javascript:void(0)" class="btn btn-warning btn-sm btn-block text-white" onclick="addDampak();"><i class="fa fa-plus"></i> Tambah Dampak</a> 
                             </aside>
 
                             <aside class="form-group">
                                 <label><small>Kebutuhan Darurat</small></label>
-                                <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea>
+                                <!-- <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea> -->
+                                <aside id="kebutuhan"></aside>
+                            </aside>
+
+                            <aside class="form-group">
+                                <a href="javascript:void(0)" class="btn btn-warning btn-sm btn-block text-white" onclick="addKebutuhan();"><i class="fa fa-plus"></i> Tambah Kebutuhan</a> 
                             </aside>
                             
                             <aside class="row">

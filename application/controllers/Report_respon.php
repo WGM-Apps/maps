@@ -54,33 +54,37 @@ Class Report_respon extends CI_Controller{
         $pdf->Cell(190,5,$row->provinsi,0,1,'L');
 
         $pdf->Cell(10,10,'',0,1);
-        $pdf->SetTextColor(44,161,219);
+        $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','B',14);
         $pdf->Cell(190,5,"Dampak",0,1,'L');
+        $pdf->SetDrawColor(255,255,255);
+        $pdf->Cell(85,1,'','B',1,'L');
 
         $pdf->Cell(10,3,'',0,1);
-        $explode = explode('-',$row->dampak);
+        $explode = explode('|',$row->dampak);
         $no = 1;
         foreach($explode as $ex):
             if($ex){
                 $pdf->SetTextColor(255,255,255);
-                $pdf->SetFont('Arial','B',12);
+                $pdf->SetFont('Arial','',12);
                 $pdf->Cell(190,5,$no++.". ".$ex,0,1,'L');
             }
         endforeach;
 
         $pdf->Cell(10,5,'',0,1);
-        $pdf->SetTextColor(44,161,219);
+        $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','B',14);
         $pdf->Cell(190,5,"Kebutuhan Darurat",0,1,'L');
+        $pdf->SetDrawColor(255,255,255);
+        $pdf->Cell(85,1,'','B',1,'L');
 
         $pdf->Cell(10,3,'',0,1);
-        $explode = explode('-',$row->kebutuhan);
+        $explode = explode('|',$row->kebutuhan);
         $no = 1;
         foreach($explode as $ex):
             if($ex){
                 $pdf->SetTextColor(255,255,255);
-                $pdf->SetFont('Arial','B',12);
+                $pdf->SetFont('Arial','',12);
                 $pdf->Cell(190,5,$no++.". ".$ex,0,1,'L');
             }
         endforeach;
@@ -90,9 +94,10 @@ Class Report_respon extends CI_Controller{
         $pdf->SetTextColor(10,182,16);
         $pdf->SetFont('Arial','B',14);
         $pdf->Cell(190,5,"Respon Dompet Dhuafa",0,1,'L');
+        $pdf->SetDrawColor(10,182,16);
+        $pdf->Cell(85,1,'','B',1,'L');
 
         $pdf->Cell(10,3,'',0,1);
-        // $explode = explode('-',$row->kebutuhan);
         $no = 1;
         foreach($result as $ex):
             if($ex){
@@ -108,8 +113,6 @@ Class Report_respon extends CI_Controller{
                 $pdf->Cell(190,5,"-   ".$res,0,1,'L');
             endforeach;
         endforeach;
-
-
         
         $pdf->Output();
     }

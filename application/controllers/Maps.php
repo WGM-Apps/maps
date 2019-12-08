@@ -63,6 +63,8 @@ class Maps extends CI_Controller {
 			$isValid = 0;
 			$isPesan = "Kebutuhan wajib diisi";
 		}else {
+			$explode_dampak = implode('|', $dampak);
+			$explode_kebutuhan = implode('|', $kebutuhan);
 			$arr = array(
 				'lat' => strtoupper($lat),
 				'lng' => strtoupper($lng),
@@ -73,8 +75,8 @@ class Maps extends CI_Controller {
 				'kecamatan' => strtoupper($kecamatan),
 				'kota' => strtoupper($kota),
 				'provinsi' => strtoupper($provinsi),
-				'dampak' => strtoupper($dampak),
-				'kebutuhan' => strtoupper($kebutuhan),
+				'dampak' => strtoupper($explode_dampak),
+				'kebutuhan' => strtoupper($explode_kebutuhan),
 				'create_date' => $date_now,
 				'flg_active' => 'Y',
 			);

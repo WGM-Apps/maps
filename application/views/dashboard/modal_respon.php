@@ -74,7 +74,7 @@
                                 '</aside>';
                     addElement<?php echo $res->id ?>('files<?php echo $res->id ?>', 'p', 'file<?php echo $res->id ?>-' + fileId<?php echo $res->id ?>, html);
                 }
-                //-----Adds an element to the document-------
+                //-----Close Adds an element to the document-------
                 function simpan_respon(){
                     var form = $('#frm-respon')[0];
                     var data = new FormData(form);
@@ -95,14 +95,9 @@
                             if(isValid == 0) {
                                 // $('.btn_post_request').html('<a href="javascript:void(0)" onclick="post_request()" class="btn btn-success"><i class="fa fa-check"></i> Kirim</a>');
                                 // $('.pesan').html(isPesan);
-                                console.log(isPesan);
+                                alert(isPesan);
                             }else {
-                                // $('.pesan').html(isPesan);
-                                // $('#modal-create-rfm').modal('hide');
-                                // $('#modal-create-rfp').modal('hide');
-                                // reload_table();
-                                console.log(isPesan);
-                                window.location.href = "./";
+                                $('#sesuaikan_respon').modal('hide');
                             }
                         }
                     });

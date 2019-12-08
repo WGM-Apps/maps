@@ -67,6 +67,58 @@
         document.getElementById('current').innerHTML="<a href='javascript:void(0)' onclick='initialize_map(); initialize()'><i class='fa fa-map-marker-alt'></i> Lokasi saat ini</a> <a class='float-right' target='_blank' href='https://www.google.com/maps?q=loc:"+lat_maps+","+lng_maps+"'><i class='fa fa-map'></i> Lihat Google Maps</a>";
     }
 
+    //-----Adds an element to the document-------
+    function addElementDampak(parentId, elementTag, elementId, html) {
+        var p = document.getElementById(parentId);
+        var newElement = document.createElement(elementTag);
+        newElement.setAttribute('id', elementId);
+        newElement.innerHTML = html;
+        p.appendChild(newElement);
+    }
+
+    function removeElementDampak(elementId) {
+        var element = document.getElementById(elementId);
+        element.parentNode.removeChild(element);
+    }
+
+    var fileIdDampak = 0;
+    function addDampak() {
+        fileIdDampak++;
+        var html =  '<aside class="row">'+
+                    '<aside class="col-md-10"><input type="text" name="dampak[]" placeholder="Keterangan Dampak..." onkeyup="javascript:this.value=this.value.toUpperCase()" class="form-control" /></aside>'+
+                    '<aside class="col"><a href="javascript:void(0)" onclick="javascript:removeElementDampak(\'fileDampak-' + fileIdDampak + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
+                    '<i class="fa fa-times"></i></a></aside>'+
+                    '</aside>';
+        addElementDampak('dampak', 'p', 'fileDampak-' + fileIdDampak, html);
+    }
+    //-----Close Adds an element to the document-------
+
+    //-----Adds an element to the document-------
+    function addElementKebutuhan(parentId, elementTag, elementId, html) {
+        var p = document.getElementById(parentId);
+        var newElement = document.createElement(elementTag);
+        newElement.setAttribute('id', elementId);
+        newElement.innerHTML = html;
+        p.appendChild(newElement);
+    }
+
+    function removeElementKebutuhan(elementId) {
+        var element = document.getElementById(elementId);
+        element.parentNode.removeChild(element);
+    }
+
+    var fileIdKebutuhan = 0;
+    function addKebutuhan() {
+        fileIdDampak++;
+        var html =  '<aside class="row">'+
+                    '<aside class="col-md-10"><input type="text" name="kebutuhan[]" placeholder="Keterangan Kebutuhan..." onkeyup="javascript:this.value=this.value.toUpperCase()" class="form-control" /></aside>'+
+                    '<aside class="col"><a href="javascript:void(0)" onclick="javascript:removeElementKebutuhan(\'fileKebutuhan-' + fileIdKebutuhan + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
+                    '<i class="fa fa-times"></i></a></aside>'+
+                    '</aside>';
+        addElementKebutuhan('kebutuhan', 'p', 'fileKebutuhan-' + fileIdKebutuhan, html);
+    }
+    //-----Close Adds an element to the document-------
+
     function simpan_maps() {
         var data = $('#frm_simpan_maps').serialize();
         var btn = document.getElementById('simpan_maps');
