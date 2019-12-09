@@ -81,12 +81,42 @@
 
                         <aside class="form-group">
                             <label><small>Dampak</small></label>
-                            <textarea name="dampak" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php echo $dampak ?></textarea>
+                           <!--  <textarea name="dampak" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php echo $dampak ?></textarea> -->
+                            <?php
+                              $exs = explode('|', $dampak);
+                                foreach($exs as $eExs){
+                                    echo "
+                                        <aside class='form-group'>
+                                            <input type='text' name='dampak[]' value='$eExs' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()'>
+                                        </aside>
+                                    ";
+                                }
+
+                            ?>
+                            <aside class="form-group" id="filesDampak<?php echo $id_wgm?>"></aside>
+                            <aside class="form-group">
+                                <a href="javascript:void(0)" class="btn btn-warning btn-sm text-white" onclick="addFileDampak<?php echo $id_wgm ?>();"><i class="far fa-clipboard"></i> Tambah Dampak </a> 
+                            </aside>
                         </aside>
 
                         <aside class="form-group">
                             <label><small>Kebutuhan Darurat</small></label>
-                            <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php echo $kebutuhan ?></textarea>
+                            <!-- <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php echo $kebutuhan ?></textarea> -->
+                            <?php
+                              $exs = explode('|', $kebutuhan);
+                                foreach($exs as $eExs){
+                                    echo "
+                                        <aside class='form-group'>
+                                            <input type='text' name='kebutuhan[]' value='$eExs' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()'>
+                                        </aside>
+                                    ";
+                                }
+
+                            ?>
+                            <aside class="form-group" id="filesKebutuhan<?php echo $id_wgm?>"></aside>
+                            <aside class="form-group">
+                                <a href="javascript:void(0)" class="btn btn-warning btn-sm text-white" onclick="addFileKebutuhan<?php echo $id_wgm ?>();"><i class="far fa-clipboard"></i> Tambah Kebutuhan </a> 
+                            </aside>
                         </aside>
                         <aside class="form-group">
                             <button type="submit" class="btn btn-primary">
@@ -101,3 +131,67 @@
         </div>
     </div>
 </div>
+
+<script>
+function addElementDampak<?php echo $id_wgm ?>(parentId, elementTag, elementId, html) {
+    var p = document.getElementById(parentId);
+
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+
+
+
+
+function removeElementDampak<?php echo $id_wgm ?>(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+var fileId<?php echo $id_wgm ?> = 0;
+function addFileDampak<?php echo $id_wgm ?>() {
+    fileId<?php echo $id_wgm ?>++;
+
+    var html =  '<aside class="row">'+
+                '<aside class="col-md-11"><input type="text" name="dampak[]" placeholder="Dampak..." class="form-control form-control-sm" onkeyup="javascript:this.value=this.value.toUpperCase()" /></aside>'+
+                '<aside class="col-md-1"><a href="javascript:void(0)" onclick="javascript:removeElementDampak<?php echo $id_wgm ?>(\'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?> + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
+                '<i class="fa fa-times"></i></a></aside>'+
+                '</aside>';
+    addElementDampak<?php echo $id_wgm ?>('filesDampak<?php echo $id_wgm ?>', 'p', 'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?>, html);
+}
+
+
+function addElementKebutuhan<?php echo $id_wgm ?>(parentId, elementTag, elementId, html) {
+    var p = document.getElementById(parentId);
+
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+
+
+
+
+function removeElementKebutuhan<?php echo $id_wgm ?>(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+var fileId<?php echo $id_wgm ?> = 0;
+function addFileKebutuhan<?php echo $id_wgm ?>() {
+    fileId<?php echo $id_wgm ?>++;
+
+    var html =  '<aside class="row">'+
+                '<aside class="col-md-11"><input type="text" name="kebutuhan[]" placeholder="Kebutuhan..." class="form-control form-control-sm"  onkeyup="javascript:this.value=this.value.toUpperCase()" /></aside>'+
+                '<aside class="col-md-1"><a href="javascript:void(0)" onclick="javascript:removeElementKebutuhan<?php echo $id_wgm ?>(\'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?> + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
+                '<i class="fa fa-times"></i></a></aside>'+
+                '</aside>';
+    addElementKebutuhan<?php echo $id_wgm ?>('filesKebutuhan<?php echo $id_wgm ?>', 'p', 'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?>, html);
+}
+
+
+
+</script>

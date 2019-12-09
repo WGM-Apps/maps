@@ -53,6 +53,7 @@
                 //-----Adds an element to the document-------
                 function addElement<?php echo $res->id ?>(parentId, elementTag, elementId, html) {
                     var p = document.getElementById(parentId);
+                    
                     var newElement = document.createElement(elementTag);
                     newElement.setAttribute('id', elementId);
                     newElement.innerHTML = html;

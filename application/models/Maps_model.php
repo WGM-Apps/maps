@@ -81,9 +81,27 @@ class Maps_model extends ci_model{
 
     function update_maps($id,$bencana,$tgl_kejadian,$nama_lokasi,$kelurahan,$kecamatan,$kota,$provinsi,$dampak,$kebutuhan){
 
+        $deskripsidampak ="";
+        $deskripsikebutuhan ="";
+
+
+        for ($i=0; $i < count($dampak) ; $i++) { 
+            $deskripsidampak .=$dampak[$i]."|";
+        }
+
+        $deskripsidampak = substr($deskripsidampak,0,strlen($deskripsidampak) - 1);
+
+
+        for ($i=0; $i < count($kebutuhan) ; $i++) { 
+            $deskripsikebutuhan .=$kebutuhan[$i]."|";
+        }
+
+        $deskripsikebutuhan = substr($deskripsikebutuhan,0,strlen($deskripsikebutuhan) - 1);
+
+
         $query ="UPDATE wgm_detail SET bencana ='$bencana',tgl_kejadian ='$tgl_kejadian',
                               nama_lokasi ='$nama_lokasi',kelurahan ='$kelurahan' ,kecamatan ='$kecamatan',
-                              kota ='$kota',provinsi ='$provinsi',dampak ='$dampak',kebutuhan ='$kebutuhan'
+                              kota ='$kota',provinsi ='$provinsi',dampak ='$deskripsidampak',kebutuhan ='$deskripsikebutuhan'
                               WHERE id ='$id'";
         
         $hsl=$this->db->query($query);
