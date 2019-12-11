@@ -19,8 +19,6 @@
                 $nama_bencana = $b['nama_bencana'];
                 $pic = $b['pic'];
                 $posko = $b['posko'];
-
-                print_r($pic);
             ?>
         </div>
         <div class="modal-body">

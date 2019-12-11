@@ -135,9 +135,19 @@
         </aside>
         <?php echo $this->session->flashdata('msg');?>
         <aside class="card-body">
-            <div class="row">
-                <a href="<?php echo base_url().'maps/export_excel' ?>" class="btn btn-success btn-sm float-right" ><i class="fa fa-excel"></i> Export to Excel</a>
-            </div>
+            <form class="form-horizontal" role="form" method="post" action="<?php echo base_url().'maps/export_excel'?>" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input class="form-control" type="date" name="periode_awal" id="periode_awal" style="width: 40%;display: inline;" placeholder="Periode Awal" >&nbsp;<input class="form-control" type="date" name="periode_akhir" id="periode_akhir" style="width: 40%;display: inline;" placeholder="Periode Akhir" >
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-excel"></span> Export to Excel
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
             <hr width="100%">
             <aside class="scrollmenu">
                 <table class="table table-hover table-bordered table-sm" id="tbDetail">

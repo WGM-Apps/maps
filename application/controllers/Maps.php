@@ -211,11 +211,14 @@ class Maps extends CI_Controller {
 	    header("Content-Disposition: attachment; filename=Report Data Maps.xlsx");
 	    header("Pragma: no-cache");
 	    header("Expires: 0");
-	    
-	    
+
+	    $periode_awal = $this->input->post('periode_awal');
+	    $periode_akhir = $this->input->post('periode_akhir');
+
 	    $query = "SELECT * 
-	              FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` ";
-	              
+	              FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` 
+	              WHERE wd.tgl_kejadian >='$periode_awal' AND wd.tgl_kejadian <='$periode_akhir' ";
+
 	    $execQuery = $this->db->query($query);
 	    if($execQuery){
 	        echo "<style>
