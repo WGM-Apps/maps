@@ -71,6 +71,9 @@ a:hover{
         margin-left:215px;
         margin-top:50px;
     }
+    .tombol{
+        display: none;
+    }
 
 }
 
@@ -122,9 +125,9 @@ a:hover{
             left: 0;
         }
         .tombol{
-                background: transparent;
-                cursor: pointer;
-            }
+            background: transparent;
+            cursor: pointer;
+        }
 }
 
 #map_canvas{
@@ -141,14 +144,10 @@ div[style*="background-color: white; font-weight: 500; font-family: Roboto, sans
     display: none;
 }
 
-/* #deskripsi_page .card{
+#deskripsi_page .card{
     box-shadow: 1px 2px 18px rgba(0, 0, 0, 0.151);
-} */
+}
 
 .modal{
     padding-top:5em;
-}
-
-.tombol img{
-    width: 65px;
 }

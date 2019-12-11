@@ -4,7 +4,7 @@
             <?php if($this->session->userdata('USER_ID')): ?>
                 <sup>(<a href="javascript:void(0)" onclick="sesuaikan_respon(<?php echo $row_detail->id ?>)">Sesuaikan Respon <i class="far fa-edit"></i></a>)</sup>
             <?php endif ?>
-            <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right" onclick="report_respon('<?php echo $row_detail->id ?>')"><i class="fa fa-print"></i> LAPORAN</a>
+            <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right" onclick="report_respon('<?php echo $row_detail->id ?>')"><i class="fa fa-print"></i> Cetak</a>
     </aside>
 </aside>
 
@@ -15,25 +15,67 @@
                 Data Bencana
             </aside>
             <aside class="card-body bg-white text-secondary">
-                Nama: <?php echo $row_detail->nama_bencana ?><br>
-                Tgl. Kejadian: <?php echo date('d-m-Y', strtotime($row_detail->tgl_kejadian)) ?><br>
-                Lokasi Kejadian: <?php echo $row_detail->nama_lokasi.", ".$row_detail->kelurahan." ".$row_detail->kecamatan." ".$row_detail->kota." ".$row_detail->provinsi ?><br>
+                <b>Nama:</b> <?php echo $row_detail->nama_bencana ?><br>
+                <b>Tgl. Kejadian:</b> <?php echo date('d F Y', strtotime($row_detail->tgl_kejadian)) ?><br>
+                <b>Lokasi Kejadian:</b><br><?php echo $row_detail->nama_lokasi.", ".$row_detail->kelurahan." ".$row_detail->kecamatan." ".$row_detail->kota." ".$row_detail->provinsi ?><br>
+                <small><a href="https://www.google.com/maps?q=loc:<?php echo $row_detail->lat.','.$row_detail->lng ?>" target="_blank">Tampilkan Google Maps</a></small>
             </aside>
         </aside>
+
         <aside class="card mb-5">
             <aside class="card-header bg-white text-primary">
                 Dampak
             </aside>
             <aside class="card-body bg-white text-secondary">
-                <textarea class="form-control" rows="5" id="txt_dampak" readonly><?php echo $row_detail->dampak ?></textarea>
+                <ul class="list-group list-group-flush">
+                <?php
+                    $explode_dampak = explode("|", $row_detail->dampak);
+                    foreach($explode_dampak as $dampak):
+                ?>
+                    <li class="list-group-item small"><?php echo $dampak ?></li>
+                <?php endforeach ?>
+                </ul>
             </aside>
         </aside>
-        <aside class="card">
+
+        <aside class="card mb-5">
             <aside class="card-header bg-white text-primary">
                 Kebutuhan Darurat
             </aside>
             <aside class="card-body bg-white text-secondary" id="detail-respon">
-                <textarea class="form-control" rows="5" id="txt_kebutuhan" readonly><?php echo $row_detail->kebutuhan ?></textarea>
+                <ul class="list-group list-group-flush">
+                <?php
+                    $explode_kebutuhan = explode("|", $row_detail->kebutuhan);
+                    foreach($explode_kebutuhan as $kebutuhan):
+                ?>
+                    <li class="list-group-item small"><?php echo $kebutuhan ?></li>
+                <?php endforeach ?>
+                </ul>
+            </aside>
+        </aside>
+
+        <aside class="card mb-5">
+            <aside class="card-header bg-white text-primary">
+                Kontak Informasi
+            </aside>
+            <aside class="card-body bg-white text-secondary" id="detail-respon">
+                <ul class="list-group list-group-flush">
+                <?php
+                    $explode_pic = explode("|", $row_detail->pic);
+                    foreach($explode_pic as $pic):
+                ?>
+                    <li class="list-group-item small"><?php echo $pic ?></li>
+                <?php endforeach ?>
+                </ul>
+            </aside>
+        </aside>
+
+        <aside class="card mb-5">
+            <aside class="card-header bg-white text-primary">
+                Posko
+            </aside>
+            <aside class="card-body bg-white text-secondary" id="detail-respon">
+                <?php echo $row_detail->posko ?>
             </aside>
         </aside>
     </aside>
@@ -47,13 +89,21 @@
                         <?php echo $res_timeline->wgk_nama ?>
                     </aside>
                     <aside class="card-body bg-white text-secondary">
+                        <?php if($res_timeline->gambar): ?>
+                            <aside class="pb-3 text-center">
+                                <a href="<?php echo base_url("upload/$res_timeline->gambar") ?>" target="_blank">
+                                    <img src="<?php echo base_url("upload/$res_timeline->gambar") ?>" width="300px">
+                                </a>
+                            </aside>
+                        <?php endif ?>
+
                         <ul class="list-group list-group-flush">
-                        <?php
-                            $explode_timeline = explode("|", $res_timeline->deskripsi);
-                            foreach($explode_timeline AS $res):
-                                echo "<li class='list-group-item small'>$res</li>";
-                            endforeach;
-                        ?>
+                            <?php
+                                $explode_timeline = explode("|", $res_timeline->deskripsi);
+                                foreach($explode_timeline AS $res):
+                                    echo "<li class='list-group-item small'>$res</li>";
+                                endforeach;
+                            ?>
                         </ul>
                     </aside>
                 </aside>

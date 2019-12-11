@@ -13,6 +13,7 @@
 
     <body class="bg-light">
         <aside class="nav-menu border-right position-fixed nav-slider">
+            <img src="<?php echo base_url('assets/icon_marker/logo.png') ?>" width="200px" class="p-3">
             <aside class="card border-0 m-3 text-secondary">
                 <span>
                     <a href="<?php echo base_url() ?>">
@@ -77,7 +78,7 @@
         <aside class="nav-top position-fixed">
             <aside class="row">
                 <aside class="col mr-3 ml-3 p-3 tombol">
-                    <img src="<?php echo base_url('assets/icon_marker/logo.png') ?>">
+                    <i class="fa fa-ellipsis-h"></i>
                 </aside>
                 <aside class="col">
                     <aside class="float-right mr-3 p-3">

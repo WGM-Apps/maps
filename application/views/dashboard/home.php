@@ -9,7 +9,10 @@
             <?php foreach($row_timeline AS $res): ?>
             <b><a href="javascript:void(0)" onclick="viewDetailKordinat(<?php echo $res->detail_id ?>)"><?php echo $res->nama_kegiatan ?></a></b>
             <aside class="readmore"><?php echo substr($res->timeline_kegiatan_deskripsi, 0 ,10) ?>...</aside>
-            <small><?php echo $res->tgl_insert ?> | <i>Oleh: <?php echo $res->nama ?></i></small>
+            <small>
+                <i class='far fa-clock fa-fw mr-1'></i><?php echo date("h:i:s", strtotime($res->tgl_insert)) ?>
+                <i class='far fa-calendar fa-fw mr-1'></i><?php echo date("d-F-Y", strtotime($res->tgl_insert)) ?>
+            </small>
             <hr>
             <?php endforeach ?>
         </aside>
