@@ -30,6 +30,9 @@ class Maps extends CI_Controller {
 		$provinsi = $this->input->post('provinsi');
 		$dampak = $this->input->post('dampak');
 		$kebutuhan = $this->input->post('kebutuhan');
+		$pic = $this->input->post('pic');
+		$hp = $this->input->post('hp');
+		$posko = $this->input->post('posko');
 		$date_now = date('Y-m-d');
 
 		if(empty($lat) || empty($lng)) {
@@ -44,18 +47,6 @@ class Maps extends CI_Controller {
 		}elseif(empty($nama_lokasi)) {
 			$isValid = 0;
 			$isPesan = "Nama lokasi wajib disi";
-		}elseif(empty($kelurahan)) {
-			$isValid = 0;
-			$isPesan = "Kelurahan wajib diisi";
-		}elseif(empty($kecamatan)) {
-			$isValid = 0;
-			$isPesan = "Kecamtan wajib diisi";
-		}elseif(empty($kota)) {
-			$isValid = 0;
-			$isPesan = "Kota wajib diisi";
-		}elseif(empty($provinsi)) {
-			$isValid = 0;
-			$isPesan = "Provinsi wajib diisi";
 		}elseif(empty($dampak)) {
 			$isValid = 0;
 			$isPesan = "Dampak wajib diisi";
@@ -63,6 +54,15 @@ class Maps extends CI_Controller {
 			$isValid = 0;
 			$isPesan = "Kebutuhan wajib diisi";
 		}else {
+
+			$deskripsipic ="";
+
+			for ($i=0; $i < count($pic) ; $i++) { 
+	            $deskripsipic .=$pic[$i]."-".$hp[$i]."|";
+	        }
+
+	        $deskripsipic = substr($deskripsipic,0,strlen($deskripsipic) - 1);
+
 			$explode_dampak = implode('|', $dampak);
 			$explode_kebutuhan = implode('|', $kebutuhan);
 			$arr = array(
@@ -77,6 +77,8 @@ class Maps extends CI_Controller {
 				'provinsi' => strtoupper($provinsi),
 				'dampak' => strtoupper($explode_dampak),
 				'kebutuhan' => strtoupper($explode_kebutuhan),
+				'pic'=> strtoupper($deskripsipic),
+				'posko' =>strtoupper($posko),
 				'create_date' => $date_now,
 				'flg_active' => 'Y',
 			);
@@ -181,9 +183,12 @@ class Maps extends CI_Controller {
 		$provinsi = $this->input->post('provinsi');
 		$dampak = $this->input->post('dampak');
 		$kebutuhan = $this->input->post('kebutuhan');
+		$pic = $this->input->post('pic');
+		$hp = $this->input->post('hp');
+		$posko = $this->input->post('posko');
 
 
-		$this->maps_model->update_maps($id,$bencana,$tgl_kejadian,$nama_lokasi,$kelurahan,$kecamatan,$kota,$provinsi,$dampak,$kebutuhan);
+		$this->maps_model->update_maps($id,$bencana,$tgl_kejadian,$nama_lokasi,$kelurahan,$kecamatan,$kota,$provinsi,$dampak,$kebutuhan,$pic,$hp,$posko);
 
 		echo $this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Maps Berhasil diupdate.</div>');
 		redirect('maps');

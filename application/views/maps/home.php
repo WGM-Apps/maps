@@ -54,7 +54,7 @@
 
                             <aside class="form-group">
                                 <label><small>Nama Lokasi</small></label>
-                                <input type="text" name="nama_lokasi" id="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()">
+                                <input type="text" name="nama_lokasi" id="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()" >
                             </aside>
                             
                             <aside class="row">
@@ -97,6 +97,21 @@
 
                             <aside class="form-group">
                                 <a href="javascript:void(0)" class="btn btn-warning btn-sm btn-block text-white" onclick="addKebutuhan();"><i class="fa fa-plus"></i> Tambah Kebutuhan</a> 
+                            </aside>
+
+                            <aside class="form-group">
+                                <label><small>PIC</small></label>
+                                <!-- <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea> -->
+                                <aside id="PIC"></aside>
+                            </aside>
+
+                            <aside class="form-group">
+                                <a href="javascript:void(0)" class="btn btn-warning btn-sm btn-block text-white" onclick="addPIC();"><i class="fa fa-plus"></i> Tambah PIC</a> 
+                            </aside>
+
+                            <aside class="form-group">
+                                <label><small>Alamat Posko</small></label>
+                                <textarea type="text" name="posko"  class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea>
                             </aside>
                             
                             <aside class="row">

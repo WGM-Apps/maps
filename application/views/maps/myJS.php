@@ -109,7 +109,7 @@
 
     var fileIdKebutuhan = 0;
     function addKebutuhan() {
-        fileIdDampak++;
+        fileIdKebutuhan++;
         var html =  '<aside class="row">'+
                     '<aside class="col-md-10"><input type="text" name="kebutuhan[]" placeholder="Keterangan Kebutuhan..." onkeyup="javascript:this.value=this.value.toUpperCase()" class="form-control" /></aside>'+
                     '<aside class="col"><a href="javascript:void(0)" onclick="javascript:removeElementKebutuhan(\'fileKebutuhan-' + fileIdKebutuhan + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
@@ -117,6 +117,33 @@
                     '</aside>';
         addElementKebutuhan('kebutuhan', 'p', 'fileKebutuhan-' + fileIdKebutuhan, html);
     }
+    //-----Close Adds an element to the document-------
+
+    //-----Adds an element to the document-------
+    function addElementPIC(parentId, elementTag, elementId, html) {
+        var p = document.getElementById(parentId);
+        var newElement = document.createElement(elementTag);
+        newElement.setAttribute('id', elementId);
+        newElement.innerHTML = html;
+        p.appendChild(newElement);
+    }
+
+    function removeElementPIC(elementId) {
+        var element = document.getElementById(elementId);
+        element.parentNode.removeChild(element);
+    }
+
+    var fileIdPIC = 0;
+    function addPIC() {
+        fileIdPIC++;
+        var html =  '<aside class="row">'+
+                    '<aside class="col-md-10"><input type="text" name="pic[]" placeholder="PIC" onkeyup="javascript:this.value=this.value.toUpperCase()" class="form-control" style="width: 50%;display: inline;" /><input type="text" name="hp[]" placeholder="HP" onkeypress="return formatNumber(event)" class="form-control" style="width: 50%;display: inline;" /></aside>'+
+                    '<aside class="col"><a href="javascript:void(0)" onclick="javascript:removeElementPIC(\'filePIC-' + fileIdPIC + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
+                    '<i class="fa fa-times"></i></a></aside>'+
+                    '</aside>';
+        addElementPIC('PIC', 'p', 'filePIC-' + fileIdPIC, html);
+    }
+
     //-----Close Adds an element to the document-------
 
     function simpan_maps() {

@@ -17,6 +17,10 @@
                 $dampak = $b['dampak'];
                 $kebutuhan = $b['kebutuhan'];
                 $nama_bencana = $b['nama_bencana'];
+                $pic = $b['pic'];
+                $posko = $b['posko'];
+
+                print_r($pic);
             ?>
         </div>
         <div class="modal-body">
@@ -119,6 +123,37 @@
                             </aside>
                         </aside>
                         <aside class="form-group">
+                            <label><small>PIC</small></label>
+                            <!-- <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php echo $kebutuhan ?></textarea> -->
+                            <?php
+                              $exs = explode('|', $pic);
+                                foreach($exs as $eExs){
+
+                                    $a = explode('-',$eExs);
+                                    echo "
+                                        <aside class='form-group'>
+                                        <aside class='row'>
+                                            <aside class='col-md-11'>
+                                                <input type='text' name='pic[]' value='$a[0]' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()' style='width: 50%;display: inline;'><input type='text' name='hp[]' value='$a[1]' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()' style='width: 50%;display: inline;'>
+                                            </aside>
+                                        </aside>
+                                        </aside>
+                                    ";
+
+                                   
+                                }
+
+                            ?>
+                            <aside class="form-group" id="filespic<?php echo $id_wgm?>"></aside>
+                            <aside class="form-group">
+                                <a href="javascript:void(0)" class="btn btn-warning btn-sm text-white" onclick="addFilepic<?php echo $id_wgm ?>();"><i class="far fa-clipboard"></i> Tambah pic </a> 
+                            </aside>
+                        </aside>
+                        <aside class="form-group">
+                            <label><small>Alamat posko</small></label>
+                            <textarea class="form-control" name="posko" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php  echo $posko ?></textarea>
+                        </aside>
+                        <aside class="form-group">
                             <button type="submit" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-save"></span> Simpan
                             </button>&nbsp;
@@ -190,6 +225,36 @@ function addFileKebutuhan<?php echo $id_wgm ?>() {
                 '<i class="fa fa-times"></i></a></aside>'+
                 '</aside>';
     addElementKebutuhan<?php echo $id_wgm ?>('filesKebutuhan<?php echo $id_wgm ?>', 'p', 'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?>, html);
+}
+
+function addElementpic<?php echo $id_wgm ?>(parentId, elementTag, elementId, html) {
+    var p = document.getElementById(parentId);
+
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+
+
+
+
+function removeElementpic<?php echo $id_wgm ?>(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+var fileId<?php echo $id_wgm ?> = 0;
+function addFilepic<?php echo $id_wgm ?>() {
+    fileId<?php echo $id_wgm ?>++;
+
+    var html =  '<aside class="form-group">'+
+                '<aside class="row">'+
+                '<aside class="col-md-11"><input type="text" name="pic[]" placeholder="PIC..." class="form-control form-control-sm"  onkeyup="javascript:this.value=this.value.toUpperCase()" style="width: 50%;display: inline;" /><input type="text" name="hp[]" placeholder="HP..." class="form-control form-control-sm"  onkeyup="javascript:this.value=this.value.toUpperCase()" style="width: 50%;display: inline;" /></aside>'+
+                '<aside class="col-md-1"><a href="javascript:void(0)" onclick="javascript:removeElementpic<?php echo $id_wgm ?>(\'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?> + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
+                '<i class="fa fa-times"></i></a></aside>'+
+                '</aside></aside>';
+    addElementpic<?php echo $id_wgm ?>('filespic<?php echo $id_wgm ?>', 'p', 'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?>, html);
 }
 
 

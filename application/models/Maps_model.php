@@ -79,10 +79,11 @@ class Maps_model extends ci_model{
         return $hsl;    
     }
 
-    function update_maps($id,$bencana,$tgl_kejadian,$nama_lokasi,$kelurahan,$kecamatan,$kota,$provinsi,$dampak,$kebutuhan){
+    function update_maps($id,$bencana,$tgl_kejadian,$nama_lokasi,$kelurahan,$kecamatan,$kota,$provinsi,$dampak,$kebutuhan,$pic,$hp,$posko){
 
         $deskripsidampak ="";
         $deskripsikebutuhan ="";
+        $deskripsipic ="";
 
 
         for ($i=0; $i < count($dampak) ; $i++) { 
@@ -98,10 +99,17 @@ class Maps_model extends ci_model{
 
         $deskripsikebutuhan = substr($deskripsikebutuhan,0,strlen($deskripsikebutuhan) - 1);
 
+        for ($i=0; $i < count($pic) ; $i++) { 
+            $deskripsipic .=$pic[$i]."-".$hp[$i]."|";
+        }
+
+        $deskripsipic = substr($deskripsipic,0,strlen($deskripsipic) - 1);
+
 
         $query ="UPDATE wgm_detail SET bencana ='$bencana',tgl_kejadian ='$tgl_kejadian',
                               nama_lokasi ='$nama_lokasi',kelurahan ='$kelurahan' ,kecamatan ='$kecamatan',
-                              kota ='$kota',provinsi ='$provinsi',dampak ='$deskripsidampak',kebutuhan ='$deskripsikebutuhan'
+                              kota ='$kota',provinsi ='$provinsi',dampak ='$deskripsidampak',kebutuhan ='$deskripsikebutuhan',
+                              pic ='$deskripsipic' ,posko ='$posko'
                               WHERE id ='$id'";
         
         $hsl=$this->db->query($query);
