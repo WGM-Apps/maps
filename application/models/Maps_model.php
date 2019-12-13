@@ -5,11 +5,12 @@ class Maps_model extends ci_model{
     var $table = TB_DETAIL;
     var $column_order = array(null, 'id');
     var $column_search = array('nama_lokasi', 'kelurahan', 'kecamatan', 'kota', 'provinsi');
-    var $order = array('id' => 'desc');
+    var $order = array(TB_DETAIL.'.id' => 'desc');
 
     private function _get_datatables_query()
     {
         $this->db->from($this->table);
+        $this->db->join(TB_TIPE_BENCANA, TB_TIPE_BENCANA. '.id =' .$this->table. '.bencana', 'LEFT');
         $this->db->where('flg_active', 'Y');
  
         $i = 0;

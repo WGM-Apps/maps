@@ -120,16 +120,6 @@ class Maps extends CI_Controller {
         
         foreach ($list as $field) {
 			$no++;
-			if($field->bencana == '1'){
-				$bencana = "Gempa Bumi";
-			}elseif($field->bencana == '2'){
-				$bencana = "Gunung Meletus";
-			}elseif($field->bencana == '2'){
-				$bencana = "Tsunami";
-			}else{
-				$bencana = "Lainnya";
-			}
-
 
             $row = array();
             $row[] = $no;
@@ -138,7 +128,7 @@ class Maps extends CI_Controller {
                 <a class='btn btn-primary btn-sm' onclick ='edit_maps($field->id)'><i class='fa fa-edit'></i></a>
                 <a class='btn btn-warning btn-sm' href='https://www.google.com/maps?q=loc:$field->lat,$field->lng' target='_blank' title='Buka Google Maps'><i class='fa fa-map'></i></a>
             ";
-            $row[] = $bencana;
+            $row[] = $field->nama;
             $row[] = $field->nama_lokasi.", ".$field->kelurahan.", ".$field->kecamatan.", ".$field->kota.", ".$field->provinsi;
             $data[] = $row;
         }
