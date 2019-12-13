@@ -146,6 +146,7 @@ class Maps extends CI_Controller {
 	function edit_maps(){
 		$this->load->model('maps_model');
 		$id = $this->input->post('id');
+
 		$data['myJS'] = 'maps/myJS';
 
 		$x['bencana']=$this->maps_model->get_bencana();

@@ -9,6 +9,7 @@ class Maps_model extends ci_model{
 
     private function _get_datatables_query()
     {
+        $this->db->select($this->table.".*,".TB_TIPE_BENCANA.".id AS id_bencana,".TB_TIPE_BENCANA.".nama AS nama,");
         $this->db->from($this->table);
         $this->db->join(TB_TIPE_BENCANA, TB_TIPE_BENCANA. '.id =' .$this->table. '.bencana', 'LEFT');
         $this->db->where('flg_active', 'Y');
@@ -75,8 +76,9 @@ class Maps_model extends ci_model{
     }
 
     function get_lokasi_id($id){
-        $hsl=$this->db->query("SELECT wd.*, wtb.`nama` AS `nama_bencana` 
-                  FROM wgm_detail wd LEFT JOIN wgm_tipe_bencana wtb ON wtb.`id`=wd.`bencana` WHERE wd.`id`='$id' ");
+        $query ="SELECT wd.*, wtb.`nama` AS `nama_bencana` 
+                 FROM wgm_detail wd LEFT JOIN wgm_tipe_bencana wtb ON wtb.`id`=wd.`bencana` WHERE wd.`id`='$id' ";
+        $hsl=$this->db->query($query);
         return $hsl;    
     }
 

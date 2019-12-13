@@ -19,6 +19,7 @@
                 $nama_bencana = $b['nama_bencana'];
                 $pic = $b['pic'];
                 $posko = $b['posko'];
+                
             ?>
         </div>
         <div class="modal-body">
@@ -32,7 +33,8 @@
                                     <?php
                                         $qr=$this->db->query("SELECT * from wgm_tipe_bencana"); ?>
                                     <select name="bencana" id="" class="form-control"> 
-                                    <?php    foreach ($qr->result_array() as $x1) {
+
+                                    <?php foreach ($qr->result_array() as $x1) {
                                             $id=$x1['id'];
                                             $nama = $x1['nama']; 
 
@@ -132,7 +134,7 @@
                                         <aside class='form-group'>
                                         <aside class='row'>
                                             <aside class='col-md-11'>
-                                                <input type='text' name='pic[]' value='$a[0]' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()' style='width: 50%;display: inline;'><input type='text' name='hp[]' value='$a[1]' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()' style='width: 50%;display: inline;'>
+                                                <input type='text' name='pic[]' value='$a[0]' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()' style='width: 50%;display: inline;' required><input type='text' name='hp[]' value='$a[1]' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()' style='width: 50%;display: inline;' required>
                                             </aside>
                                         </aside>
                                         </aside>
@@ -248,7 +250,7 @@ function addFilepic<?php echo $id_wgm ?>() {
 
     var html =  '<aside class="form-group">'+
                 '<aside class="row">'+
-                '<aside class="col-md-11"><input type="text" name="pic[]" placeholder="PIC..." class="form-control form-control-sm"  onkeyup="javascript:this.value=this.value.toUpperCase()" style="width: 50%;display: inline;" /><input type="text" name="hp[]" placeholder="HP..." class="form-control form-control-sm"  onkeyup="javascript:this.value=this.value.toUpperCase()" style="width: 50%;display: inline;" /></aside>'+
+                '<aside class="col-md-11"><input type="text" name="pic[]" placeholder="PIC..." class="form-control form-control-sm"  onkeyup="javascript:this.value=this.value.toUpperCase()" style="width: 50%;display: inline;" required /><input type="text" name="hp[]" placeholder="HP..." class="form-control form-control-sm"  onkeyup="javascript:this.value=this.value.toUpperCase()" style="width: 50%;display: inline;" required /></aside>'+
                 '<aside class="col-md-1"><a href="javascript:void(0)" onclick="javascript:removeElementpic<?php echo $id_wgm ?>(\'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?> + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
                 '<i class="fa fa-times"></i></a></aside>'+
                 '</aside></aside>';
