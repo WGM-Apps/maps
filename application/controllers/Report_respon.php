@@ -106,13 +106,48 @@ Class Report_respon extends CI_Controller{
                 $pdf->Cell(190,5,$no++.". ".$ex->wgk_nama,0,1,'L');
             }
 
-            $explode_timeline = explode("|", $ex->deskripsi);
-            foreach($explode_timeline AS $res):
-                $pdf->SetFont('Arial','',10);
-                $pdf->SetX(15);
-                $pdf->Cell(190,5,"-   ".$res,0,1,'L');
-            endforeach;
+            // $explode_timeline = explode("|", $ex->deskripsi);
+            // foreach($explode_timeline AS $res):
+            //     $pdf->SetFont('Arial','',10);
+            //     $pdf->SetX(15);
+            //     $pdf->Cell(190,5,"-   ".$res,0,1,'L');
+            // endforeach;
         endforeach;
+        
+        $pdf->Cell(10,5,'',0,1);
+        $pdf->SetTextColor(255,255,255);
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(190,5,"Posko Dompet Dhuafa",0,1,'L');
+        $pdf->SetDrawColor(255,255,255);
+        $pdf->Cell(85,1,'','B',1,'L');
+
+        $pdf->Cell(10,5,'',0,1);
+        $pdf->SetTextColor(255,255,255);
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(190,5,$row->posko,0,1,'L');
+
+        $pdf->Cell(10,5,'',0,1);
+        $pdf->Cell(190,5,"Informasi",0,1,'L');
+
+        $explode_pic = explode("|", $row->pic);
+        foreach($explode_pic AS $res):
+            $pdf->SetTextColor(255,255,255);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell(190,5,$res,0,1,'L');
+        endforeach;
+
+        $pdf->Cell(10,30,'',0,1);
+        $pdf->SetFont('Arial','',12);
+        $pdf->Cell(190,5,"Rekening Donasi",0,1,'R');
+        $pdf->Cell(190,5,"Mandiri : 101.000.647.57.33",0,1,'R');
+        $pdf->Cell(190,5,"BNI Syariah : 340.350.666.5",0,1,'R');
+        $pdf->Cell(190,5,"BCA : 237.304.7171",0,1,'R');
+
+        $pdf->Cell(10,5,'',0,1);
+        $pdf->SetFont('Arial','',10);
+        $pdf->Cell(190,5,"a.n Yayasan Dompet Dhuafa Republika",0,1,'R');
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(190,5,"Tambahkan angka 50 di akhir nominal donasi Anda",0,1,'R');
         
         $pdf->Output();
     }
