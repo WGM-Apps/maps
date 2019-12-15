@@ -164,6 +164,105 @@ class Welcome extends CI_Controller {
 		$id_group_kegiatan10 = $this->input->post('id_group_kegiatan10');
 		$id_group_kegiatan11 = $this->input->post('id_group_kegiatan11');
 
+		if(!empty($gambar1['name']) AND empty($deskripsi1)){
+			$isValid = 0;
+			$isPesan = "Keterangan 1 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar2['name']) AND empty($deskripsi2)){
+			$isValid = 0;
+			$isPesan = "Keterangan 2 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar3['name']) AND empty($deskripsi3)){
+			$isValid = 0;
+			$isPesan = "Keterangan 3 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar4['name']) AND empty($deskripsi4)){
+			$isValid = 0;
+			$isPesan = "Keterangan 4 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar5['name']) AND empty($deskripsi5)){
+			$isValid = 0;
+			$isPesan = "Keterangan 5 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar6['name']) AND empty($deskripsi6)){
+			$isValid = 0;
+			$isPesan = "Keterangan 6 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar7['name']) AND empty($deskripsi7)){
+			$isValid = 0;
+			$isPesan = "Keterangan 7 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar8['name']) AND empty($deskripsi8)){
+			$isValid = 0;
+			$isPesan = "Keterangan 8 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar9['name']) AND empty($deskripsi9)){
+			$isValid = 0;
+			$isPesan = "Keterangan 9 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar10['name']) AND empty($deskripsi10)){
+			$isValid = 0;
+			$isPesan = "Keterangan 10 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
+		if(!empty($gambar11['name']) AND empty($deskripsi11)){
+			$isValid = 0;
+			$isPesan = "Keterangan 11 harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
 		$cek_kegiatan1 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail1 AND group_kegiatan_id = $id_group_kegiatan1")->row();
 
 		$cek_kegiatan2 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail2 AND group_kegiatan_id = $id_group_kegiatan2")->row();
@@ -187,179 +286,223 @@ class Welcome extends CI_Controller {
 		$cek_kegiatan11 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail11 AND group_kegiatan_id = $id_group_kegiatan11")->row();
 
 		if(empty($gambar1['name'])){
-			$new_name1 = null;
+			if($cek_kegiatan1->gambar){
+				$new_name1 = $cek_kegiatan1->gambar;
+			}else{
+				$new_name1 = null;
+			}
 		}else{
-			$name = $gambar1['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name1 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar1['tmp_name'];
+			$name1 = $gambar1['name'];
+			$ext1 = explode(".", $name1);
+			$extensi = end($ext1);
+			$explode_name1 = explode(".", $name1);
+			$random_name1 = round(microtime(true)).'.'.end($explode_name1);
+			$new_name1 = md5(date('YmdHis'))."-1-".$random_name1;
+			$tmp1 = $gambar1['tmp_name'];
 			if($cek_kegiatan1->gambar){
 				unlink($path.$cek_kegiatan1->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name1);
+			move_uploaded_file($tmp1, $path.''.$new_name1);
 		}
 
 		if(empty($gambar2['name'])){
-			$new_name2 = null;
+			if($cek_kegiatan2->gambar){
+				$new_name2 = $cek_kegiatan2->gambar;
+			}else{
+				$new_name2 = null;
+			}
 		}else{
-			$name = $gambar2['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name2 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar2['tmp_name'];
+			$name2 = $gambar2['name'];
+			$ext2 = explode(".", $name2);
+			$extensi = end($ext2);
+			$explode_name2 = explode(".", $name2);
+			$random_name2 = round(microtime(true)).'.'.end($explode_name2);
+			$new_name2 = md5(date('YmdHis'))."-2-".$random_name2;
+			$tmp2 = $gambar2['tmp_name'];
 			if($cek_kegiatan2->gambar){
 				unlink($path.$cek_kegiatan2->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name2);
+			move_uploaded_file($tmp2, $path.''.$new_name2);
 		}
 
 		if(empty($gambar3['name'])){
-			$new_name3 = null;
+			if($cek_kegiatan3->gambar){
+				$new_name3 = $cek_kegiatan3->gambar;
+			}else{
+				$new_name3 = null;
+			}
 		}else{
-			$name = $gambar3['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name3 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar3['tmp_name'];
+			$name3 = $gambar3['name'];
+			$ext3 = explode(".", $name3);
+			$extensi = end($ext3);
+			$explode_name3 = explode(".", $name3);
+			$random_name3 = round(microtime(true)).'.'.end($explode_name3);
+			$new_name3 = md5(date('YmdHis'))."-3-".$random_name3;
+			$tmp3 = $gambar3['tmp_name'];
 			if($cek_kegiatan3->gambar){
 				unlink($path.$cek_kegiatan3->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name3);
+			move_uploaded_file($tmp3, $path.''.$new_name3);
 		}
 
 		if(empty($gambar4['name'])){
-			$new_name4 = null;
+			if($cek_kegiatan4->gambar){
+				$new_name4 = $cek_kegiatan4->gambar;
+			}else{
+				$new_name4 = null;
+			}
 		}else{
-			$name = $gambar4['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name4 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar4['tmp_name'];
+			$name4 = $gambar4['name'];
+			$ext4 = explode(".", $name4);
+			$extensi = end($ext4);
+			$explode_name4 = explode(".", $name4);
+			$random_name4 = round(microtime(true)).'.'.end($explode_name4);
+			$new_name4 = md5(date('YmdHis'))."-4-".$random_name4;
+			$tmp4 = $gambar4['tmp_name'];
 			if($cek_kegiatan4->gambar){
 				unlink($path.$cek_kegiatan4->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name4);
+			move_uploaded_file($tmp4, $path.''.$new_name4);
 		}
 
 		if(empty($gambar5['name'])){
-			$new_name5 = null;
+			if($cek_kegiatan5->gambar){
+				$new_name5 = $cek_kegiatan5->gambar;
+			}else{
+				$new_name5 = null;
+			}
 		}else{
-			$name = $gambar5['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name5 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar5['tmp_name'];
+			$name5 = $gambar5['name'];
+			$ext5 = explode(".", $name5);
+			$extensi = end($ext5);
+			$explode_name5 = explode(".", $name5);
+			$random_name5 = round(microtime(true)).'.'.end($explode_name5);
+			$new_name5 = md5(date('YmdHis'))."-5-".$random_name5;
+			$tmp5 = $gambar5['tmp_name'];
 			if($cek_kegiatan5->gambar){
 				unlink($path.$cek_kegiatan5->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name5);
+			move_uploaded_file($tmp5, $path.''.$new_name5);
 		}
 
 		if(empty($gambar6['name'])){
-			$new_name6 = null;
+			if($cek_kegiatan6->gambar){
+				$new_name6 = $cek_kegiatan6->gambar;
+			}else{
+				$new_name6 = null;
+			}
 		}else{
-			$name = $gambar6['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name6 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar6['tmp_name'];
+			$name6 = $gambar6['name'];
+			$ext6 = explode(".", $name6);
+			$extensi = end($ext6);
+			$explode_name6 = explode(".", $name6);
+			$random_name6 = round(microtime(true)).'.'.end($explode_name6);
+			$new_name6 = md5(date('YmdHis'))."-6-".$random_name6;
+			$tmp6 = $gambar6['tmp_name'];
 			if($cek_kegiatan6->gambar){
 				unlink($path.$cek_kegiatan6->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name6);
+			move_uploaded_file($tmp6, $path.''.$new_name6);
 		}
 
 		if(empty($gambar7['name'])){
-			$new_name7 = null;
+			if($cek_kegiatan7->gambar){
+				$new_name7 = $cek_kegiatan7->gambar;
+			}else{
+				$new_name7 = null;
+			}
 		}else{
-			$name = $gambar7['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name7 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar7['tmp_name'];
+			$name7 = $gambar7['name'];
+			$ext7 = explode(".", $name7);
+			$extensi = end($ext7);
+			$explode_name7 = explode(".", $name7);
+			$random_name7 = round(microtime(true)).'.'.end($explode_name7);
+			$new_name7 = md5(date('YmdHis'))."-7-".$random_name7;
+			$tmp7 = $gambar7['tmp_name'];
 			if($cek_kegiatan7->gambar){
 				unlink($path.$cek_kegiatan7->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name7);
+			move_uploaded_file($tmp7, $path.''.$new_name7);
 		}
 
 		if(empty($gambar8['name'])){
-			$new_name8 = null;
+			if($cek_kegiatan8->gambar){
+				$new_name8 = $cek_kegiatan8->gambar;
+			}else{
+				$new_name8 = null;
+			}
 		}else{
-			$name = $gambar8['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name8 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar8['tmp_name'];
+			$name8 = $gambar8['name'];
+			$ext8 = explode(".", $name8);
+			$extensi = end($ext8);
+			$explode_name8 = explode(".", $name8);
+			$random_name8 = round(microtime(true)).'.'.end($explode_name8);
+			$new_name8 = md5(date('YmdHis'))."-8-".$random_name8;
+			$tmp8 = $gambar8['tmp_name'];
 			if($cek_kegiatan8->gambar){
 				unlink($path.$cek_kegiatan8->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name8);
+			move_uploaded_file($tmp8, $path.''.$new_name8);
 		}
 
 		if(empty($gambar9['name'])){
-			$new_name9 = null;
+			if($cek_kegiatan9->gambar){
+				$new_name9 = $cek_kegiatan9->gambar;
+			}else{
+				$new_name9 = null;
+			}
 		}else{
-			$name = $gambar9['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name9 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar9['tmp_name'];
+			$name9 = $gambar9['name'];
+			$ext9 = explode(".", $name9);
+			$extensi = end($ext9);
+			$explode_name9 = explode(".", $name9);
+			$random_name9 = round(microtime(true)).'.'.end($explode_name9);
+			$new_name9 = md5(date('YmdHis'))."-9-".$random_name9;
+			$tmp9 = $gambar9['tmp_name'];
 			if($cek_kegiatan9->gambar){
 				unlink($path.$cek_kegiatan9->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name9);
+			move_uploaded_file($tmp9, $path.''.$new_name9);
 		}
 
 		if(empty($gambar10['name'])){
-			$new_name10 = null;
+			if($cek_kegiatan10->gambar){
+				$new_name10 = $cek_kegiatan10->gambar;
+			}else{
+				$new_name10 = null;
+			}
 		}else{
-			$name = $gambar10['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name10 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar10['tmp_name'];
+			$name10 = $gambar10['name'];
+			$ext10 = explode(".", $name10);
+			$extensi = end($ext10);
+			$explode_name10 = explode(".", $name10);
+			$random_name10 = round(microtime(true)).'.'.end($explode_name10);
+			$new_name10 = md5(date('YmdHis'))."-10-".$random_name10;
+			$tmp10 = $gambar10['tmp_name'];
 			if($cek_kegiatan10->gambar){
 				unlink($path.$cek_kegiatan10->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name10);
+			move_uploaded_file($tmp10, $path.''.$new_name10);
 		}
 
 		if(empty($gambar11['name'])){
-			$new_name11 = null;
+			if($cek_kegiatan11->gambar){
+				$new_name11 = $cek_kegiatan11->gambar;
+			}else{
+				$new_name11 = null;
+			}
 		}else{
-			$name = $gambar11['name'];
-			$ext = explode(".", $name);
-			$extensi = end($ext);
-			$explode_name = explode(".", $name);
-			$random_name = round(microtime(true)).'.'.end($explode_name);
-			$new_name11 = md5(date('YmdHis'))."-".$random_name;
-			$tmp = $gambar11['tmp_name'];
+			$name11 = $gambar11['name'];
+			$ext11 = explode(".", $name11);
+			$extensi = end($ext11);
+			$explode_name11 = explode(".", $name11);
+			$random_name11 = round(microtime(true)).'.'.end($explode_name11);
+			$new_name11 = md5(date('YmdHis'))."-11-".$random_name11;
+			$tmp11 = $gambar11['tmp_name'];
 			if($cek_kegiatan11->gambar){
 				unlink($path.$cek_kegiatan11->gambar);
 			}
-			move_uploaded_file($tmp, $path.''.$new_name11);
+			move_uploaded_file($tmp11, $path.''.$new_name11);
 		}
 
 		if(empty($deskripsi1)){

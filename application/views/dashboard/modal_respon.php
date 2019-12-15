@@ -1,9 +1,13 @@
 <form id="frm-respon" method="post" enctype="multipart/form-data">
     <aside class="modal-body">
         <aside id="accordion">
-        <?php foreach($row_group as $res): ?>
+        <?php
+            $no = 0;
+            foreach($row_group as $res):
+                $no++;
+        ?>
             <aside class="card-header" data-toggle="collapse" data-target="#group<?php echo $res->id ?>" aria-expanded="true" aria-controls="group<?php echo $res->id ?>" style="cursor:pointer">
-                <?php echo $res->nama ?>
+                <?php echo $no.". ".$res->nama ?>
             </aside>
             <aside id="group<?php echo $res->id ?>" class="collapse p-2" aria-labelledby="group<?php echo $res->id ?>" data-parent="#accordion">
                 <div class="form-group">
@@ -88,17 +92,20 @@
                         cache: false,
                         dataType: "json",
                         beforeSend: function() {
-                            // $('.btn_post_request').html('<a href="javascript:void(0)" class="btn btn-secondary"><i class="fas fa-spinner fa-pulse"></i> Proses</a>');
+                            $('#btn_simpan').attr("disabled", true);
+                            $('#btn_simpan').html("<i class='fa fa-spinner fa-spin fa-lg'></i>");
                         },
                         success: function (res) {
                             var isValid = res.isValid,
                                 isPesan = res.isPesan;
                             if(isValid == 0) {
-                                // $('.btn_post_request').html('<a href="javascript:void(0)" onclick="post_request()" class="btn btn-success"><i class="fa fa-check"></i> Kirim</a>');
-                                // $('.pesan').html(isPesan);
                                 alert(isPesan);
+                                $('#btn_simpan').attr("disabled", false);
+                                $('#btn_simpan').html("Simpan Perubahan");
                             }else {
+                                alert(isPesan);
                                 $('#sesuaikan_respon').modal('hide');
+                                window.location.href="<?php echo base_url() ?>";
                             }
                         }
                     });
@@ -109,6 +116,6 @@
     </aside>
     <aside class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-primary" onclick="simpan_respon()">Simpan Perubahan</button>
+        <button type="button" class="btn btn-primary" id="btn_simpan" onclick="simpan_respon()">Simpan Perubahan</button>
     </aside>
 </form>
