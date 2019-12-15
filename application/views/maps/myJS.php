@@ -230,6 +230,23 @@
         });
     }
 
+    var delay;
+    function manual_position() {
+        clearTimeout(delay);
+        delay = setTimeout(function() {
+            marker.setMap(null);
+            var manual_lat = $('#text_lat').val();
+            var manual_lng = $('#text_lng').val();
+            document.getElementById('current').innerHTML="<a href='javascript:void(0)' onclick='initialize_map(); initialize()'><i class='fa fa-map-marker-alt'></i> Lokasi saat ini</a> <a class='float-right' target='_blank' href='https://www.google.com/maps?q=loc:"+manual_lat+","+manual_lng+"'><i class='fa fa-map'></i> Lihat Google Maps</a>";
+            var pos= new google.maps.LatLng(manual_lat, manual_lng);
+            map.setCenter(pos);
+            map.setZoom(14);
 
+            marker = new google.maps.Marker({
+                position: pos,
+                map: map
+            });
+        }, 2000);
+    }
 
 </script>

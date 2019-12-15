@@ -22,11 +22,11 @@
                             <aside class="row">
                                 <aside class="col-md-6">
                                     <label><small>Latitude</small></label>
-                                    <input type="text" name="lat" id="text_lat" class="form-control" readonly>
+                                    <input type="text" name="lat" id="text_lat" class="form-control" onkeyup="manual_position()">
                                 </aside>
                                 <aside class="col-md-6">
                                     <label><small>Longitude</small></label>
-                                    <input type="text" name="lng" id="text_lng" class="form-control" readonly>
+                                    <input type="text" name="lng" id="text_lng" class="form-control" onkeyup="manual_position()">
                                 </aside>
                             </aside>
                             
