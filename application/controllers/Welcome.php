@@ -126,6 +126,7 @@ class Welcome extends CI_Controller {
 		$gambar9 = $_FILES['gambar9'];
 		$gambar10 = $_FILES['gambar10'];
 		$gambar11 = $_FILES['gambar11'];
+		$gambar99999 = $_FILES['gambar99999'];
 		$path = "upload/";
 
 		$deskripsi1 = $this->input->post('deskripsi1');
@@ -139,6 +140,7 @@ class Welcome extends CI_Controller {
 		$deskripsi9 = $this->input->post('deskripsi9');
 		$deskripsi10 = $this->input->post('deskripsi10');
 		$deskripsi11 = $this->input->post('deskripsi11');
+		$deskripsi99999 = $this->input->post('deskripsi99999');
 
 		$id_detail1 = $this->input->post('id_detail1');
 		$id_detail2 = $this->input->post('id_detail2');
@@ -151,6 +153,7 @@ class Welcome extends CI_Controller {
 		$id_detail9 = $this->input->post('id_detail9');
 		$id_detail10 = $this->input->post('id_detail10');
 		$id_detail11 = $this->input->post('id_detail11');
+		$id_detail99999 = $this->input->post('id_detail99999');
 
 		$id_group_kegiatan1 = $this->input->post('id_group_kegiatan1');
 		$id_group_kegiatan2 = $this->input->post('id_group_kegiatan2');
@@ -163,6 +166,7 @@ class Welcome extends CI_Controller {
 		$id_group_kegiatan9 = $this->input->post('id_group_kegiatan9');
 		$id_group_kegiatan10 = $this->input->post('id_group_kegiatan10');
 		$id_group_kegiatan11 = $this->input->post('id_group_kegiatan11');
+		$id_group_kegiatan99999 = $this->input->post('id_group_kegiatan99999');
 
 		if(!empty($gambar1['name']) AND empty($deskripsi1)){
 			$isValid = 0;
@@ -263,6 +267,15 @@ class Welcome extends CI_Controller {
 			die();
 		}
 
+		if(!empty($gambar99999['name']) AND empty($deskripsi99999)){
+			$isValid = 0;
+			$isPesan = "Penerima manfaat harus di isi";
+
+			$arrImage = array('isValid'=>$isValid, 'isPesan'=>$isPesan);
+			echo json_encode($arrImage);
+			die();
+		}
+
 		$cek_kegiatan1 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail1 AND group_kegiatan_id = $id_group_kegiatan1")->row();
 
 		$cek_kegiatan2 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail2 AND group_kegiatan_id = $id_group_kegiatan2")->row();
@@ -284,6 +297,8 @@ class Welcome extends CI_Controller {
 		$cek_kegiatan10 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail10 AND group_kegiatan_id = $id_group_kegiatan10")->row();
 		
 		$cek_kegiatan11 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail11 AND group_kegiatan_id = $id_group_kegiatan11")->row();
+
+		$cek_kegiatan99999 = $this->db->query("SELECT COUNT(*) as total, id, gambar FROM $tb_timeline_kegiatan WHERE detail_id = $id_detail99999 AND group_kegiatan_id = $id_group_kegiatan99999")->row();
 
 		if(empty($gambar1['name'])){
 			if($cek_kegiatan1->gambar){
@@ -505,6 +520,26 @@ class Welcome extends CI_Controller {
 			move_uploaded_file($tmp11, $path.''.$new_name11);
 		}
 
+		if(empty($gambar99999['name'])){
+			if($cek_kegiatan99999->gambar){
+				$new_name99999 = $cek_kegiatan99999->gambar;
+			}else{
+				$new_name99999 = null;
+			}
+		}else{
+			$name99999 = $gambar99999['name'];
+			$ext99999 = explode(".", $name99999);
+			$extensi = end($ext99999);
+			$explode_name99999 = explode(".", $name99999);
+			$random_name99999 = round(microtime(true)).'.'.end($explode_name99999);
+			$new_name99999 = md5(date('YmdHis'))."-PM-".$random_name99999;
+			$tmp99999 = $gambar99999['tmp_name'];
+			if($cek_kegiatan99999->gambar){
+				unlink($path.$cek_kegiatan99999->gambar);
+			}
+			move_uploaded_file($tmp99999, $path.''.$new_name99999);
+		}
+
 		if(empty($deskripsi1)){
 			$implode_deskripsi1 = null;
 		}else{
@@ -571,6 +606,12 @@ class Welcome extends CI_Controller {
 			$implode_deskripsi11 = implode('|', $deskripsi11);
 		}
 
+		if(empty($deskripsi99999)){
+			$implode_deskripsi99999 = null;
+		}else{
+			$implode_deskripsi99999 = implode('|', $deskripsi99999);
+		}
+
 		$isPesan = array();
 		if($cek_kegiatan1->total > 0){
 			$arr = array(
@@ -587,6 +628,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan1->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -610,6 +652,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -633,6 +676,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan2->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -656,6 +700,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -679,6 +724,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan3->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -702,6 +748,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -725,6 +772,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan4->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -748,6 +796,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -771,6 +820,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan5->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -794,6 +844,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -817,6 +868,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan6->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -840,6 +892,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -863,6 +916,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan7->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -886,6 +940,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -909,6 +964,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan8->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -932,6 +988,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -955,6 +1012,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan9->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -978,6 +1036,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -1001,6 +1060,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan10->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -1024,6 +1084,7 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
@@ -1047,6 +1108,7 @@ class Welcome extends CI_Controller {
 						"timeline_kegiatan_id" => $cek_kegiatan11->id,
 						"user_id" => $this->session->userdata('USER_ID'),
 						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
 					);
 					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 				}
@@ -1070,10 +1132,59 @@ class Welcome extends CI_Controller {
 							"timeline_kegiatan_id" => $last_id,
 							"user_id" => $this->session->userdata('USER_ID'),
 							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
 						);
 						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
 					}
 					$isPesan[] = "Kegitan ke-11 berhasil di simpan!";
+				}
+			}
+		}
+
+		if($cek_kegiatan99999->total > 0){
+			$arr = array(
+				"deskripsi" => $implode_deskripsi99999,
+				"gambar" => $new_name99999,
+			);
+			$this->db->where('id', $cek_kegiatan99999->id);
+			$exec = $this->db->update($tb_timeline_kegiatan, $arr);
+			if(!$exec){
+				$isPesan[] = "Kegitan Penerima manfaat gagal di simpan!";
+			}else{
+				foreach($deskripsi99999 as $desc){
+					$arr = array(
+						"timeline_kegiatan_id" => $cek_kegiatan99999->id,
+						"user_id" => $this->session->userdata('USER_ID'),
+						"timeline_kegiatan_deskripsi" => $desc,
+						"tgl_insert" => date('Y-m-d h:i:s'),
+					);
+					$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
+				}
+				$isPesan[] = "Kegitan Penerima manfaat berhasil di simpan!";
+			}
+		}else{
+			if($implode_deskripsi99999 != null){
+				$arr = array(
+					"detail_id" => $id_detail99999,
+					"group_kegiatan_id" => $id_group_kegiatan99999,
+					"deskripsi" => $implode_deskripsi99999,
+					"gambar" => $new_name99999,
+				);
+				$exec = $this->db->insert($tb_timeline_kegiatan, $arr);
+				$last_id = $this->db->insert_id();
+				if(!$exec){
+					$isPesan[] = "Kegitan Penerima manfaat gagal di simpan!";
+				}else{
+					foreach($deskripsi99999 as $desc){
+						$arr = array(
+							"timeline_kegiatan_id" => $last_id,
+							"user_id" => $this->session->userdata('USER_ID'),
+							"timeline_kegiatan_deskripsi" => $desc,
+							"tgl_insert" => date('Y-m-d h:i:s'),
+						);
+						$this->db->insert($tb_last_update_timeline_kegiatan, $arr);
+					}
+					$isPesan[] = "Kegitan Penerima manfaat berhasil di simpan!";
 				}
 			}
 		}
