@@ -6,6 +6,7 @@ class Bencana extends CI_Controller {
         parent::__construct();
         $this->load->model('welcome_model');
         $this->load->model('bencana_model');
+        $this->load->library('upload');
     }
 
     function index(){
@@ -56,24 +57,88 @@ class Bencana extends CI_Controller {
 
     function simpan(){
         $tb_bencana = TB_TIPE_BENCANA;
+        $size = 200;
         $nama_bencana = $this->input->post('nama_bencana');
-        $result = $this->bencana_model->cek_double($nama_bencana,$tb_bencana);
-        $count = $result->num_rows();
+        $nama = strtolower($nama_bencana);
 
-        if($count == 0){
-           $result = $this->bencana_model->simpan_data($nama_bencana,$tb_bencana);
-
-            echo $this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button> Proses simpan berhasil.</div>');
-            redirect('bencana'); 
-        }else{
-
-            echo $this->session->set_flashdata('msg','<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Data tersebut sudah ada.</div>');
-            redirect('bencana');
+        if(empty($nama_bencana)){
+            $isValid = 0;
+            $isPesan = 'Nama bencana tidak boleh kosong !!!';
+            $json = array("isValid" => $isValid, "isPesan" => $isPesan);
+            echo json_encode($json);
+            die();
         }
 
+        if(empty($_FILES)){
+            $isValid = 0;
+            $isPesan = 'File icon tidak boleh kosong !!!';
+            $json = array("isValid" => $isValid, "isPesan" => $isPesan);
+            echo json_encode($json);
+            die();
+        }
 
-        
+        if(!empty($_FILES)) {
+            $dir_base = $_SERVER['DOCUMENT_ROOT'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME'])."assets/icon_marker/";
+            $dir_file = $dir_base;
+
+            if(!file_exists($dir_file)){
+                mkdir("$dir_file");
+                chmod("$dir_file", 0777);
+            }
+
+            $fileName = $_FILES['file_icon']['name'] ;
+            $fileTmpName = $_FILES['file_icon']['tmp_name'];
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+            $allowed = array('gif','jpg','jpeg','png','.pdf');
+            $file_ext = substr($fileName, strripos($fileName, '.'));
+            $file_basename= substr($fileName, 0, strripos($fileName, '.'));
+            $newfilename = $nama.$file_ext;
+
+
+            if (in_array($fileActualExt, $allowed)) {
+                
+                if(move_uploaded_file($fileTmpName,$dir_file.$newfilename)) {
+
+                    $query ="SELECT * from $tb_bencana WHERE nama ='$nama_bencana' ";
+                    $result = $this->db->query($query);
+                    $jml = $result->num_rows();
+
+                    if($jml > 0){
+                        $isValid = 0;
+                        $isPesan = 'Nama bencana sudah ada !!!'; 
+                    }else{
+                        $query = "INSERT INTO $tb_bencana(nama, icon)
+                        VALUES ('$nama_bencana', '$newfilename')";
+             
+
+                        $exe = $this->db->query($query);
+                        if(!$exe){
+                            $isValid = 0;
+                            $isPesan = "Data gagal tersimpan, error : ".mysqli_error($KONEKSI);
+                        }else{
+                            $isValid = 1;
+                            $isPesan = "Upload Sukses !!!";
+                        }
+                    }
+
+                    
+                }else{
+                    $isValid = 0;
+                    $isPesan = 'File gagal terkirim, Silahkan coba kembali !!!';
+                }
+            }else {
+                $isValid = 0;
+                $isPesan = 'Tipe File Tidak Diizinkan !!!';
+            }
+
+
+            $json = array("isValid" => $isValid, "isPesan" => $isPesan);
+            echo json_encode($json);
+        }
     }
+
+   
 
     function edit_bencana(){
         $this->load->model('bencana_model');
@@ -93,24 +158,105 @@ class Bencana extends CI_Controller {
     }
 
     function update(){
-        $this->load->model('bencana_model');
         $tb_bencana = TB_TIPE_BENCANA;
-        $id = $this->input->post('id');
+        $size = 200;
         $nama_bencana = $this->input->post('nama_bencana');
-        $result = $this->bencana_model->cek_double($nama_bencana,$tb_bencana);
-        $count = $result->num_rows();
+        $id = $this->input->post('id');
+        $nama = strtolower($nama_bencana);
 
-        if($count == 0){
-           $result = $this->bencana_model->update_data($id,$nama_bencana,$tb_bencana);
+        if(empty($nama_bencana)){
+            $isValid = 0;
+            $isPesan = 'Nama bencana tidak boleh kosong !!!';
+            $json = array("isValid" => $isValid, "isPesan" => $isPesan);
+            echo json_encode($json);
+            die();
+        }
 
-            echo $this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button> Proses update berhasil.</div>');
-            redirect('bencana'); 
-        }else{
+        if(empty($_FILES)){
+            $isValid = 0;
+            $isPesan = 'File icon tidak boleh kosong !!!';
+            $json = array("isValid" => $isValid, "isPesan" => $isPesan);
+            echo json_encode($json);
+            die();
+        }
 
-            echo $this->session->set_flashdata('msg','<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Data tersebut sudah ada.</div>');
-            redirect('bencana');
+        if(!empty($_FILES)) {
+            $dir_base = $_SERVER['DOCUMENT_ROOT'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME'])."assets/icon_marker/";
+            $dir_file = $dir_base;
+
+            if(!file_exists($dir_file)){
+                mkdir("$dir_file");
+                chmod("$dir_file", 0777);
+            }
+
+            $fileName = $_FILES['file_icon']['name'] ;
+            $fileTmpName = $_FILES['file_icon']['tmp_name'];
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+            $allowed = array('gif','jpg','jpeg','png','.pdf');
+            $file_ext = substr($fileName, strripos($fileName, '.'));
+            $file_basename= substr($fileName, 0, strripos($fileName, '.'));
+            $newfilename = $nama.$file_ext;
+
+
+            if (in_array($fileActualExt, $allowed)) {
+                
+                if(move_uploaded_file($fileTmpName,$dir_file.$newfilename)) {
+
+                    $query ="SELECT * from $tb_bencana WHERE nama ='$nama_bencana' <>  id ='$id' ";
+                    $result = $this->db->query($query);
+                    $jml = $result->num_rows();
+
+                    if($jml > 0){
+                        $isValid = 0;
+                        $isPesan = 'Nama bencana sudah ada !!!'; 
+                    }else{
+                        $query = "UPDATE $tb_bencana SET nama ='$nama_bencana' , icon ='$newfilename' WHERE id ='$id' ";
+                        $exe = $this->db->query($query);
+                        if(!$exe){
+                            $isValid = 0;
+                            $isPesan = "Data gagal tersimpan, error : ".mysqli_error($KONEKSI);
+                        }else{
+                            $isValid = 1;
+                            $isPesan = "Upload Sukses !!!";
+                        }
+                    }
+
+                    
+                }else{
+                    $isValid = 0;
+                    $isPesan = 'File gagal terkirim, Silahkan coba kembali !!!';
+                }
+            }else {
+                $isValid = 0;
+                $isPesan = 'Tipe File Tidak Diizinkan !!!';
+            }
+
+
+            $json = array("isValid" => $isValid, "isPesan" => $isPesan);
+            echo json_encode($json);
         }
     }
+
+    // function update(){
+    //     $this->load->model('bencana_model');
+    //     $tb_bencana = TB_TIPE_BENCANA;
+    //     $id = $this->input->post('id');
+    //     $nama_bencana = $this->input->post('nama_bencana');
+    //     $result = $this->bencana_model->cek_double($nama_bencana,$tb_bencana);
+    //     $count = $result->num_rows();
+
+    //     if($count == 0){
+    //        $result = $this->bencana_model->update_data($id,$nama_bencana,$tb_bencana);
+
+    //         echo $this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button> Proses update berhasil.</div>');
+    //         redirect('bencana'); 
+    //     }else{
+
+    //         echo $this->session->set_flashdata('msg','<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Data tersebut sudah ada.</div>');
+    //         redirect('bencana');
+    //     }
+    // }
 
     function delete_bencana(){
         $id = $this->input->post('id');

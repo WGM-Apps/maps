@@ -71,8 +71,8 @@ class Bencana_model extends ci_model{
         return $hsl; 
     }
 
-    function simpan_data($nama,$table){
-         $hsl=$this->db->query("INSERT INTO $table (nama) VALUES ('$nama') ");
+    function simpan_data($nama,$table,$gambar){
+         $hsl=$this->db->query("INSERT INTO $table (nama,icon) VALUES ('$nama','$gambar') ");
         return $hsl;
     }
 
