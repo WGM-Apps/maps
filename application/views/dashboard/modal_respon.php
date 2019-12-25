@@ -35,10 +35,21 @@
                     if($cek_total->total > 0){
                         $exs = explode('|', $cek_total->deskripsi);
                         foreach($exs as $eExs){
+                            $exsN = explode("^", $eExs);
+                            if(empty($exsN[1])) $exsN[1]=0;
                             echo "
-                                <aside class='form-group'>
-                                    <input type='text' name='deskripsi$res->id[]' value='$eExs' class='form-control form-control-sm'>
-                                </aside>
+                            <div class='row'>
+                                <div class='col-md-10'>
+                                    <aside class='form-group'>
+                                        <input type='text' name='deskripsi$res->id[]' value='$exsN[0]' class='form-control form-control-sm'>
+                                    </aside>
+                                </div>
+                                <div class='col-md-2'>
+                                    <aside class='form-group'>
+                                        <input type='text' name='deskripsi_nilai$res->id[]' value='$exsN[1]' class='form-control form-control-sm'>
+                                    </aside>
+                                </div>
+                            </div>
                             ";
                         }
                     }
@@ -73,7 +84,8 @@
                 function addFile<?php echo $res->id ?>() {
                     fileId<?php echo $res->id ?>++;
                     var html =  '<aside class="row">'+
-                                '<aside class="col-md-11"><input type="text" name="deskripsi<?php echo $res->id ?>[]" placeholder="Keterangan Kegiatan..." class="form-control form-control-sm" /></aside>'+
+                                '<aside class="col-md-9"><input type="text" name="deskripsi<?php echo $res->id ?>[]" placeholder="Keterangan Kegiatan..." class="form-control form-control-sm" /></aside>'+
+                                '<aside class="col-md-2"><input type="number" name="deskripsi_nilai<?php echo $res->id ?>[]" placeholder="0" class="form-control form-control-sm" /></aside>'+
                                 '<aside class="col-md-1"><a href="javascript:void(0)" onclick="javascript:removeElement<?php echo $res->id ?>(\'file<?php echo $res->id ?>-' + fileId<?php echo $res->id ?> + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
                                 '<i class="fa fa-times"></i></a></aside>'+
                                 '</aside>';
