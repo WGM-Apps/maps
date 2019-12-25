@@ -19,7 +19,24 @@
                 $nama_bencana = $b['nama_bencana'];
                 $pic = $b['pic'];
                 $posko = $b['posko'];
-                
+                $anggaran = $b['anggaran'];
+
+                $query = "SELECT deskripsi FROM `wgm_timeline_kegiatan` WHERE detail_id ='$id_wgm'";
+                $result = $this->db->query($query);
+                $a ="";
+                $jml = 0;
+                foreach ($result->result_array() as $x) {
+                    $a = $x['deskripsi'];
+                     $exs = explode('|', $a);
+                     foreach ($exs as $b ) {
+                         $c = explode('^',$b);
+                         $jml += (int)$c[1];
+                     }
+            
+                }
+
+
+               
             ?>
         </div>
         <div class="modal-body">
@@ -154,6 +171,14 @@
                             <textarea class="form-control" name="posko" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php  echo $posko ?></textarea>
                         </aside>
                         <aside class="form-group">
+                            <label><small>Anggaran</small></label>
+                            <input class="form-control" name="anggaran"  value="<?php  echo $anggaran ?>">
+                        </aside>
+                        <aside class="form-group">
+                            <label><small>Penerimaan Manfaat</small></label>
+                            <input disabled="disabled" class="form-control" name="manfaat"  value="<?php  echo $jml ?>" >
+                        </aside>
+                        <aside class="form-group">
                             <button type="submit" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-save"></span> Simpan
                             </button>&nbsp;
@@ -168,6 +193,7 @@
 </div>
 
 <script>
+
 function addElementDampak<?php echo $id_wgm ?>(parentId, elementTag, elementId, html) {
     var p = document.getElementById(parentId);
 
