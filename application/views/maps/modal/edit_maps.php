@@ -20,6 +20,7 @@
                 $pic = $b['pic'];
                 $posko = $b['posko'];
                 $anggaran = $b['anggaran'];
+                $sumber_daya = $b['sumber_daya'];
 
                 $query = "SELECT deskripsi FROM `wgm_timeline_kegiatan` WHERE detail_id ='$id_wgm'";
                 $result = $this->db->query($query);
@@ -140,6 +141,24 @@
                             </aside>
                         </aside>
                         <aside class="form-group">
+                            <label><small>Sumber daya</small></label>
+                            <?php
+                              $exs = explode('|', $sumber_daya);
+                                foreach($exs as $eExs){
+                                    echo "
+                                        <aside class='form-group'>
+                                            <input type='text' name='sumber_daya[]' value='$eExs' class='form-control form-control-sm' onkeyup='javascript:this.value=this.value.toUpperCase()'>
+                                        </aside>
+                                    ";
+                                }
+
+                            ?>
+                            <aside class="form-group" id="filesSumberdaya<?php echo $id_wgm?>"></aside>
+                            <aside class="form-group">
+                                <a href="javascript:void(0)" class="btn btn-warning btn-sm text-white" onclick="addFileSumberdaya<?php echo $id_wgm ?>();"><i class="far fa-clipboard"></i> Tambah sumber daya </a> 
+                            </aside>
+                        </aside>
+                        <aside class="form-group">
                             <label><small>PIC</small></label>
                             <!-- <textarea name="kebutuhan" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase()"><?php echo $kebutuhan ?></textarea> -->
                             <?php
@@ -172,7 +191,7 @@
                         </aside>
                         <aside class="form-group">
                             <label><small>Anggaran</small></label>
-                            <input class="form-control" name="anggaran"  value="<?php  echo $anggaran ?>">
+                            <input class="form-control" name="anggaran"  value="<?php  echo $anggaran ?>" onkeypress="return formatNumber(event)">
                         </aside>
                         <aside class="form-group">
                             <label><small>Penerimaan Manfaat</small></label>
@@ -193,6 +212,36 @@
 </div>
 
 <script>
+
+function addElementSumberdaya<?php echo $id_wgm ?>(parentId, elementTag, elementId, html) {
+    var p = document.getElementById(parentId);
+
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+
+
+
+
+function removeElementSumberdaya<?php echo $id_wgm ?>(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+var fileId<?php echo $id_wgm ?> = 0;
+function addFileSumberdaya<?php echo $id_wgm ?>() {
+    fileId<?php echo $id_wgm ?>++;
+
+    var html =  '<aside class="row">'+
+                '<aside class="col-md-11"><input type="text" name="sumber_daya[]" placeholder="Sumberdaya..." class="form-control form-control-sm" onkeyup="javascript:this.value=this.value.toUpperCase()" /></aside>'+
+                '<aside class="col-md-1"><a href="javascript:void(0)" onclick="javascript:removeElementSumberdaya<?php echo $id_wgm ?>(\'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?> + '\'); return false;" class="btn btn-outline-danger btn-block btn-sm">'+
+                '<i class="fa fa-times"></i></a></aside>'+
+                '</aside>';
+    addElementSumberdaya<?php echo $id_wgm ?>('filesSumberdaya<?php echo $id_wgm ?>', 'p', 'file<?php echo $id_wgm ?>-' + fileId<?php echo $id_wgm ?>, html);
+}
+
 
 function addElementDampak<?php echo $id_wgm ?>(parentId, elementTag, elementId, html) {
     var p = document.getElementById(parentId);

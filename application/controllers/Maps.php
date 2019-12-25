@@ -174,13 +174,14 @@ class Maps extends CI_Controller {
 		$provinsi = $this->input->post('provinsi');
 		$dampak = $this->input->post('dampak');
 		$kebutuhan = $this->input->post('kebutuhan');
+		$sumber_daya = $this->input->post('sumber_daya');
 		$pic = $this->input->post('pic');
 		$hp = $this->input->post('hp');
 		$posko = $this->input->post('posko');
 		$anggaran = $this->input->post('anggaran');
 
 
-		$this->maps_model->update_maps($id,$bencana,$tgl_kejadian,$nama_lokasi,$kelurahan,$kecamatan,$kota,$provinsi,$dampak,$kebutuhan,$pic,$hp,$posko,$anggaran);
+		$this->maps_model->update_maps($id,$bencana,$tgl_kejadian,$nama_lokasi,$kelurahan,$kecamatan,$kota,$provinsi,$dampak,$kebutuhan,$pic,$hp,$posko,$anggaran,$sumber_daya);
 
 		echo $this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Maps Berhasil diupdate.</div>');
 		redirect('maps');
