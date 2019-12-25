@@ -56,6 +56,22 @@
 
         <aside class="card mb-5">
             <aside class="card-header bg-white text-primary">
+                Sumber Daya
+            </aside>
+            <aside class="card-body bg-white text-secondary" id="detail-respon">
+                <ul class="list-group list-group-flush">
+                <?php
+                    $explode_sumberdaya = explode("|", $row_detail->sumber_daya);
+                    foreach($explode_sumberdaya as $sumberdaya):
+                ?>
+                    <li class="list-group-item small"><?php echo $sumberdaya ?></li>
+                <?php endforeach ?>
+                </ul>
+            </aside>
+        </aside>
+
+        <aside class="card mb-5">
+            <aside class="card-header bg-white text-primary">
                 Kontak Informasi
             </aside>
             <aside class="card-body bg-white text-secondary" id="detail-respon">
@@ -89,12 +105,16 @@
             </aside>
             <aside class="card-body bg-white text-secondary" id="detail-respon">
                 <ul class="list-group list-group-flush">
+                    <?php if($row_detail->anggaran<>'0.00'): ?>
                     <li class="list-group-item small">
                         <b>Anggaran :</b> <?php echo $row_detail->anggaran ?>
                     </li>
+                    <?php endif ?>
+                    <?php if($penerima_manfaat!='0' || !empty($penerima_manfaat)): ?>
                     <li class="list-group-item small">
                         <b>Penerima :</b> <?php echo $penerima_manfaat ?>
                     </li>
+                    <?php endif ?>
                 </ul>
             </aside>
         </aside>

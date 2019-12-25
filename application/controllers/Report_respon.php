@@ -52,15 +52,15 @@ Class Report_respon extends CI_Controller{
         $pdf->SetFont('Arial','B',50);
         $pdf->MultiCell(130,10,$row->nama_bencana,0,'L');
 
-        $pdf->Cell(10,5,'',0,1);
-        $pdf->SetTextColor(255,132,37);
-        $pdf->SetFont('Arial','B',20);
-        $pdf->MultiCell(190,5,$row->nama_lokasi,0,'L');
+        // $pdf->Cell(10,5,'',0,1);
+        // $pdf->SetTextColor(255,132,37);
+        // $pdf->SetFont('Arial','B',20);
+        // $pdf->MultiCell(190,5,$row->nama_lokasi,0,'L');
 
-        $pdf->Cell(10,5,'',0,1);
-        $pdf->SetTextColor(255,132,37);
-        $pdf->SetFont('Arial','B',20);
-        $pdf->MultiCell(190,5,$row->kota,0,'L');
+        // $pdf->Cell(10,5,'',0,1);
+        // $pdf->SetTextColor(255,132,37);
+        // $pdf->SetFont('Arial','B',20);
+        // $pdf->MultiCell(190,5,$row->kota,0,'L');
 
         $pdf->Cell(10,5,'',0,1);
         $pdf->SetTextColor(255,132,37);
@@ -89,7 +89,7 @@ Class Report_respon extends CI_Controller{
         $pdf->Cell(10,10,'',0,1);
         $pdf->SetTextColor(255,132,37);
         $pdf->SetFont('Arial','B',14);
-        $pdf->Cell(190,5,"KEBUTUHAN DARURAT",0,1,'R');
+        $pdf->Cell(190,5,"KEBUTUHAN DARURAT",0,1,'L');
         // $pdf->SetDrawColor(255,132,37);
         // $pdf->Cell(190,1,'','B',1,'L');
 
@@ -100,7 +100,25 @@ Class Report_respon extends CI_Controller{
             if($ex){
                 $pdf->SetTextColor(255,255,255);
                 $pdf->SetFont('Arial','',10);
-                $pdf->MultiCell(190,5,$no++.". ".$ex,0,'R');
+                $pdf->MultiCell(190,5,$no++.". ".$ex,0,'L');
+            }
+        endforeach;
+
+        $pdf->Cell(10,10,'',0,1);
+        $pdf->SetTextColor(255,132,37);
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(190,5,"SUMBER DAYA",0,1,'L');
+        // $pdf->SetDrawColor(255,132,37);
+        // $pdf->Cell(190,1,'','B',1,'L');
+
+        $pdf->Cell(10,3,'',0,1);
+        $explode = explode('|',$row->sumber_daya);
+        $no = 1;
+        foreach($explode as $ex):
+            if($ex){
+                $pdf->SetTextColor(255,255,255);
+                $pdf->SetFont('Arial','',10);
+                $pdf->MultiCell(190,5,$no++.". ".$ex,0,'L');
             }
         endforeach;
         
@@ -141,20 +159,20 @@ Class Report_respon extends CI_Controller{
         $pdf->Cell(10,3,'',0,1);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','',10);
-        $pdf->MultiCell(190,5,"ANGGARAN : ".$row->anggaran,0,'L');
-        $pdf->MultiCell(190,5,"PENERIMA : ".$jml." JIWA",0,'L');
+        if($row->anggaran<>'0.00') $pdf->MultiCell(190,5,"ANGGARAN : ".$row->anggaran,0,'L');
+        if($jml!='0' || !empty($jml)) $pdf->MultiCell(190,5,"PENERIMA : ".$jml." JIWA",0,'L');
         
         $pdf->Cell(10,5,'',0,1);
         $pdf->SetTextColor(255,132,37);
         $pdf->SetFont('Arial','B',14);
-        $pdf->Cell(190,5,"POSKO DOMPET DHUAFA",0,1,'R');
+        $pdf->Cell(190,5,"POSKO DOMPET DHUAFA",0,1,'L');
         // $pdf->SetDrawColor(255,132,37);
         // $pdf->Cell(190,1,'','B',1,'L');
 
         $pdf->Cell(10,3,'',0,1);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','',10);
-        $pdf->MultiCell(190,5,$row->posko,0,'R');
+        $pdf->MultiCell(190,5,$row->posko,0,'L');
 
         $pdf->Cell(10,10,'',0,1);
         $pdf->SetTextColor(44,161,219);
