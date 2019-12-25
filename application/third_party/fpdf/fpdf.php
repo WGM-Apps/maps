@@ -359,12 +359,34 @@ function AddPage($orientation='', $size='', $rotation=0)
 
 function Header()
 {
-	// To be implemented in your own inherited class
+	// Logo
+	$bg = base_url('assets/icon_marker/logo.png');
+	$bg1 = base_url('assets/icon_marker/s.jpg');
+	$this->Image($bg1,0,0,210);
+	// $this->Image($bg,150,10,50);
+    // // Arial bold 15
+    // $this->SetFont('Arial','B',15);
+    // // Move to the right
+    // $this->Cell(80);
+    // // Title
+    // $this->Cell(30,10,'Title',1,0,'C');
+    // // Line break
+    // $this->Ln(20);
 }
 
 function Footer()
 {
-	// To be implemented in your own inherited class
+    // // Position at 1.5 cm from bottom
+    $this->SetY(-15);
+    // // Arial italic 8
+    // $this->SetFont('Arial','I',8);
+    // // Page number
+	// $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+	
+
+	$this->Cell(10,5,'',0,1);
+	$this->SetFont('Arial','I',8);
+	$this->MultiCell(0,3,"Rekening Donasi Ke Mandiri : 101.000.647.57.33 | BNI Syariah : 340.350.666.5 | BCA : 237.304.7171 a.n Yayasan Dompet Dhuafa Republika. Tambahkan angka 50 di akhir nominal donasi Anda",0,'C');
 }
 
 function PageNo()

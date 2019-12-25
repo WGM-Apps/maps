@@ -91,6 +91,20 @@ class Welcome extends CI_Controller {
 		$timeline = $this->db->query($query_timeline)->result();
 		$data['row_timeline'] = $timeline;
 		
+		$query_penerima_manfaat = "SELECT deskripsi FROM $tb_timeline_kegiatan WHERE detail_id ='$id'";
+		$result_penerima_manfaat = $this->db->query($query_penerima_manfaat);
+		$a ="";
+		$jml = 0;
+		foreach ($result_penerima_manfaat->result_array() as $x) {
+			$a = $x['deskripsi'];
+			$exs = explode('|', $a);
+			foreach ($exs as $b ) {
+				$c = explode('^',$b);
+				$jml += (int)$c[1];
+			}
+		}
+		$data['penerima_manfaat'] = $jml;
+		
 		$this->load->view('dashboard/detail_koordinat', $data);
 	}
 

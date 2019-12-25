@@ -75,7 +75,27 @@
                 Posko
             </aside>
             <aside class="card-body bg-white text-secondary" id="detail-respon">
-                <?php echo $row_detail->posko ?>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item small">
+                        <?php echo $row_detail->posko ?>
+                    </li>
+                </ul>
+            </aside>
+        </aside>
+
+        <aside class="card mb-5">
+            <aside class="card-header bg-white text-primary">
+                Penerima Manfaat
+            </aside>
+            <aside class="card-body bg-white text-secondary" id="detail-respon">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item small">
+                        <b>Anggaran :</b> <?php echo $row_detail->anggaran ?>
+                    </li>
+                    <li class="list-group-item small">
+                        <b>Penerima :</b> <?php echo $penerima_manfaat ?>
+                    </li>
+                </ul>
             </aside>
         </aside>
     </aside>
