@@ -101,7 +101,8 @@
                             <?php
                                 $explode_timeline = explode("|", $res_timeline->deskripsi);
                                 foreach($explode_timeline AS $res):
-                                    echo "<li class='list-group-item small'>$res</li>";
+                                    $res_desk = explode("^", $res);
+                                    echo "<li class='list-group-item d-flex justify-content-between align-items-center small'>$res_desk[0]<span class='badge badge-primary badge-pill'>$res_desk[1]</span></li>";
                                 endforeach;
                             ?>
                         </ul>
