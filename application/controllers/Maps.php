@@ -212,6 +212,8 @@ class Maps extends CI_Controller {
 	              FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` 
 	              WHERE wd.tgl_kejadian >='$periode_awal' AND wd.tgl_kejadian <='$periode_akhir' ";
 
+
+
 	    $execQuery = $this->db->query($query);
 	    if($execQuery){
 	        echo "<style>
@@ -232,6 +234,7 @@ class Maps extends CI_Controller {
 	                }
 	               </style>
 	                <h1>REPORT DATA MAPS ALL</h1>
+	                <h1>PERIODE ".date('d-m-Y',strtotime($periode_awal))." / ".date('d-m-Y',strtotime($periode_akhir))." </h1>
 	                <table>
 	                <tr>
 	                    <TH>Nama Bencana</TH>
@@ -258,12 +261,79 @@ class Maps extends CI_Controller {
 	                    <td class ='str'>".$data['kecamatan']."</td>
 	                    <td class ='str'>".$data['kota']."</td>
 	                    <td class ='str'>".$data['provinsi']."</td>
-	                    <td class ='str'>".$data['dampak']."</td>
-	                    <td class ='str'>".$data['kebutuhan']."</td>
+	                    <td class ='str'>".str_replace('|',',',$data['dampak'])."</td>
+	                    <td class ='str'>".str_replace('|',',',$data['kebutuhan'])."</td>
 	                </tr>";
 	        }
 
 	        echo '</table>';
+
+	        
+	    }else{
+	        echo "
+	            <table border=1 style='border: 1px solid black'>
+	                <tr><h4>INVALID</h4></tr>
+	            </table>";
+	    }
+
+	    $query ="SELECT c.`nama` AS nama_bencana,
+					       d.`nama` AS nama_kegiatan,
+					       a.`deskripsi`
+					FROM `wgm_timeline_kegiatan` a LEFT JOIN `wgm_detail` b 
+					ON a.`detail_id` = b.`id` LEFT JOIN `wgm_tipe_bencana` c
+					ON b.`bencana` = c.`id` LEFT JOIN `wgm_group_kegiatan` d
+					ON a.`group_kegiatan_id` = d.`id`
+					WHERE b.tgl_kejadian >='$periode_awal' AND b.tgl_kejadian <='$periode_akhir' ";
+
+		$execQuery = $this->db->query($query);
+	    if($execQuery){
+	        echo "<style>
+	                table{
+	                    border-collapse: collapse;
+	                }
+	                th{
+	                    background-color:blue;
+	                    color:white;
+	                }
+	                th, td {
+	                    border-color: rgba(121, 117, 117, 0.6);
+	                    border-style: solid !important;
+	                    border-width : 0.3pt;
+	                }
+	                .str{
+	                    mso-number-format:\@;
+	                }
+	               </style>
+	                <h1>DETAIL KEGIATAN</h1>
+	                <table>
+	                <tr>
+	                    <TH>Nama Bencana</TH>
+	                    <TH>Nama Kegiatan</TH>
+	                    <TH>Deskkripsi</TH>
+	                    
+	                </tr>";
+
+	        $rows = $execQuery->result_array();
+	        $nama_old ="";
+	        foreach ($rows as $data) {
+
+	        	if($nama_old == $data['nama_bencana']){
+	        		$nama_bencana = "";
+	        	}else{
+	        		$nama_bencana = $data['nama_bencana'];
+	        	}
+
+	        	echo "<tr>
+	                    <td class ='str'>".$nama_bencana."</td>
+	                    <td class ='str'>".$data['nama_kegiatan']."</td>
+	                    <td class ='str'>".str_replace('^',' = ',str_replace('|',',',$data['deskripsi']))."</td>
+	                </tr>";
+	            $nama_old = $data['nama_bencana'];
+	        }
+
+	        echo '</table>';
+
+	        
 	    }else{
 	        echo "
 	            <table border=1 style='border: 1px solid black'>
