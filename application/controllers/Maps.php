@@ -275,6 +275,9 @@ class Maps extends CI_Controller {
 					$respon .= $key['nama_kegiatan']."|";
 				}
 
+	        	$respon = substr($respon,0,strlen($respon) - 1);
+
+
 	        	
 	        	echo "<tr>
 	                    <td class ='str'>".$data['nama_bencana']."</td>
