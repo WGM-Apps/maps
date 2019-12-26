@@ -18,9 +18,9 @@ class Welcome extends CI_Controller {
 		$bencana = $this->input->post('id_bencana');
 		$where_bencana = null;
 		if(!empty($bencana)){
-			$where_bencana = "WHERE wd.bencana='$bencana'";
+			$where_bencana = "AND wd.bencana='$bencana'";
 		}
-		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana`, wtb.`icon` AS `icon_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` $where_bencana WHERE wd.flg_active='Y'";
+		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana`, wtb.`icon` AS `icon_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` WHERE wd.flg_active='Y' $where_bencana";
 		$data['result'] = $this->db->query($query)->result();
 		$data['myJS'] = 'dashboard/myJS';
 		if(!$this->welcome_model->logged_id()) {
