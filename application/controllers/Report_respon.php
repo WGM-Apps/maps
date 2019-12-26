@@ -159,7 +159,7 @@ Class Report_respon extends CI_Controller{
         $pdf->Cell(10,3,'',0,1);
         $pdf->SetTextColor(255,255,255);
         $pdf->SetFont('Arial','',10);
-        if($row->anggaran<>'0.00') $pdf->MultiCell(190,5,"ANGGARAN : ".number_format($row_detail->anggaran,0,'','.'),0,'L');
+        if($row->anggaran<>'0.00') $pdf->MultiCell(190,5,"ANGGARAN : ".number_format($row->anggaran,0,'','.'),0,'L');
         if($jml!='0' || !empty($jml)) $pdf->MultiCell(190,5,"PENERIMA : ".$jml." JIWA",0,'L');
         
         $pdf->Cell(10,5,'',0,1);

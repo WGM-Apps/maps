@@ -2,7 +2,9 @@
     <aside class="col-md-12 text-secondary">
             <a href="<?php echo base_url() ?>"><b>Respon DMC</b></a>
             <?php if($this->session->userdata('USER_ID')): ?>
-                <sup>(<a href="javascript:void(0)" onclick="sesuaikan_respon(<?php echo $row_detail->id ?>)">Sesuaikan Respon <i class="far fa-edit"></i></a>)</sup>
+                <?php if($this->session->userdata('USER_ACCESS')!=0): ?>
+                    <sup>(<a href="javascript:void(0)" onclick="sesuaikan_respon(<?php echo $row_detail->id ?>)">Sesuaikan Respon <i class="far fa-edit"></i></a>)</sup>
+                <?php endif ?>
             <?php endif ?>
             <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right" onclick="report_respon('<?php echo $row_detail->id ?>')"><i class="fa fa-print"></i> Cetak</a>
     </aside>
