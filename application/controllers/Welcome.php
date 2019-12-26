@@ -20,7 +20,7 @@ class Welcome extends CI_Controller {
 		if(!empty($bencana)){
 			$where_bencana = "WHERE wd.bencana='$bencana'";
 		}
-		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana`, wtb.`icon` AS `icon_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` $where_bencana";
+		$query = "SELECT wd.*, wtb.`nama` AS `nama_bencana`, wtb.`icon` AS `icon_bencana` FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` $where_bencana WHERE wd.flg_active='Y'";
 		$data['result'] = $this->db->query($query)->result();
 		$data['myJS'] = 'dashboard/myJS';
 		if(!$this->welcome_model->logged_id()) {
@@ -29,7 +29,7 @@ class Welcome extends CI_Controller {
 			$data['menu'] = 1;
 		}
 
-		$query_timeline = "SELECT wlutk.`id`, wgk.`nama` as nama_kegiatan, wtk.`detail_id`, u.`nama`, wtb.`nama` AS nama_bencana, wd.`lat`, wd.`lng`, wlutk.`timeline_kegiatan_deskripsi`, wlutk.`tgl_insert` FROM $tb_last_update_timeline_kegiatan wlutk LEFT JOIN $tb_timeline_kegiatan wtk ON wtk.`id` = wlutk.`timeline_kegiatan_id` LEFT JOIN wgm_detail wd ON wd.`id` = wtk.`detail_id` LEFT JOIN $tb_group_kegiatan wgk ON wgk.`id` = wtk.`group_kegiatan_id` LEFT JOIN wgm_tipe_bencana wtb ON wtb.`id` = wd.`bencana` LEFT JOIN $tb_user u ON u.`id` = wlutk.`user_id` GROUP BY CONCAT(wlutk.`timeline_kegiatan_deskripsi`, wlutk.`timeline_kegiatan_id`, u.`nama`) ORDER BY tgl_insert DESC LIMIT 5";
+		$query_timeline = "SELECT wlutk.`id`, wgk.`nama` as nama_kegiatan, wtk.`detail_id`, u.`nama`, wtb.`nama` AS nama_bencana, wd.`lat`, wd.`lng`, wlutk.`timeline_kegiatan_deskripsi`, wlutk.`tgl_insert` FROM $tb_last_update_timeline_kegiatan wlutk LEFT JOIN $tb_timeline_kegiatan wtk ON wtk.`id` = wlutk.`timeline_kegiatan_id` LEFT JOIN wgm_detail wd ON wd.`id` = wtk.`detail_id` LEFT JOIN $tb_group_kegiatan wgk ON wgk.`id` = wtk.`group_kegiatan_id` LEFT JOIN wgm_tipe_bencana wtb ON wtb.`id` = wd.`bencana` LEFT JOIN $tb_user u ON u.`id` = wlutk.`user_id` WHERE wd.flg_active='Y' GROUP BY CONCAT(wlutk.`timeline_kegiatan_deskripsi`, wlutk.`timeline_kegiatan_id`, u.`nama`) ORDER BY tgl_insert DESC LIMIT 5";
 		$data['row_timeline'] = $this->db->query($query_timeline)->result();
 
 		$this->template->load('template', 'dashboard/home', $data);
