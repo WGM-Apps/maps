@@ -22,22 +22,25 @@
                     </a>
                 </span>
                 <?php if($menu == 1): ?>
-                    <span data-toggle="collapse" href="#master" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fa fa-bars fa-fw mr-2"></i>
-                        Master Data
-                    </span>
-                    <aside class="collapse" id="master">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item border-0"><a href="<?php echo base_url('bencana') ?>">Bencana</a></li>
-                            <li class="list-group-item border-0"><a href="<?php echo base_url('kegiatan') ?>">Kegiatan</a></li>
-                        </ul>
-                    </aside>
-                    <span>
-                        <a href="<?php echo base_url('maps') ?>">
-                            <i class="far fa-map fa-fw mr-2"></i>
-                            Maps
-                        </a>
-                    </span>
+                    <?php if($this->session->userdata('USER_ACCESS')==2): ?>
+                        <span data-toggle="collapse" href="#master" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa fa-bars fa-fw mr-2"></i>
+                            Master Data
+                        </span>
+                        <aside class="collapse" id="master">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item border-0"><a href="<?php echo base_url('users') ?>">Users</a></li>
+                                <li class="list-group-item border-0"><a href="<?php echo base_url('bencana') ?>">Bencana</a></li>
+                                <li class="list-group-item border-0"><a href="<?php echo base_url('kegiatan') ?>">Kegiatan</a></li>
+                            </ul>
+                        </aside>
+                        <span>
+                            <a href="<?php echo base_url('maps') ?>">
+                                <i class="far fa-map fa-fw mr-2"></i>
+                                Maps
+                            </a>
+                        </span>
+                    <?php endif ?>
                     <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <i class="fa fa-chart-line fa-fw mr-2"></i>
                         Kategori bencana

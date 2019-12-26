@@ -47,6 +47,7 @@ class Welcome extends CI_Controller {
                 'USER_ID' => $r->id,
                 'USER_NAME' => $r->user,
                 'USER_FULLNAME' => $r->nama,
+                'USER_ACCESS' => $r->akses,
                 'USER_ACTIVE' => $r->flg_active,
             );
             $this->session->set_userdata($session_data);
