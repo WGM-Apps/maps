@@ -107,7 +107,7 @@
                 <ul class="list-group list-group-flush">
                     <?php if($row_detail->anggaran<>'0.00'): ?>
                     <li class="list-group-item small">
-                        <b>Anggaran :</b> <?php echo $row_detail->anggaran ?>
+                        <b>Anggaran :</b> <?php echo number_format($row_detail->anggaran,0,'','.') ?>
                     </li>
                     <?php endif ?>
                     <?php if($penerima_manfaat!='0' || !empty($penerima_manfaat)): ?>
