@@ -208,9 +208,14 @@ class Maps extends CI_Controller {
 	    $periode_awal = $this->input->post('periode_awal');
 	    $periode_akhir = $this->input->post('periode_akhir');
 
-	    $query = "SELECT * 
-	              FROM $tb_detail wd LEFT JOIN $tb_bencana wtb ON wtb.`id` = wd.`bencana` 
-	              WHERE wd.tgl_kejadian >='$periode_awal' AND wd.tgl_kejadian <='$periode_akhir' ";
+	    $query = "SELECT  wd.`id` ,wtb.`nama` AS nama_bencana,wd.`tgl_kejadian`,wd.`nama_lokasi`,
+	    				  wd.`kelurahan`,wd.`kecamatan`,wd.`kota`,
+        				  wd.`provinsi`,wd.`dampak`,wd.`kebutuhan`,wd.`sumber_daya`,
+        				  wd.`pic`,wd.`posko`,wd.`anggaran`
+					FROM `wgm_detail` wd LEFT JOIN `wgm_tipe_bencana` wtb ON wtb.`id` = wd.`bencana` 
+					WHERE wd.tgl_kejadian >='$periode_awal' AND wd.tgl_kejadian <='$periode_akhir' AND wd.`flg_active` ='Y' ";
+
+
 
 	    $execQuery = $this->db->query($query);
 	    if($execQuery){
@@ -232,6 +237,7 @@ class Maps extends CI_Controller {
 	                }
 	               </style>
 	                <h1>REPORT DATA MAPS ALL</h1>
+	                <h1>PERIODE ".date('d-m-Y',strtotime($periode_awal))." / ".date('d-m-Y',strtotime($periode_akhir))." </h1>
 	                <table>
 	                <tr>
 	                    <TH>Nama Bencana</TH>
@@ -243,15 +249,38 @@ class Maps extends CI_Controller {
 	                    <TH>Provinsi</TH>
 	                    <TH>Dampak</TH>
 	                    <TH>Kebutuhan</TH>
-	                    
+	                    <TH>Sumber daya</TH>
+	                    <TH>PIC</TH>
+	                    <TH>Posko</TH>
+	                    <TH>Anggaran</TH>
+	                    <TH>Respon</TH>
 	                </tr>";
 
 	        $rows = $execQuery->result_array();
 	        foreach ($rows as $data) {
+	        	$id = $data['id'];
+
+	        	$query ="SELECT b.`id`,
+							       d.`nama` as nama_kegiatan
+							from `wgm_timeline_kegiatan` a left join `wgm_detail` b 
+							on a.`detail_id` = b.`id` left join `wgm_tipe_bencana` c
+							on b.`bencana` = c.`id` left join `wgm_group_kegiatan` d
+							on a.`group_kegiatan_id` = d.`id`
+							WHERE b.`id` ='$id'";
+
+				$execQuery = $this->db->query($query);
+				$rw = $execQuery->result_array();
+				$respon ="";
+				foreach ($rw as $key) {
+					$respon .= $key['nama_kegiatan']."|";
+				}
+
+	        	$respon = substr($respon,0,strlen($respon) - 1);
+
 
 	        	
 	        	echo "<tr>
-	                    <td class ='str'>".$data['nama']."</td>
+	                    <td class ='str'>".$data['nama_bencana']."</td>
 	                    <td class ='str'>".date('d-m-Y',strtotime($data['tgl_kejadian']))."</td>
 	                    <td class ='str'>".$data['nama_lokasi']."</td>
 	                    <td class ='str'>".$data['kelurahan']."</td>
@@ -260,15 +289,24 @@ class Maps extends CI_Controller {
 	                    <td class ='str'>".$data['provinsi']."</td>
 	                    <td class ='str'>".$data['dampak']."</td>
 	                    <td class ='str'>".$data['kebutuhan']."</td>
+	                    <td class ='str'>".$data['sumber_daya']."</td>
+	                    <td class ='str'>".$data['pic']."</td>
+	                    <td class ='str'>".$data['posko']."</td>
+	                    <td class ='str'>".$data['anggaran']."</td>
+	                    <td class ='str'>".$respon."</td>
 	                </tr>";
 	        }
 
 	        echo '</table>';
+
+	        
 	    }else{
 	        echo "
 	            <table border=1 style='border: 1px solid black'>
 	                <tr><h4>INVALID</h4></tr>
 	            </table>";
 	    }
+
+	    
 	}
 }
