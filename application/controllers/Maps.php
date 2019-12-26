@@ -292,7 +292,7 @@ class Maps extends CI_Controller {
 	                    <td class ='str'>".$data['sumber_daya']."</td>
 	                    <td class ='str'>".$data['pic']."</td>
 	                    <td class ='str'>".$data['posko']."</td>
-	                    <td class ='str'>".$data['anggaran']."</td>
+	                    <td class ='str'>".number_format($data['anggaran'],0,'','.')."</td>
 	                    <td class ='str'>".$respon."</td>
 	                </tr>";
 	        }
