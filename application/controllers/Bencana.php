@@ -35,8 +35,9 @@ class Bencana extends CI_Controller {
             $row[] = $no;
             $row[] = "
             	
-                <a class='btn btn-warning btn-sm' onclick ='editData($field->id)'><i class='fa fa-edit'></i></a>
+                <a class='btn btn-warning btn-block btn-sm' onclick ='editData($field->id)'><i class='fa fa-edit'></i></a>
             ";
+            $row[] = "<a href=".base_url("assets/icon_marker/$field->icon")." class='btn btn-primary btn-block btn-sm' target='_blank'><i class='fa fa-images'></i></a>";
             $row[] = $field->nama;
             $data[] = $row;
         }
