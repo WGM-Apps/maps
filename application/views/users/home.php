@@ -23,12 +23,12 @@
                 <table class="table table-hover table-bordered table-sm w-100" id="tbDetail">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th width="10"><center>No</center></th>
-                            <th><center>Nama Pengguna</center></th>
-                            <th><center>Nama Lengkap</center></th>
-                            <th width="10"><center>Akses</center></th>
-                            <th width="10"><center>Aktif</center></th>
+                            <th width="10">No</th>
+                            <th width="10">Aksi</th>
+                            <th>Nama Pengguna</th>
+                            <th>Nama Lengkap</th>
+                            <th width="10">Akses</th>
+                            <th width="10">Aktif</th>
                         </tr>
                     </thead>
                 </table>

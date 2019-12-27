@@ -23,8 +23,8 @@
                 <table class="table table-hover table-bordered table-sm" id="tbDetail">
                     <thead>
                         <tr>
-                            <th width="30"><center>No</center></th>
-                            <th width="50"><center>Aksi</center></th>
+                            <th width="10">No</th>
+                            <th width="10">Aksi</th>
                             <th>Nama</th>
                         </tr>
                     </thead>

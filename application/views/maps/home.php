@@ -150,12 +150,12 @@
             
             <hr width="100%">
             <aside class="scrollmenu">
-                <table class="table table-hover table-bordered table-sm" id="tbDetail">
+                <table class="table table-hover table-bordered table-sm w-100" id="tbDetail">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Aksi</th>
-                            <th>Bencana</th>
+                            <th width="10">No</th>
+                            <th width="10">Aksi</th>
+                            <th width="10">Bencana</th>
                             <th>Lokasi</th>
                         </tr>
                     </thead>

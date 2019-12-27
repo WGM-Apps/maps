@@ -35,7 +35,7 @@ class Kegiatan extends CI_Controller {
             $row[] = $no;
             $row[] = "
             	
-                <a class='btn btn-warning btn-sm' onclick ='editData($field->id)'><i class='fa fa-edit'></i></a>
+                <a class='btn btn-warning btn-block btn-sm' onclick ='editData($field->id)'><i class='fa fa-edit'></i></a>
             ";
             $row[] = $field->nama;
             $data[] = $row;

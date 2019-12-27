@@ -1,7 +1,6 @@
 
 <div class="modal-dialog modal-lg">
     <div class="modal-content" >
-        <div class="modal-header">
             <?php
                 $b=$row->row_array();
                 $id_wgm  = $b['id'];
@@ -39,7 +38,6 @@
 
                
             ?>
-        </div>
         <div class="modal-body">
             <aside class="row p-2">
                 <aside class="col-md-12">
