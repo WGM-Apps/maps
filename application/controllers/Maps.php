@@ -197,16 +197,16 @@ class Maps extends CI_Controller {
 	function export_excel(){
 		$tb_detail = TB_DETAIL;
 		$tb_bencana = TB_TIPE_BENCANA;
+	    $periode_awal = $this->input->post('periode_awal');
+	    $periode_akhir = $this->input->post('periode_akhir');
 		header('Pragma: public');
 	    header('Cache-control: private');
 	    header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 	    header("Content-type: application/x-msexcel; charset=utf-8");
-	    header("Content-Disposition: attachment; filename=Report Data Maps.xlsx");
+	    header("Content-Disposition: attachment; filename=Report_Data_Maps_".date('d-m-Y',strtotime($periode_awal))."-sd-".date('d-m-Y',strtotime($periode_akhir)).".xlsx");
 	    header("Pragma: no-cache");
 	    header("Expires: 0");
 
-	    $periode_awal = $this->input->post('periode_awal');
-	    $periode_akhir = $this->input->post('periode_akhir');
 
 	    $query = "SELECT  wd.`id` ,wtb.`nama` AS nama_bencana,wd.`tgl_kejadian`,wd.`nama_lokasi`,
 	    				  wd.`kelurahan`,wd.`kecamatan`,wd.`kota`,
@@ -254,11 +254,25 @@ class Maps extends CI_Controller {
 	                    <TH>Posko</TH>
 	                    <TH>Anggaran</TH>
 	                    <TH>Respon</TH>
+	                    <TH>Penerima Manfaat</TH>
 	                </tr>";
 
 	        $rows = $execQuery->result_array();
 	        foreach ($rows as $data) {
 	        	$id = $data['id'];
+				$queryJML = "SELECT deskripsi FROM `wgm_timeline_kegiatan` WHERE detail_id ='$id'";
+				$resultJML = $this->db->query($queryJML);
+				$aJML ="";
+				$jml = 0;
+				foreach ($resultJML->result_array() as $xJML) {
+					$aJML = $xJML['deskripsi'];
+					 $exsJML = explode('|', $aJML);
+					 foreach ($exsJML as $bJML ) {
+						 $cJML = explode('^',$bJML);
+						 $jml += (int)$cJML[1];
+					 }
+			
+				}
 
 	        	$query ="SELECT b.`id`,
 							       d.`nama` as nama_kegiatan
@@ -294,6 +308,7 @@ class Maps extends CI_Controller {
 	                    <td class ='str'>".$data['posko']."</td>
 	                    <td class ='str'>".number_format($data['anggaran'],0,'','.')."</td>
 	                    <td class ='str'>".$respon."</td>
+	                    <td class ='str'>".$jml." Jiwa</td>
 	                </tr>";
 	        }
 
