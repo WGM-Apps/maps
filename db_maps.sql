@@ -21,7 +21,7 @@ CREATE TABLE `user` (
   `akses` enum('0','1','2') NOT NULL DEFAULT '0' COMMENT '0=tidak ada akses, 1=akses respon, 2=semua akses',
   `flg_active` enum('Y','N') NOT NULL DEFAULT 'Y' COMMENT 'Y=aktif, N=tidak aktif',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
@@ -49,9 +49,8 @@ CREATE TABLE `wgm_detail` (
   `create_date` date NOT NULL,
   `flg_active` enum('Y','N') NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `bencana` (`bencana`),
-  CONSTRAINT `wgm_detail_ibfk_1` FOREIGN KEY (`bencana`) REFERENCES `wgm_tipe_bencana` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  KEY `bencana` (`bencana`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_detail` */
 
@@ -99,7 +98,7 @@ CREATE TABLE `wgm_last_update_timeline_kegiatan` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `wgm_last_update_timeline_kegiatan_ibfk_1` (`timeline_kegiatan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_last_update_timeline_kegiatan` */
 
@@ -117,10 +116,7 @@ CREATE TABLE `wgm_request_support` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `tipe_bencana_id` (`tipe_bencana_id`),
-  KEY `group_kegiatan_id` (`group_kegiatan_id`),
-  CONSTRAINT `wgm_request_support_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `wgm_request_support_ibfk_2` FOREIGN KEY (`tipe_bencana_id`) REFERENCES `wgm_tipe_bencana` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `wgm_request_support_ibfk_3` FOREIGN KEY (`group_kegiatan_id`) REFERENCES `wgm_group_kegiatan` (`id`) ON UPDATE CASCADE
+  KEY `group_kegiatan_id` (`group_kegiatan_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_request_support` */
@@ -136,10 +132,8 @@ CREATE TABLE `wgm_timeline_kegiatan` (
   `waktu` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `group_kegiatan_id` (`group_kegiatan_id`),
-  KEY `detail_id` (`detail_id`),
-  CONSTRAINT `wgm_timeline_kegiatan_ibfk_2` FOREIGN KEY (`group_kegiatan_id`) REFERENCES `wgm_group_kegiatan` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `wgm_timeline_kegiatan_ibfk_3` FOREIGN KEY (`detail_id`) REFERENCES `wgm_detail` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+  KEY `detail_id` (`detail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `wgm_timeline_kegiatan` */
 
@@ -163,17 +157,6 @@ insert  into `wgm_tipe_bencana`(`id`,`nama`,`icon`) values (6,'KEBAKARAN HUTAN',
 insert  into `wgm_tipe_bencana`(`id`,`nama`,`icon`) values (7,'KEBAKARAN PEMUKIMAN','kebakaran.png');
 insert  into `wgm_tipe_bencana`(`id`,`nama`,`icon`) values (8,'KEKERINGAN','kekeringan.png');
 insert  into `wgm_tipe_bencana`(`id`,`nama`,`icon`) values (9,'LAINNYA','lainnya.png');
-
-/*!50106 set global event_scheduler = 1*/;
-
-/* Event structure for event `yuyuy` */
-
-DELIMITER $$
-
-/*!50106 CREATE DEFINER=`root`@`localhost` EVENT `yuyuy` ON SCHEDULE EVERY 1 DAY STARTS '2019-11-26 21:01:25' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
-	    select md5(123);
-	END */$$
-DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
