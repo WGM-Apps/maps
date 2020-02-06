@@ -21,6 +21,7 @@
         // Variabel untuk menyimpan batas kordinat
         var bounds = new google.maps.LatLngBounds();
         // Pengambilan data dari database
+        var result_marker = '<?php echo count($result)?>';
         <?php
             foreach ($result as $data) {
                 $id    = $data->id;
@@ -46,7 +47,7 @@
             }    
         ?>
         var setCircle = new google.maps.Circle();
-        var setSub = new google.maps.Marker();
+        var setSub;
         function addMarker(id, lat, lng, info, iconb) {
             var lokasi = new google.maps.LatLng(lat, lng);
             var icon_bencana = '<?php echo base_url("assets/icon_marker/") ?>'+iconb;
@@ -61,15 +62,20 @@
             bindInfoWindow(marker, map, infoWindow, info, lokasi, id);
         }        
         
+        var markersArray = [];
         function bindInfoWindow(marker, map, infoWindow, html, lokasi, id) {
             google.maps.event.addListener(marker, 'click', function() {
                 infoWindow.setContent(html);
                 infoWindow.open(map, marker);
+
                 // MAINTENANCE 05-01-2020 s/d
-                // circle.setMap(map);
+                // KETIKA TITIK MAP MASTER DI KLIK MAKA TITIK SUBMAP TAMPIL
+                map.setCenter(lokasi);
+                map.setZoom(16);
                 var getCircle = {
                     center: lokasi,
-                    radius: 100,
+                    zoom: 10,
+                    radius: 1000,
                     strokeColor: "#0099FF",
                     strokeOpacity: 0.9,
                     strokeWeight: 1,
@@ -79,30 +85,27 @@
                 setCircle.setMap(null);
                 setCircle = new google.maps.Circle(getCircle);
                 setCircle.setMap(map);
-                // setSub.setMap(null);
-
-                // google.maps.event.addListener(map, 'click', function(event) {
-                    $.ajax({
-                        type: "post",
-                        url: "welcome/detail_sub",
-                        data: "id_detail="+id,
-                        dataType: "json",
-                        beforeSend: function(){
-                            setSub.setMap(null);
-                        },
-                        success: function (response) {
-                            const arr = response;
-                            arr.forEach(function(i){
-                                // console.log(i.lat);
-                                getSub = {
-                                    position: new google.maps.LatLng(i.lat, i.lng),
-                                }
-                                setSub = new google.maps.Marker(getSub);
-                                setSub.setMap(map);
-                            })
-                        }
-                    });
-                // });
+                for (var i = 0; i < markersArray.length; i++ ) {
+                    markersArray[i].setMap(null);
+                }
+                markersArray.length = 0;
+                $.ajax({
+                    type: "post",
+                    url: "welcome/detail_sub",
+                    data: "id_detail="+id,
+                    dataType: "json",
+                    success: function (response) {
+                        const arr = response;
+                        arr.forEach(function(i){
+                            getSub = {
+                                position: new google.maps.LatLng(i.lat, i.lng),
+                                map: map
+                            }
+                            setSub = new google.maps.Marker(getSub);
+                            markersArray.push(setSub);
+                        })
+                    }
+                });
             });
         }
     }
