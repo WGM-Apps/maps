@@ -91,6 +91,7 @@ define('DB_NAME','db_gis');
 
 define('TB_USER','user');
 define('TB_DETAIL','wgm_detail');
+define('TB_DETAIL_SUB','wgm_detail_sub');
 define('TB_GROUP_KEGIATAN','wgm_group_kegiatan');
 define('TB_REQUEST_SUPPORT','wgm_request_support');
 define('TB_TIMELINE_KEGIATAN','wgm_timeline_kegiatan');

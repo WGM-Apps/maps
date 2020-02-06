@@ -35,6 +35,23 @@ class Welcome extends CI_Controller {
 		$this->template->load('template', 'dashboard/home', $data);
 	}
 
+	function detail_sub() {
+		$tb_detail_sub = TB_DETAIL_SUB;
+		$id_detail = $this->input->post('id_detail');
+		$query = "SELECT * FROM $tb_detail_sub WHERE detail_id = '$id_detail'";
+		$result = $this->db->query($query);
+		if($result->num_rows() > 0) {
+			foreach($result->result() as $r) {
+				$arr['lat'] = $r->lat;
+				$arr['lng'] = $r->lng;
+				$data[] = $arr;
+			}
+		}else{
+			$data = [];
+		}
+		echo json_encode($data);
+	}
+
 	function login() {
 		$username = $this->input->post('username');
         $password = md5($this->input->post('password'));

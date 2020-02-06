@@ -42,10 +42,12 @@
                 $content .= "<center><a href=javascript:void(0) onclick=viewDetailKordinat($id)>Lihat Detail</a></center>";
                 $content .= "<hr>";
                 $content .= "<center><a target=&quot;_blank&quot; href=https://www.google.com/maps?q=loc:$lat,$lng><small>Tampilkan Google Maps</small></a></center>";
-                echo ("addMarker($lat, $lng, '$content', '$data->icon_bencana');");                        
+                echo ("addMarker('$id', $lat, $lng, '$content', '$data->icon_bencana');");
             }    
-        ?> 
-        function addMarker(lat, lng, info, iconb) {
+        ?>
+        var setCircle = new google.maps.Circle();
+        var setSub = new google.maps.Marker();
+        function addMarker(id, lat, lng, info, iconb) {
             var lokasi = new google.maps.LatLng(lat, lng);
             var icon_bencana = '<?php echo base_url("assets/icon_marker/") ?>'+iconb;
             bounds.extend(lokasi);
@@ -54,15 +56,53 @@
                 position: lokasi,
                 // animation:google.maps.Animation.BOUNCE,
                 icon: icon_bencana,
-            });       
+            });
             map.fitBounds(bounds);
-            bindInfoWindow(marker, map, infoWindow, info);
+            bindInfoWindow(marker, map, infoWindow, info, lokasi, id);
         }        
         
-        function bindInfoWindow(marker, map, infoWindow, html) {
+        function bindInfoWindow(marker, map, infoWindow, html, lokasi, id) {
             google.maps.event.addListener(marker, 'click', function() {
                 infoWindow.setContent(html);
                 infoWindow.open(map, marker);
+                // MAINTENANCE 05-01-2020 s/d
+                // circle.setMap(map);
+                var getCircle = {
+                    center: lokasi,
+                    radius: 100,
+                    strokeColor: "#0099FF",
+                    strokeOpacity: 0.9,
+                    strokeWeight: 1,
+                    fillOpacity: 0.2,
+                    fillColor: "#0099FF"
+                };
+                setCircle.setMap(null);
+                setCircle = new google.maps.Circle(getCircle);
+                setCircle.setMap(map);
+                // setSub.setMap(null);
+
+                // google.maps.event.addListener(map, 'click', function(event) {
+                    $.ajax({
+                        type: "post",
+                        url: "welcome/detail_sub",
+                        data: "id_detail="+id,
+                        dataType: "json",
+                        beforeSend: function(){
+                            setSub.setMap(null);
+                        },
+                        success: function (response) {
+                            const arr = response;
+                            arr.forEach(function(i){
+                                // console.log(i.lat);
+                                getSub = {
+                                    position: new google.maps.LatLng(i.lat, i.lng),
+                                }
+                                setSub = new google.maps.Marker(getSub);
+                                setSub.setMap(map);
+                            })
+                        }
+                    });
+                // });
             });
         }
     }
